@@ -18,6 +18,7 @@ $(function(){
     }
 });
 
+
 $(window).resize(function(){
     if($(window).width() < 769){
         $('.scroll-pane').css({height:$(window).height() - 30});   
