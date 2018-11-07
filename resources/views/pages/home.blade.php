@@ -326,8 +326,9 @@ jQuery(document).ready(function($) {
             dataType: 'json',
             data: {lang: val_lang, id: val_id, start: val_start, limit: val_limit},
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 if (data.num_rows > 0) {
+                    var jsonAll = encodeURIComponent(JSON.stringify(data.list[0]));
                     $.each(data.list, function(index, val) {
                          append += '<div class="item col-12 col-sm-4 float-left" style="padding:0px '+pad+'px;min-height:610px;">'+
                         '<div class="contentDiv  px-1">'+
@@ -388,7 +389,13 @@ jQuery(document).ready(function($) {
                         '            <div class="row">'+
                         '                <div class="col-6">'+
                         '                    <div class="form-check">'+
-                        '                        <input type="checkbox" class="form-check-input cbCompare" data-title="'+val.CatProductName+'" data-caption="" data-price="'+val.NetPremium+'" data-catid="'+val.idx+'" id="checkboxCompare'+val.CatProductListId+'">'+
+                        '                        <input type="checkbox" class="form-check-input cbCompare" '+
+                        '                       data-title="'+val.CatProductName+'" '+
+                        '                       data-caption="" '+
+                        '                       data-price="'+val.NetPremium+'" '+
+                        '                       data-catid="'+val.idx+'"'+
+                        '                       data-all="'+jsonAll+'"'+
+                        '                       id="checkboxCompare'+val.CatProductListId+'">'+
                         '                        <label class="form-check-label" for="checkboxCompare'+val.CatProductListId+'">เปรียบเทียบ</label>'+
                         '                    </div>'+
                         '                </div>'+

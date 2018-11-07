@@ -69,7 +69,8 @@ class HomeController extends Controller
             $sendData['name'] = $request->post('name');
             $sendData['tel'] = $request->post('tel');
             $sendData['email'] = $request->post('email');
-            $sendData['callback_date'] = $request->post('callback_date');
+            $callback_date = explode('/', $request->post('callback_date'));
+            $sendData['callback_date'] = $callback_date[2] . '-' . $callback_date[1] . '-' . $callback_date[0];
             $sendData['callback_time'] = $request->post('callback_time');
             $sendData['remark'] = $request->post('remark');
             $sendData['make'] = $request->post('make');

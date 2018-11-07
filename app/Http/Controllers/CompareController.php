@@ -16,7 +16,8 @@ class CompareController extends Controller
                 // echo '<pre>';
                 // print_r($json);
                 // echo '</pre>';
-                $json->InsurerName = isset($json->InsurerName) ? $json->InsurerName : $json->CatProductName;
+                // exit();
+                $json->InsurerName = isset($json->InsurerName) ? $json->InsurerName : $json->CatProductName;    
                 $json->CatProductName = isset($json->CatProductName) ? $json->CatProductName : $json->InsurerName;
                 $data['compare_list'][$key] = $json;
 			}

@@ -36,7 +36,7 @@ $(function(){
         var caption = button.data('caption')         
         var price = button.data('price')           
         var icon = button.data('icon')     
-        var producttype = button.data('producttype')
+        var producttype = button.data('producfttype')
         var makevalue = button.data('makevalue');
         var modelvalue = button.data('modelvalue');
         var motortype = button.data('motortype');
@@ -56,7 +56,6 @@ $(function(){
     })
     $('#btn-interest').click(function(event) {
         var linkInterest = $('#url_main').val() + "Home/SendInterest";
-        console.log(linkInterest);
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             url: linkInterest,

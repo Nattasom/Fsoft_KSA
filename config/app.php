@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -51,12 +51,12 @@ return [
     | your application so that it is used when running Artisan tasks.
     |
     */
+    
+    'url' => env('APP_URL', 'http://localhost/gitkrungsri/'),
 
-    'url' => env('APP_URL', 'http://localhost'),
-
-    'url_main' => '/ksa-front/',
-    'url_assets' => '/ksa-front/resources/',
-    'url_api' => 'http://localhost/ksa-admin/api/',
+    'url_main' => '/gitkrungsri/',
+    'url_assets' => '/gitkrungsri/resources/',
+    'url_api' => 'http://atc-th.com/krungsri/ksa-admin/api/',
 
     /*
     |--------------------------------------------------------------------------
