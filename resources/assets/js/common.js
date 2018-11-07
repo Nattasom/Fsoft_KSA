@@ -36,7 +36,7 @@ $(function(){
         var caption = button.data('caption')         
         var price = button.data('price')           
         var icon = button.data('icon')     
-        var producttype = button.data('producfttype')
+        var producttype = button.data('producttype')
         var makevalue = button.data('makevalue');
         var modelvalue = button.data('modelvalue');
         var motortype = button.data('motortype');
