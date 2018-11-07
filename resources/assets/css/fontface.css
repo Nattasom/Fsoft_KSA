@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* ------------------------------------------------------------------------ fontface
+---------------------------------------------------------------------------------- */
+@font-face {
+    font-family: 'Krungsri Condensed';
+    src: url('fontface/krungsri_con-webfont.eot');
+    src: url('fontface/krungsri_con-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fontface/krungsri_con-webfont.woff') format('woff'),
+         url('fontface/krungsri_con-webfont.ttf') format('truetype'),
+         url('fontface/krungsri_con-webfont.svg#krungsri_con-webfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Krungsri Condensed Medium';
+    src: url('fontface/krungsri_con_med-webfont.eot');
+    src: url('fontface/krungsri_con_med-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fontface/krungsri_con_med-webfont.woff') format('woff'),
+         url('fontface/krungsri_con_med-webfont.ttf') format('truetype'),
+         url('fontface/krungsri_con_med-webfont.svg#krungsri_con_med-webfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Krungsri Condensed Bold';
+    src: url('fontface/krungsri_con_bol-webfont.eot');
+    src: url('fontface/krungsri_con_bol-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fontface/krungsri_con_bol-webfont.woff') format('woff'),
+         url('fontface/krungsri_con_bol-webfont.ttf') format('truetype'),
+         url('fontface/krungsri_con_bol-webfont.svg#krungsri_con_bol-webfont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

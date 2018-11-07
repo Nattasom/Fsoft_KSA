@@ -1,0 +1,55 @@
+/* Iphone 4*/
+@media(max-width:374px) {
+	#mainnav .navbar-brand img { height: 80px; }
+	#mainnav #navbarSupportedBtn { bottom:auto; right:50px; }
+	#mainnav #navbarSupportedBtn > a.btn.btn-primary { padding:5px 10px !important; font-size:0.7em; }
+	#mainnav .navbar-toggler { padding:5px; }
+	#mainnav .navbar-toggler img { height:15px; }
+	#mainnav #navbarSupportedContent { position: relative !important; bottom: auto; width:100%; left:0; }
+	#mainnav #navbarSupportedContent ul > li.nav-item:after { content: ''; }
+	#mainnav { padding-top: 0; }
+	#mainnav .navbar-brand { padding-top:0; }
+	#owlhome .owl-dots .owl-dot { height: 10px; width:10px; margin:0 5px; }
+
+	#mainnav .container { width: 100%; }
+	#mainnav #navbarSupportedBtn { top:30px; }
+	#mainnav #navbarSupportedBtn a { font-size:11px; font-weight: normal; padding: 5px 10px; color: #6F5F5E; }
+}
+
+/* Iphone X */
+@media(min-width:375px) {
+	#mainnav .navbar-brand img { height: 100px; }
+	#mainnav #navbarSupportedBtn { bottom:auto; right:60px; }
+	#mainnav #navbarSupportedBtn > a.btn.btn-primary { padding:5px 10px !important; font-size:0.7em; }
+	#mainnav .navbar-toggler { padding:6px; }
+	#mainnav .navbar-toggler img { height:18px; }
+	#mainnav #navbarSupportedContent { position: relative !important; bottom: auto; width:100%; left:0; }
+	#mainnav #navbarSupportedContent ul > li.nav-item:after { content: ''; }
+	#mainnav { padding-top: 0; }
+	#mainnav .navbar-brand { padding-top:0; }
+	#owlhome .owl-dots .owl-dot { height: 12px; width:12px; background:#fff; border-radius: 25px; margin:0 7px; }
+	#mainnav #navbarSupportedBtn { top:30px; }
+	#mainnav #navbarSupportedBtn a { font-size:11px; font-weight: normal; padding: 5px 10px; color: #6F5F5E; }
+}
+@media(min-width:414px) {
+	#mainnav #navbarSupportedBtn { bottom:auto; right:60px; }
+	#mainnav #navbarSupportedBtn > a.btn.btn-primary { padding:5px 10px !important; font-size:0.8em; }
+	#mainnav .navbar-toggler { padding:7px; }
+	#mainnav #navbarSupportedContent { position: relative !important; bottom: auto; width:100%; left:0; }
+	#mainnav #navbarSupportedContent ul > li.nav-item:after { content: ''; }
+	#mainnav { padding-top: 0; }
+	#mainnav .navbar-brand { padding-top:0; }
+}
+@media(min-width:768px) {
+	#mainnav #navbarSupportedContent { position: absolute !important; bottom: 0; left: 100px; }
+	#mainnav #navbarSupportedContent ul > li.nav-item:after { content: '|'; display: inline-block;  color: rgba(0,0,0,.5); margin-right: 5px; }
+	#mainnav #navbarSupportedContent ul > li.nav-item:last-child:after { content: ''; }
+	#mainnav #navbarSupportedBtn { bottom:0; }
+	#mainnav #navbarSupportedBtn > a.btn.btn-primary { padding: 8px 27px !important; font-size:1.1em; border-radius: 8px; }
+}
+@media(min-width:992px) {
+
+}
+@media(min-width:1200px) {
+
+}

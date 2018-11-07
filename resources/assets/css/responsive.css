@@ -1,0 +1,103 @@
+/* Iphone 4*/
+@media(max-width:374px) {
+	.slider__keyvisual .slider-1 .slick-dots { bottom:5px; }
+	.slick-slider { padding-top:25px; }
+	.box__recommend-insurance [class^="slider__insurance"] .price-start strong,
+	.boxinsurance .price-start strong { font-size: 1em; }
+	.box__recommend-insurance [class^="slider__insurance"] .price-start em,
+	.boxinsurance .price-start em { font-size: 2em; }
+	#box__home, #contentAjax { margin-top: 70px; }
+
+	.box__recommend-insurance .head__info { font-size: 18px; padding:0 50px; margin-bottom: 15px; }
+	.box__recommend-insurance { padding:20px 0; }
+	.box__recommend-insurance .tab__info .detail[aria-hidden="false"] { padding:0; }
+	.box__recommend-insurance [class^="slider__insurance"] .item { padding:0; padding: 0 15px; padding-right: 45px; }
+	
+	.owl-carousel.owl-theme.owl-home .owl-item img.img-fluid { width:300px;	 }
+
+	#contentAjax { 	padding:0; margin:0; }
+
+}
+
+/* Iphone X */
+@media(min-width:375px) {
+	.slider__keyvisual .slider-1 .slick-dots { bottom:40px; }
+	.slick-slider { padding-top:0; }
+	.box__recommend-insurance [class^="slider__insurance"] .price-start strong,
+	.boxinsurance .price-start strong { font-size: 1.5em; }
+	.box__recommend-insurance [class^="slider__insurance"] .price-start em { font-size: 2.8em; }
+	.boxinsurance .price-start em { font-size: 4em; }
+	#box__home, #contentAjax { margin-top: 82px; }
+	.box__recommend-insurance .head__info { font-size: 18px; padding:0 50px; margin-bottom: 15px; }
+	.box__recommend-insurance .tab__info .detail[aria-hidden="false"] { padding:0; }
+	.box__recommend-insurance [class^="slider__insurance"] .item { padding:0; padding: 0 15px; padding-right: 45px; }
+	.owl-carousel.owl-theme.owl-home .owl-item img.img-fluid { width:300px;	 }
+	#contentAjax { 	padding:0; margin:0; }
+}
+@media(min-width:414px) {
+	.slider__keyvisual .slider-1 .slick-dots { bottom:15px; }
+}
+
+
+@media(min-width:768px) {
+}
+@media(min-width:992px) {
+	.visible__desktop  { display: block !important; }
+	#nav__main .box__description {padding:0;}
+	#nav__main .list__main { top:5px; width:85%; }
+	#nav__main .list__main a { font-size: 14px; font-weight: lighter; padding:5px; 
+		-webkit-transition: all .25s;
+		   -moz-transition: all .25s;
+		    -ms-transition: all .25s;
+		     -o-transition: all .25s;
+		        transition: all .25s;
+	 }
+	 #header .call-center button { font-size:12px; }
+	#nav__main .list__main a:hover { text-decoration: none; color: #FFD503; }
+	#nav__main .menu-toggle { display: none; }
+	#header .call-center { position: absolute; top: 30px; right: 0; cursor: pointer; }
+	#nav__main .list__main li a:after { content: '|'; display: inline-block; margin-left:10px; color:#CFCFCF; }
+	#nav__main .list__main li:last-child a:after { content:''; }
+	#header { border-bottom: 0; }
+	.box__recommend-insurance { padding:30px 0; }
+	.box__recommend-insurance .head__info { font-size: 32px; padding:0; }
+	.box__recommend-insurance .tab__info .list__info .thumb img { height: 45px; }
+	.box__recommend-insurance .tab__info .list__info .text { font-size: 20px; }
+	.box__recommend-insurance [class^="slider__insurance"] { margin-bottom: 10px; }
+	.box__recommend-insurance [class^="slider__insurance"] .price-start strong, .boxinsurance .price-start strong { padding:0; line-height: 24px; }
+	.box__recommend-insurance [class^="slider__insurance"] .price-start span em { font-size:48px; }
+	#contentAjax { padding:0; margin:0; }
+	.slider__keyvisual .slider-1 .slick-prev { left:13%; }
+	.slider__keyvisual .slider-1 .slick-next { right:13%; }
+	#nav__main .list__main { top:0px; }
+	#header .call-center { top:30px; }
+	.box__recommend-insurance [class^="slider__insurance"] .item { padding:0; padding:0 15px; }
+	.card-bc .show-text { display: none; }
+	.card-item .card-footer p { font-size:13px; }
+	.owl-home .card-body { min-height: 334px; }
+
+}
+@media(min-width:1200px) {
+	#nav__main .list__main { top:10px; }
+	#header .call-center { top:35px; }	
+	#header .call-center button { font-size:14px; }
+	.box__recommend-insurance { padding:50px 0; padding-bottom: 60px; }
+	.slider__keyvisual .slider-1 .slick-prev { left:7%; background-size: 18px 30px; }
+	.slider__keyvisual .slider-1 .slick-next { right:7%; background-size: 18px 30px; }
+	.customizetype { padding:10px 0; }
+	.customizetype a { padding: 0 !important; }
+	#submitCustom { float: right; }
+	.lineright { border-right:1px solid #E5E5E5; }
+}
+@media(min-width:1366px) {
+	#nav__main .list__main { top:15px; }
+	#header .call-center { top:40px; }	
+	.slider__keyvisual .slider-1 .slick-prev { left:10%; background-size: 25px 45px;  }
+	.slider__keyvisual .slider-1 .slick-next { right:10%; background-size: 25px 45px;  }
+}
+@media(min-width:1440px) {
+	#nav__main .list__main { top:20px; }
+	#header .call-center { top:45px; }	
+	.slider__keyvisual .slider-1 .slick-prev { left:12%; background-size: 30px 50px; }
+	.slider__keyvisual .slider-1 .slick-next { right:12%; background-size: 30px 50px; }
+}

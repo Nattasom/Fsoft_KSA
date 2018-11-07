@@ -1,0 +1,29 @@
+$resolution            : 1920;
+$percent               : 100vw;
+$ratio                 : ($percent / $resolution) * ($resolution/768);
+$ratio-tablet          : ($percent / $resolution) * ($resolution/1024);
+$ratio-pc              : ($percent / $resolution) * ($resolution/1920);
+
+@mixin desktop {
+    @media (min-width: 769px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: 992px) and (max-width:1024px) {
+        @content;
+    }
+}
+
+@mixin ipadpro {
+    @media (min-height: 760px) and (max-width:1366px) and (min-width:1112px) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media (min-width: 1680px) {
+        @content;
+    }
+}
