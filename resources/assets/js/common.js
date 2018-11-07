@@ -56,7 +56,6 @@ $(function(){
     })
     $('#btn-interest').click(function(event) {
         var linkInterest = $('#url_main').val() + "Home/SendInterest";
-        console.log(linkInterest);
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             url: linkInterest,

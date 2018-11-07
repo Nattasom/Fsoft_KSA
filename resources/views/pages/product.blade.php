@@ -108,11 +108,11 @@
 										</div>
 										<div class="col-7 text-right">
 											<div class="row mx-0 customizetype">
-												<div class="col px-1 py-0 text-center"><a class="py-0 text-dark d-block border pr-type-check {{(in_array('1',$product_type)) ? 'active':''}}">1</a></div>
-												<div class="col px-1 py-0 text-center"><a class="py-0 text-dark d-block border pr-type-check {{(in_array('2+',$product_type)) ? 'active':''}}">2+</a></div>
-												<div class="col px-1 py-0 text-center"><a class="py-0 text-dark d-block border pr-type-check {{(in_array('2',$product_type)) ? 'active':''}}">2</a></div>
-												<div class="col px-1 py-0 text-center"><a class="py-0 text-dark d-block border pr-type-check {{(in_array('3+',$product_type)) ? 'active':''}}">3+</a></div>
-												<div class="col px-1 py-0 text-center"><a class="py-0 text-dark d-block border pr-type-check {{(in_array('3',$product_type)) ? 'active':''}}">3</a></div>
+												<div class="col px-1 py-0 text-center"><a class="suminsured py-0 text-dark d-block border pr-type-check {{(in_array('1',$product_type)) ? 'active':''}}" data-value="1">1</a></div>
+												<div class="col px-1 py-0 text-center"><a class="suminsured py-0 text-dark d-block border pr-type-check {{(in_array('2+',$product_type)) ? 'active':''}}" data-value="2+">2+</a></div>
+												<div class="col px-1 py-0 text-center"><a class="suminsured py-0 text-dark d-block border pr-type-check {{(in_array('2',$product_type)) ? 'active':''}}" data-value="2">2</a></div>
+												<div class="col px-1 py-0 text-center"><a class="suminsured py-0 text-dark d-block border pr-type-check {{(in_array('3+',$product_type)) ? 'active':''}}" data-value="3+">3+</a></div>
+												<div class="col px-1 py-0 text-center"><a class="suminsured py-0 text-dark d-block border pr-type-check {{(in_array('3',$product_type)) ? 'active':''}}" data-value="3">3</a></div>
 											</div>
 										</div>
 									</div>
@@ -327,10 +327,10 @@
 								<p class="mb-0">เบี้ยเริ่มต้น <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 							</div>
 							<div class="col-12 text-center">
-								<p class="mb-0"><span class="text-33" id="rr1">8,000</span> บาท/ปี</p>
+								<p class="mb-0"><span class="text-33" id="rr1">{{$premium_value}}</span> บาท/ปี</p>
 							</div>
 							<div class="col-12 mt-2">
-								<div class="slider-range" datatoid="rr1" min="8000" max="200000"></div>
+								<div class="slider-range" datatoid="rr1" min="0" max="200000"></div>
 							</div>
 						</div>
 						<div class="row mb-4">
@@ -343,7 +343,7 @@
 									<div class="col px-0 py-0 mr-1 text-center"><a class="py-0 text-dark d-block border">2+</a></div>
 									<div class="col px-0 py-0 mr-1 text-center"><a class="py-0 text-dark d-block border">2</a></div>
 									<div class="col px-0 py-0 mr-1 text-center"><a class="py-0 text-dark d-block border">3+</a></div>
-									<div class="col px-0 py-0 mr-1 text-center"><a class="py-0 text-dark d-block border disabled">3</a></div>
+									<div class="col px-0 py-0 mr-1 text-center"><a class="py-0 text-dark d-block border">3</a></div>
 								</div>
 							</div>
 						</div>
@@ -352,16 +352,16 @@
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs nav-pills nav-justified" role="tablist">
 								<li role="presentation" class="nav-item">
-									<a href="#filter" aria-controls="filter" class="btn btn-yellow py-2 active show" role="tab" data-toggle="tab"><img src="{{ Config::get('app.url_assets') }}assets/img/Group-1.png" alt="" > ปรับแต่ง</a>
+									<a href="#filter_desk" aria-controls="filter_desk" class="btn btn-yellow py-2 active show" role="tab" data-toggle="tab"><img src="{{ Config::get('app.url_assets') }}assets/img/Group-1.png" alt="" > ปรับแต่ง</a>
 								</li>
 								<li role="presentation" class="nav-item">
-									<a href="#sort" aria-controls="sort" class="btn btn-yellow py-2" role="tab" data-toggle="tab""><img src="{{ Config::get('app.url_assets') }}assets/img/sort.png" alt="" > เรียงลำดับ</a>
+									<a href="#sort_desk" aria-controls="sort_desk" class="btn btn-yellow py-2" role="tab" data-toggle="tab""><img src="{{ Config::get('app.url_assets') }}assets/img/sort.png" alt="" > เรียงลำดับ</a>
 								</li>
 							</ul>
 						
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div role="tabpanel" class="tab-pane active pt-4" id="filter">
+								<div role="tabpanel" class="tab-pane active pt-4" id="filter_desk">
 									<div class="row mb-3">
 										<div class="col-5 text-left">
 											<p class="mb-0">ทุนประกัน <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
@@ -479,7 +479,7 @@
 										</div>
 									</div>
 								</div>
-								<div role="tabpanel" class="tab-pane pt-4" id="sort">
+								<div role="tabpanel" class="tab-pane pt-4" id="sort_desk">
 									<div class="form-group">
 										<div class="form-check">
 										<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
@@ -795,25 +795,54 @@ $(document).ready(function() {
 		containerCssClass: 'mb-2'
 	});
 
-	var option = "<option></option>";
+	@if (isset($make_value) && !empty($make_value))
+	deskMake.val('{{$make_value}}').trigger('change');
+	@endif
 
+	@if (isset($model_value) && !empty($model_value))
+	var sendData = {text:'{{$make_value}}', id:'{{$make_value}}'};
+	getModelValue(sendData);
+	deskModel.html(setOption(dataList[1], 1));
+	deskModel.select2({ 
+		placeholder: "กรุณาเลือกรุ่นรถยนต์",
+		containerCssClass: 'mb-2'
+	});
+	deskModel.val('{{$model_value}}').trigger('change');
+	@else
+	var option = "<option></option>";
 	deskModel.html(option);
 	deskModel.select2({ 
 		placeholder: "กรุณาเลือกรุ่นรถยนต์",
 		containerCssClass: 'mb-2'
 	});
+	@endif
 
+	@if (isset($model_year_value) && !empty($model_year_value))
+	var sendData = {text:'{{$model_text_value}}', id:'{{$model_value}}'};
+	getModelYearValue(sendData);
+	deskYear.html(setOption(dataList[2], 2));
+	deskYear.select2({ 
+		placeholder: "กรุณาเลือกปีรถยนต์",
+		containerCssClass: 'mb-2'
+	});
+	deskYear.val('{{$model_year_value}}').trigger('change');
+	@else
+	var option = "<option></option>";
 	deskYear.html(option);
 	deskYear.select2({ 
 		placeholder: "กรุณาเลือกปีรถยนต์",
 		containerCssClass: 'mb-2'
 	});
+	@endif
+
+
+	
+
 	deskMake.on('select2:select', function (e) {
 		var data = e.params.data;
 		$('#hd-make-filter').val(data.id);
 		var sendData = {text:data.text, id:data.id};
 		getModelValue(sendData);
-		console.log(dataList);
 		deskModel.html(setOption(dataList[1], 1));
 		deskModel.select2({ 
 			placeholder: "กรุณาเลือกรุ่นรถยนต์",
@@ -825,8 +854,8 @@ $(document).ready(function() {
 		$('#hd-model-filter').val(data.id);
 		// $('#hd-model-filter').val(data.text);
 		var sendData = {text:data.text, id:data.id};
+		console.log(sendData);
 		getModelYearValue(sendData);
-		console.log(dataList);
 		deskYear.html(setOption(dataList[2], 2));
 		deskYear.select2({ 
 			placeholder: "กรุณาเลือกปีรถยนต์",
@@ -841,6 +870,12 @@ $(document).ready(function() {
 		$('#contentAjax').html('');
 		callProductList();
 	});
+	$('.suminsured').click(function(event) {
+		var value = $(this).data('value');
+		var oldValue = $("#hd-product-type-filter").val().split(',');
+		console.log(oldValue);
+		console.log(value);
+	});
 
 
     
@@ -854,12 +889,8 @@ $(document).ready(function() {
 		}
 	});
 
-	// $('#modal-advance-filter .modal-dialog .modal-content').css('min-height', ($(window).outerHeight() - 80)+'px');
-
 	$('#lazyLoad').click(function(event) {
-
 		callProductList();
-			
 	});
 
 	
@@ -928,9 +959,10 @@ $(document).ready(function() {
 	funcSlideMulti($('.slider-range-multiple[datatoid="tppd1"]'));
 	callProductList();
 
-});	//ready
+});	
 
-function getModelValue(dataObj){
+
+	function getModelValue(dataObj){
 		$.ajax({
             headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
             url: "{{url('/ajaxModelValue')}}",
