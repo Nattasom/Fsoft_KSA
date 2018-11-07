@@ -13,10 +13,10 @@ $(function(){
         
         $('.scroll-pane').jScrollPane({
             mouseWheelSpeed: 50, 
-            autoReinitialise: truegit
+            autoReinitialise: true
         });
     }
-}); 
+});
 
 $(window).resize(function(){
     if($(window).width() < 769){
