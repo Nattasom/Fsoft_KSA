@@ -1173,26 +1173,44 @@ $(document).ready(function() {
         );
         return $state;
     }
-    $('#select2-a').select2({templateResult: formatState, templateSelection: formatState, data: 6});
-    $('#select2-b').select2({templateResult: formatState, templateSelection: formatState});
-    $('#select2-a').val(6);
+    
+    var sa = $('#select2-a')
+    var sb = $('#select2-b')
 
-    $('#select2-a').on('select2:select', function (e) {
-        var data = e.params.data;
-        console.log('a change');
-        addData(data, '-a');
-    });
-    $('#select2-b').on('select2:select', function (e) {
-        var data = e.params.data;
-        console.log('b change');
-        addData(data, '-b');
-    });
+    sa.select2({templateResult: formatState, templateSelection: formatState});
+    sb.select2({templateResult: formatState, templateSelection: formatState});
 
-    function addData(data, name) {
+    var json = sa.children('option:first-child').data('json');
+    var obj = jQuery.parseJSON(decodeURIComponent(json));
+    obj.link = sa.children('option:first-child').data('link');
+    addData(obj, '-a');
+
+    sb.val(sb.children('option:nth-child(2)').val()).trigger('change');
+    var json = sb.children('option:nth-child(2)').data('json');
+    var obj = jQuery.parseJSON(decodeURIComponent(json));
+    obj.link = sb.children('option:nth-child(2)').data('link');
+    addData(obj, '-b');
+
+    sa.on('select2:select', function (e) {
+        var data = e.params.data;
         var json = data.element.attributes['data-json'].value;
         var obj = jQuery.parseJSON(decodeURIComponent(json));
+        obj.link = data.element.attributes['data-link'].value;
+        addData(obj, '-a');
+    });
+    sb.on('select2:select', function (e) {
+        var data = e.params.data;
+        var json = data.element.attributes['data-json'].value;
+        var obj = jQuery.parseJSON(decodeURIComponent(json));
+        obj.link = data.element.attributes['data-link'].value;
+        addData(obj, '-b');
+    });
+
+    function addData(obj, name) {
+        // var json = data.element.attributes['data-json'].value;
+        // var obj = jQuery.parseJSON(decodeURIComponent(json));
         $('.price'+name).html(addCommas(obj.NetPremium) + ' บาท/ปี');
-        $('.link'+name).attr('href', data.element.attributes['data-link'].value);
+        $('.link'+name).attr('href', obj.link);
         var oldClass = "";
         $('.jskey').each(function(index, el) {
             var nameClass = $(this).attr('class');
