@@ -54,8 +54,8 @@ return [
     
     'url' => env('APP_URL', 'http://localhost/gitkrungsri/'),
 
-    'url_main' => '/gitkrungsri/',
-    'url_assets' => '/gitkrungsri/resources/',
+    'url_main' => '/ksa-front/',
+    'url_assets' => '/ksa-front/resources/',
     'url_api' => 'http://atc-th.com/krungsri/ksa-admin/api/',
 
     /*
