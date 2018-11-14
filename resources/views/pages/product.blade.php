@@ -96,7 +96,11 @@
 											<p class="mb-0">เบี้ยเริ่มต้น <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 										</div>
 										<div class="col-7 text-right">
-											<p class="mb-0"><a data-toggle="modal" data-target="#ModalFilterRange" data-form="#r1" data-input="#hd-premium-filter"><span class="text-33 lbl-start-premium" id="r1">{{number_format($premium_value)}}</span> บาท/ปี</a></p>
+											<p class="mb-0">
+												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#r1" data-input="#hd-premium-filter" data-rangeid="r1">
+													<span class="text-33 lbl-start-premium" id="r1">{{number_format($premium_value)}}</span> บาท/ปี
+												</a>
+											</p>
 										</div>
 										<div class="col-12 mt-2">
 											<div class="slider-range" datatoid="r1" data-href="#hd-premium-filter" data-href-label="#lbl-mb-premium-text" data-val="{{$premium_value}}" min="{{$premium_filter->Minimum}}"  max="{{$premium_filter->Maximum}}"></div>
@@ -121,7 +125,11 @@
 											<p class="mb-0">ทุนประกัน <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 										</div>
 										<div class="col-7 text-right">
-											<p class="mb-0"><a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-suminsured-text" data-input="#hd-suminsured-filter"><span class="text-33 lbl-start-suminsured" id="lbl-suminsured-text">{{number_format($suminsured_filter->Minimum)}}</span> บาท</a></p>
+											<p class="mb-0">
+												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-suminsured-text" data-input="#hd-suminsured-filter"  data-rangeid="r2">
+													<span class="text-33 lbl-start-suminsured" id="lbl-suminsured-text">{{number_format($suminsured_filter->Minimum)}}</span> บาท
+												</a>
+											</p>
 										</div>
 										<div class="col-12 mt-2">
 											<div class="slider-range" datatoid="r2" data-val="0" data-href="#hd-suminsured-filter" data-href-label="#lbl-suminsured-text" min="{{$suminsured_filter->Minimum}}" max="{{$suminsured_filter->Maximum}}"></div>
@@ -132,7 +140,11 @@
 											<p class="mb-0">ค่าเสียหายส่วนแรก <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 										</div>
 										<div class="col-7 text-right">
-											<p><a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-deduct-text" data-input="#hd-deduct-filter"><span class="text-33" id="lbl-deduct-text">1,000</span> บาท</a></p>
+											<p>
+												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-deduct-text" data-input="#hd-deduct-filter" data-rangeid="r3">
+													<span class="text-33" id="lbl-deduct-text">1,000</span> บาท
+												</a>
+											</p>
 										</div>
 										<div class="col-12 mt-2">
 											<div class="slider-range" data-val="0" data-href="#hd-deduct-filter" data-href-label="#lbl-deduct-text" datatoid="r3" min="0" max="10000"></div>
@@ -176,7 +188,14 @@
 												<div class="row mb-3">
 													<div class="col-12 text-left mb-1">
 														<p class="mb-1">คุ้มครองน้ำท่วม <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
-														<p class="text-rangemulti"><a data-toggle="modal" data-target="#ModalFilterRange" data-form="#flood1-1" data-input="#"><span id="flood1-1">0 บาท</span></a><a data-toggle="modal" data-target="#ModalFilterRange" data-form="#flood1-2" data-input="#hd-flood-filter"><span id="flood1-2" class="float-right">5,000 บาท</span></a></p>
+														<p class="text-rangemulti">
+															<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#flood1-1" data-input="#" data-rangeid="flood1" data-rangetype="min">
+																<span id="flood1-1">0 บาท</span>
+															</a>
+															<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#flood1-2" data-input="#hd-flood-filter" data-rangeid="flood1" data-rangetype="max">
+																<span id="flood1-2" class="float-right">5,000 บาท</span>
+															</a>
+														</p>
 													</div>
 													<div class="col-12">
 														<div class="slider-range-multiple" data-href1="#hd-flood-filter" data-href2="#hd-flood-filter" datatoid="flood1" min="0" max="10000"></div>
@@ -186,7 +205,14 @@
 												<div class="row mb-3">
 													<div class="col-12 text-left mb-1">
 														<p class="mb-1">ทรัพย์สินส่วนบุคคลภายนอก <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
-														<p class="text-rangemulti"><span id="tppd1-1">0 บาท</span><span id="tppd1-2" class="float-right">{{number_format($tppd_filter->Maximum)}} บาท</span></p>
+														<p class="text-rangemulti">
+															<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#tppd1-1" data-input="#hd-tppd-min-filter" data-rangeid="tppd1" data-rangetype="min">
+																<span id="tppd1-1">0 บาท</span>
+															</a>
+															<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#tppd1-2" data-input="#hd-tppd-max-filter" data-rangeid="tppd1" data-rangetype="max">
+																<span id="tppd1-2" class="float-right">{{number_format($tppd_filter->Maximum)}} บาท</span>
+															</a>
+														</p>
 													</div>
 													<div class="col-12">
 														<div class="slider-range-multiple" data-href1="#hd-tppd-min-filter" data-href2="#hd-tppd-max-filter" datatoid="tppd1" min="0" max="{{$tppd_filter->Maximum}}"></div>
@@ -327,7 +353,11 @@
 								<p class="mb-0">เบี้ยเริ่มต้น <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 							</div>
 							<div class="col-12 text-center">
-								<p class="mb-0"><span class="text-33" id="lbl-mb-premium-text-desk">{{$premium_value}}</span> บาท/ปี</p>
+								<p class="mb-0">
+									<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-mb-premium-text-desk" data-input="#hd-premium-filter" data-rangeid="rr1">
+										<span class="" id="lbl-mb-premium-text-desk">{{$premium_value}}</span> บาท/ปี
+									</a>
+								</p>
 							</div>
 							<div class="col-12 mt-2">
 								<div class="slider-range" datatoid="rr1" data-href="#hd-premium-filter" data-href-label="#lbl-mb-premium-text-desk" data-val="{{$premium_value}}" min="{{$premium_filter->Minimum}}"  max="{{$premium_filter->Maximum}}"></div>
@@ -367,7 +397,11 @@
 											<p class="mb-0">ทุนประกัน <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 										</div>
 										<div class="col-7 text-right">
-											<p class="mb-0"><span class="text-33" id="lbl-suminsured-text-desk">300,000</span> บาท</p>
+											<p class="mb-0">
+												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-suminsured-text-desk" data-input="#hd-suminsured-filter" data-rangeid="rr2">
+													<span class="" id="lbl-suminsured-text-desk">300,000</span> บาท
+												</a>
+											</p>
 										</div>
 										<div class="col-12 mt-2">
 											<div class="slider-range" datatoid="rr2" data-val="0" data-href="#hd-suminsured-filter" data-href-label="#lbl-suminsured-text-desk" min="{{$suminsured_filter->Minimum}}" max="{{$suminsured_filter->Maximum}}"></div>
@@ -378,7 +412,11 @@
 											<p class="mb-0">ค่าเสียหายส่วนแรก <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 										</div>
 										<div class="col-7 text-right">
-											<p><span class="text-33" id="lbl-deduct-text-desk">1,000</span> บาท</p>
+											<p>
+												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-deduct-text-desk" data-input="#hd-deduct-filter" data-rangeid="rr3">
+													<span class="" id="lbl-deduct-text-desk">1,000</span> บาท
+												</a>
+											</p>
 										</div>
 										<div class="col-12 mt-2">
 											<div class="slider-range" datatoid="rr3" data-val="0" data-href="#hd-deduct-filter" data-href-label="#lbl-deduct-text-desk" datatoid="r3" min="0" max="10000"></div>
@@ -422,7 +460,14 @@
 												<div class="row mb-3">
 													<div class="col-12 text-left mb-1">
 														<p class="mb-1">คุ้มครองน้ำท่วม <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
-														<p class="text-rangemulti"><span id="rrr1-1">0 บาท</span><span id="rrr1-2" class="float-right">5,000 บาท</span></p>
+														<p class="text-rangemulti">
+															<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#rrr1-1" data-input="#" data-rangeid="rrr1" data-rangetype="min">
+																<span id="rrr1-1">0 บาท</span>
+															</a>
+															<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#rrr1-2" data-input="#hd-flood-filter" data-rangeid="rrr1" data-rangetype="max">
+																<span id="rrr1-2" class="float-right">5,000 บาท</span>
+															</a>
+														</p>
 													</div>
 													<div class="col-12">
 														<div class="slider-range-multiple" datatoid="rrr1" data-href1="#hd-flood-filter" data-href2="#hd-flood-filter" datatoid="flood1" min="0" max="10000"></div>
@@ -432,7 +477,14 @@
 												<div class="row mb-3">
 													<div class="col-12 text-left mb-1">
 														<p class="mb-1">ทรัพย์สินส่วนบุคคลภายนอก <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
-														<p class="text-rangemulti"><span id="rrr2-1">0 บาท</span><span id="rrr2-2" class="float-right">5,000 บาท</span></p>
+														<p class="text-rangemulti">
+															<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#rrr2-1" data-input="#hd-tppd-min-filter" data-rangeid="rrr2" data-rangetype="min">
+																<span id="rrr2-1">0 บาท</span>
+															</a>
+															<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#rrr2-2" data-input="#hd-tppd-max-filter" data-rangeid="rrr2" data-rangetype="max">
+																<span id="rrr2-2" class="float-right">5,000 บาท</span>
+															</a>
+														</p>
 													</div>
 													<div class="col-12">
 														<div class="slider-range-multiple" datatoid="rrr2" data-href1="#hd-tppd-min-filter" data-href2="#hd-tppd-max-filter" datatoid="tppd1" min="0" max="{{$tppd_filter->Maximum}}"></div>
@@ -558,8 +610,10 @@
 		  <div class="form-group">
 		    <label for="title"></label>
 		    <input type="number" class="form-control" id="" placeholder="" value="">
-		    <input type="hidden" id="filter-setto" value="">
+		    <input type="hidden" id="filter-form" value="">
 		    <input type="hidden" id="filter-input" value="">
+		    <input type="hidden" id="filter-rangeid" value="">
+		    <input type="hidden" id="filter-rangetype" value="">
 		  </div>
 		</form>
       </div>
@@ -589,24 +643,6 @@ var year = new Array();
 
 var dataList = [car,carmodel,year];
 $(document).ready(function() {
-
-	$('#ModalFilterRange').on('show.bs.modal', function (event) {
-	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  var form = button.data('form') // Extract info from data-* attributes
-	  var input = button.data('input') // Extract info from data-* attributes
-	  var modal = $(this)
-	  // modal.find('.modal-body input[type="number"]').val(recipient)
-	  $('#filter-setto').val(form);
-	  $('#filter-input').val(input);
-	});
-	$('#submitFilterRange').click(function(event) {
-		var num = $('#ModalFilterRange input[type="number"]').val();
-		var id = $('#ModalFilterRange #filter-setto').val();
-		var input = $('#ModalFilterRange #filter-input').val();
-		$(id).html(addCommas(num));
-		$(input).val(num);
-		$('#ModalFilterRange').modal('hide');	
-	});
 
 	//car filter mobile
 	if($("#hd-make-filter").val()!=""){
@@ -985,11 +1021,11 @@ $(document).ready(function() {
 	
 
 
-	var funcSlide = function(div,id){
+	var funcSlide = function(div){
 		$(div).slider({
 			min: parseInt(div.attr('min')),
 			max: parseInt(div.attr('max')),
-			value:parseInt(div.attr("data-val")),
+			// value:parseInt(div.attr("data-val")),
 			slide: function( event, ui ) {
 				var tempid = event.target.attributes.datatoid.value;
 				var href_val = event.target.attributes["data-href"].value;
@@ -1048,6 +1084,51 @@ $(document).ready(function() {
 	funcSlideMulti($('.slider-range-multiple[datatoid="tppd1"]'));
 	callProductList();
 
+
+	$('#ModalFilterRange').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget) // Button that triggered the modal
+	  var form = button.data('form') // Extract info from data-* attributes
+	  var input = button.data('input') // Extract info from data-* attributes
+	  var rangeid = button.data('rangeid') // Extract info from data-* attributes
+	  var rangetype = button.data('rangetype') // Extract info from data-* attributes
+	  var modal = $(this)
+	  modal.find('.modal-body input[type="number"]').val('');
+		var min = parseInt($('[datatoid="'+rangeid+'"]').attr('min'));
+		var max = parseInt($('[datatoid="'+rangeid+'"]').attr('max'));
+		modal.find('.modal-body input[type="number"]').attr('placeholder','Min:'+addCommas(min)+' / Max:'+addCommas(max));
+		modal.find('.modal-body input[type="number"]').attr('min', min);
+		modal.find('.modal-body input[type="number"]').attr('max', max);
+	  $('#filter-form').val(form);
+	  $('#filter-input').val(input);
+	  $('#filter-rangeid').val(rangeid);
+	  if (rangetype != null && rangetype != undefined) {
+	  	$('#filter-rangetype').val(rangetype);	
+	  }
+	  
+	});
+	$('#submitFilterRange').click(function(event) {
+		var num = $('#ModalFilterRange input[type="number"]').val();
+		var form = $('#ModalFilterRange #filter-form').val();
+		var input = $('#ModalFilterRange #filter-input').val();
+		var rangeid = $('#ModalFilterRange #filter-rangeid').val();
+		var rangetype = $('#ModalFilterRange #filter-rangetype').val();
+		$(form).html(addCommas(num));
+		if ($('[datatoid="'+rangeid+'"]').hasClass('slider-range-multiple')==true) {
+		  	if (rangetype != null && rangetype != undefined && rangetype=='min') {
+				$('[datatoid="'+rangeid+'"]').slider( "values", 0, num);
+			}
+			if (rangetype != null && rangetype != undefined && rangetype=='max') {
+				$('[datatoid="'+rangeid+'"]').slider( "values", 1, num);
+			}
+		} else {
+			$('[datatoid="'+rangeid+'"]').slider( "value", num );
+		}
+			
+		if (input != '#' && input != '') {
+			$(input).val(num);	
+		}
+		$('#ModalFilterRange').modal('hide');	
+	});
 });	
 
 
