@@ -5,8 +5,8 @@
                 <div class="col-12 col-lg-4">
                     <div class="box__e-news">
                         <div class="row mb-3">
-                            <div class="col-6 text-right"><h5 class="text-white mb-0 py-1 text-18">พูดคุยกับเรา</h5></div>
-                            <div class="col-4 text-left pl-0"><img src="{{ Config::Get('app.url_assets') }}assets/img/addline.png" alt="" class="" height="35" style="max-width: initial;"></div>
+                            <div class="col-6 text-right"><h5 class="text-white mb-0 py-1 text-20">พูดคุยกับเรา</h5></div>
+                            <div class="col-4 text-left pl-0"><img src="{{ Config::Get('app.url_assets') }}assets/img/icon-line.png" alt="" class="" height="35" style="max-width: initial;"></div>
                         </div>
 
                     </div>
@@ -77,7 +77,7 @@
             <div class="col"><p id="interest-caption">ประกันเปิด-ปิด ประเภท 1 ทุนประกัน 300,000</p></div>
         </div>
         <div class="row mb-4">
-            <div class="col-4"><button class="btn btn-gray btn-sm text-dark" type="button">ชั้น <span id="interest-producttype">1</span></button></div>
+            <div class="col-4"><button class="btn btn-gray btn-sm" type="button">ชั้น <span id="interest-producttype">1</span></button></div>
             <div class="col-8 text-right"><h3 class="d-inline-block" id="interest-price">4,990</h3> <span class="d-inline-block">บาท/ปี</span></div>
         </div>
         <div class="row bg-gray py-4">

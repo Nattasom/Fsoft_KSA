@@ -35,8 +35,8 @@
     });
     $(function(){
 
-        $('.slider__keyvisual').css({height:$(window).height() - $('#header').height()});
-        $('.slider__keyvisual .slider-1 .info, .slider__keyvisual .slider-2 .info').css({height:$('.slider__keyvisual').height() /2});
+        // $('.slider__keyvisual').css({height:$(window).height() - $('#header').height()});
+        // $('.slider__keyvisual .slider-1 .info, .slider__keyvisual .slider-2 .info').css({height:$('.slider__keyvisual').height() /2});
         
         $('.slider__keyvisual .slider-1').slick({
             infinite: true,

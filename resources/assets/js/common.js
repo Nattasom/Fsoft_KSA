@@ -1,3 +1,4 @@
+
 $(function(){
     $('#nav__main .menu-toggle').click(function(){
         $(this).parent().toggleClass('active');
@@ -56,38 +57,55 @@ $(function(){
     })
     $('#btn-interest').click(function(event) {
         var linkInterest = $('#url_main').val() + "Home/SendInterest";
-        $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            url: linkInterest,
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                name: $('#interest-name').val(),
-                tel: $('#interest-tel').val(),
-                email: $('#interest-email').val(),
-                remark: $('#interest-remark').val(),
-                callback_date: $('#interest-callback_date').val(),
-                callback_time: $('#interest-callback_time').val(),
-                make: $('#interest-makevalue').val(),
-                model: $('#interest-modelvalue').val(),
-                motor_type: $('#interest-motortype').val(),
-                seat: $('#interest-seat').val(),
-                cc: $('#interest-cc').val(),
-            },
-            success: function(data) {
-                //console.log(data);
-                if (data.fail != null || data.fail != undefined) {
-                    msgAlert(data.fail);
+        if (
+            $('#interest-name').val().length>0 &&
+            $('#interest-tel').val().length>0 &&
+            $('#interest-email').val().length>0 &&
+            $('#interest-callback_date').val().length>0 &&
+            $('#interest-callback_time').val().length>0 &&
+            $('#interest-makevalue').val().length>0 &&
+            $('#interest-modelvalue').val().length>0 &&
+            $('#interest-motortype').val().length>0 &&
+            $('#interest-seat').val().length>0 &&
+            $('#interest-cc').val().length>0 
+            )
+        {
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                url: linkInterest,
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    name: $('#interest-name').val(),
+                    tel: $('#interest-tel').val(),
+                    email: $('#interest-email').val(),
+                    remark: $('#interest-remark').val(),
+                    callback_date: $('#interest-callback_date').val(),
+                    callback_time: $('#interest-callback_time').val(),
+                    make: $('#interest-makevalue').val(),
+                    model: $('#interest-modelvalue').val(),
+                    motor_type: $('#interest-motortype').val(),
+                    seat: $('#interest-seat').val(),
+                    cc: $('#interest-cc').val(),
+                },
+                success: function(data) {
+                    //console.log(data);
+                    if (data.fail != null || data.fail != undefined) {
+                        msgAlert(data.fail);
+                    }
+                    if (data.status == '01') {
+                        window.location.href = $('#url_main').val() + 'Success';
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    // console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                 }
-                if (data.status == '01') {
-                    window.location.href = $('#url_main').val() + 'Success';
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-                // console.log(JSON.stringify(jqXHR));
-                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-            }
-        });
+            });
+        } else {
+            msgAlert('กรุณากรอกข้อมูลให้ครบถ้วน');
+            // $(this).html('กรุณากรอกข้อมูลให้ครบถ้วน').delay(5000).html('ยืนยันข้อมูล');
+        }
         
     });
 
@@ -254,5 +272,18 @@ $(function(){
         console.log(checkID);
         $('#compare_list #compare_list_id').val(JSON.stringify(checkID));
         $('#compare_list .showlist').html(listHTML);
+    }
+});
+
+$(document).ready(function() {
+    setHeightBanner();
+    $(window).resize(function(event) {
+        setHeightBanner();
+    });
+    function setHeightBanner() {
+        var winH = $(window).height();
+        var HomeH = winH-130;
+        $('#box__home .slider__keyvisual').height(HomeH);
+        $('#box__home .slider__keyvisual .slider-1 .info, .slider__keyvisual .slider-2 .info').height(HomeH/2);
     }
 });

@@ -46,6 +46,8 @@
             <div class="item">
                 <a href="{{ Config::get('app.url_main') }}Custom" class="info">
                     <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/herobanner_top.png" alt="">
+
+                    <!-- <div class="visible__mobile" style="background: url('{{ Config::get('app.url_assets') }}assets/img/herobanner_top.png') no-repeat top center / contain; width:100%; height: 100%;"></div> -->
                     <!-- <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-4.jpg" alt=""> -->
                     <img class="visible__desktop" src="<?php echo $banners->banner_1; ?>" alt="">
                 </a>
@@ -67,6 +69,7 @@
         <div class="slider-2">
             <div class="item">
                 <a href="#" class="info">
+                    <!-- <div class="visible__mobile" style="background: url('{{ Config::get('app.url_assets') }}assets/img/banner_suggest.png') no-repeat top center / contain; width:100%; height: 100%;"></div> -->
                     <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/banner_suggest.png" alt="">
                     <!-- <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-5.jpg" alt=""> -->
                     <img class="visible__desktop" src="<?php echo $banners->banner_2; ?>" alt="">
@@ -107,9 +110,9 @@
                         <div class="contentDiv  px-1">
                             <div class="card rounded-0 mb-4 card-item">
                                 <div class="overlay">
-                                    <?php //if ((int)$data->PromotionDiscountAmt > 0) { ?>
-                                    <!-- <img src="{{ Config::get('app.url_assets') }}assets/img/special.png" style="height:60px; width: auto;" class="mr-1" alt=""> -->
-                                    <?php //} ?>
+                                    <?php if (isset($data->PromotionTag)&&!empty($data->PromotionTag)) { ?>
+                                    <img src="<?php echo $data->PromotionTag;?>" style="height:60px; width: auto;" class="mr-1" alt="">
+                                    <?php } ?>
                                 </div>
                                 <div class="card-header rounded-0">
                                     <p><img src="<?php echo $data->InsurerIcon;?>" style="height:30px; width: auto; margin-top:-2px;" alt="" class="d-inline-block"> <?php echo $data->CatProductName; ?></p>
@@ -200,7 +203,7 @@
                     <div class="clearfix"></div>
                     <div class="row ">
                         <div class="col-12">
-                            <div class="more-info"><button type="button" data-categoryid="<?php echo $category->id;?>" class="lazyLoad btn btn-brown">แนะนำประกันรถเพิ่มเติม &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></button></div>
+                            <div class="more-info"><button type="button" data-categoryid="<?php echo $category->id;?>" class="lazyLoad btn btn-gray px-3 text-16">แนะนำประกันรถเพิ่มเติม &nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></button></div>
                         </div>
                     </div>
                 </div>
