@@ -1,12 +1,12 @@
 /* Iphone 4*/
 @media(max-width:374px) {
 	.slider__keyvisual .slider-1 .slick-dots { bottom:5px; }
-	.slick-slider { padding-top:25px; }
+	/*.slick-slider { padding-top:25px; }*/
 	.box__recommend-insurance [class^="slider__insurance"] .price-start strong,
 	.boxinsurance .price-start strong { font-size: 1em; }
 	.box__recommend-insurance [class^="slider__insurance"] .price-start em,
 	.boxinsurance .price-start em { font-size: 2em; }
-	#box__home, #contentAjax { margin-top: 70px; }
+	#box__home, #contentAjax { margin-top: 130px; }
 
 	.box__recommend-insurance .head__info { font-size: 18px; padding:0 50px; margin-bottom: 15px; }
 	.box__recommend-insurance { padding:20px 0; }
@@ -16,6 +16,15 @@
 	.owl-carousel.owl-theme.owl-home .owl-item img.img-fluid { width:300px;	 }
 
 	#contentAjax { 	padding:0; margin:0; }
+	.datepicker-dropdown { position:fixed; top:50px !important; left:0 !important; width:100%; }
+	.datepicker-dropdown:before, .datepicker-dropdown:after { display: none; }
+	.datepicker table { width:100%; }
+	.datepicker table td, .datepicker table th { height: 50px; }
+	#nav__main .menu-toggle { top:43px; right:15px; }
+	#header .logo__krungsri { width:85px; height:130px; left:15px; background-size: 85px 130px; }
+	#header .call-center { right:65px; top:50px; }
+	.car-filter-tag input.form-control#car-keyin { font-size: 14px; }
+	.car-filter-tag { padding:10px; padding-top:15px; }
 
 }
 
@@ -27,19 +36,36 @@
 	.boxinsurance .price-start strong { font-size: 1.5em; }
 	.box__recommend-insurance [class^="slider__insurance"] .price-start em { font-size: 2.8em; }
 	.boxinsurance .price-start em { font-size: 4em; }
-	#box__home, #contentAjax { margin-top: 82px; }
+	#box__home, #contentAjax { margin-top: 130px; }
 	.box__recommend-insurance .head__info { font-size: 18px; padding:0 50px; margin-bottom: 15px; }
 	.box__recommend-insurance .tab__info .detail[aria-hidden="false"] { padding:0; }
 	.box__recommend-insurance [class^="slider__insurance"] .item { padding:0; padding: 0 15px; padding-right: 45px; }
 	.owl-carousel.owl-theme.owl-home .owl-item img.img-fluid { width:300px;	 }
 	#contentAjax { 	padding:0; margin:0; }
+	.datepicker-dropdown { position:fixed; top:50px !important; left:0 !important; width:100%; }
+	.datepicker-dropdown:before, .datepicker-dropdown:after { display: none; }
+	.datepicker table { width:100%; }
+	.datepicker table td, .datepicker table th { height: 50px; }
+	#nav__main .menu-toggle { top:43px; right:15px; }
+	#header .logo__krungsri { width:85px; height:130px; left:15px; background-size: 85px 130px; }
+	#header .call-center { right:65px; top:50px; }
+	.car-filter-tag input.form-control#car-keyin { font-size: 14px; }
+	.car-filter-tag { padding:10px; padding-top:15px; }
 }
 @media(min-width:414px) {
 	.slider__keyvisual .slider-1 .slick-dots { bottom:15px; }
+	#nav__main .menu-toggle { top:43px; right:15px; }
+	#header .logo__krungsri { width:85px; height:130px; left:15px; background-size: 85px 130px; }
+	#header .call-center { right: 70px; top:50px; }
+	.car-filter-tag input.form-control#car-keyin { font-size: 14px; }
+	.car-filter-tag { padding:10px; padding-top:15px; }
 }
 
 
 @media(min-width:768px) {
+	.datepicker-dropdown { position:fixed; top:50px !important; left:0 !important; width:100%; }
+	.datepicker table { width:100%; }
+	.datepicker table td, .datepicker table th { height: 50px; }
 }
 @media(min-width:992px) {
 	.visible__desktop  { display: block !important; }
@@ -75,6 +101,10 @@
 	.card-bc .show-text { display: none; }
 	.card-item .card-footer p { font-size:13px; }
 	.owl-home .card-body { min-height: 334px; }
+	.datepicker-dropdown { position:absolute; top:auto !important; left:auto !important; width:auto; }
+	.datepicker-dropdown:before, .datepicker-dropdown:after { display: inline-block; }
+	.datepicker table { width:auto; }
+	.datepicker table td, .datepicker table th { height: auto; }
 
 }
 @media(min-width:1200px) {
@@ -88,6 +118,7 @@
 	.customizetype a { padding: 0 !important; }
 	#submitCustom { float: right; }
 	.lineright { border-right:1px solid #E5E5E5; }
+	
 }
 @media(min-width:1366px) {
 	#nav__main .list__main { top:15px; }
