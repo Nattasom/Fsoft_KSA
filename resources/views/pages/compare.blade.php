@@ -823,7 +823,19 @@
                                 <div class="col-md-12 text-center">
                                     <p>เริ่มต้นเพียง</p>
                                     <h4 class="text-center"><?php echo !empty($data->NetPremium) ? number_format($data->NetPremium,0).'<span class="text-18 text-dark font-weight-normal"> บาท / ปี</span>':''; ?></h4>
-                                    <a href="<?php echo $link_product_detail; ?>/{{$data->idx}}" class="btn btn-warning btn-theme">รายละเอียด</a>
+                                    <!-- <a href="<?php echo $link_product_detail; ?>/{{$data->idx}}" class="btn btn-warning btn-theme">รายละเอียด</a> -->
+                                    <a data-toggle="modal" data-target="#interest" class="btn btn-warning btn-theme" 
+                                    data-title="<?php echo $data->CatProductName; ?>" 
+                                    data-caption="" 
+                                    data-price="<?php echo $data->NetPremium;?>" 
+                                    data-producttype="<?php echo $data->ProductType; ?>" 
+                                    data-icon="<?php echo $data->InsurerIcon;?>" 
+                                    data-makevalue="<?php echo $data->MakeValue; ?>"
+                                    data-modelvalue="<?php echo $data->ModelValue; ?>"
+                                    data-motortype="<?php echo $data->MotorType; ?>"
+                                    data-seat="<?php echo $data->Seat; ?>"
+                                    data-cc="<?php echo $data->CC;?>"
+                                    >สนใจประกันนี้</a>
                                 </div>
                             </div>
                         </div>
@@ -1187,9 +1199,11 @@ $(document).ready(function() {
 
     sb.val(sb.children('option:nth-child(2)').val()).trigger('change');
     var json = sb.children('option:nth-child(2)').data('json');
-    var obj = jQuery.parseJSON(decodeURIComponent(json));
-    obj.link = sb.children('option:nth-child(2)').data('link');
-    addData(obj, '-b');
+    if (json != undefined && json != null) {
+        var obj = jQuery.parseJSON(decodeURIComponent(json));
+        obj.link = sb.children('option:nth-child(2)').data('link');
+        addData(obj, '-b');
+    }
 
     sa.on('select2:select', function (e) {
         var data = e.params.data;
@@ -1210,7 +1224,22 @@ $(document).ready(function() {
         // var json = data.element.attributes['data-json'].value;
         // var obj = jQuery.parseJSON(decodeURIComponent(json));
         $('.price'+name).html(addCommas(obj.NetPremium) + ' บาท/ปี');
-        $('.link'+name).attr('href', obj.link);
+        $('.link'+name).attr({
+            'data-toggle': 'modal',
+            'data-target': '#interest',
+            'data-title': obj.CatProductName,
+            'data-caption': '',
+            'data-price': obj.NetPremium,
+            'data-producttype': obj.ProductType,
+            'data-icon': obj.InsurerIcon,
+            'data-makevalue': obj.MakeValue,
+            'data-modelvalue': obj.ModelValue,
+            'data-motortype': obj.MotorType,
+            'data-seat': obj.Seat,
+            'data-cc': obj.CC,
+        });
+        $('.link'+name).removeAttr('href');
+        // $('.link'+name).attr('href', obj.link);
         var oldClass = "";
         $('.jskey').each(function(index, el) {
             var nameClass = $(this).attr('class');

@@ -135,6 +135,7 @@
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function() {
 	// $("#btn-ddl-car").click();
+	$('#submitCustom').attr('disabled','disabled');
 	$('.customizetype a').click(function(event) {
 		if ($(this).hasClass('disabled') == false) {
 			// $('.customizetype a:not(.disabled)').removeClass('active');
@@ -144,13 +145,6 @@ $(document).ready(function() {
 				$(this).addClass('active');
 			}
 			
-		}
-		var active = false;
-		$('.customizetype a').each(function(index, el) {
-			if ($(this).hasClass('active')) { active = true; }
-		});
-		if (active) {
-			$('[type="submit"]').removeClass('btn-gray').addClass('btn-yellow');
 		}
 	});
 	$("#form-custom").submit(function(){
@@ -250,6 +244,7 @@ $(document).ready(function() {
 		deskModel.select2({ 
 			placeholder: "กรุณาเลือกรุ่นรถยนต์"
 		});
+		deskModel.select2('open');
 	});
 
 	deskModel.on('select2:select', function (e) {
@@ -263,11 +258,13 @@ $(document).ready(function() {
 		deskYear.select2({ 
 			placeholder: "กรุณาเลือกปีรถยนต์"
 		});
+		deskYear.select2('open');
 	});
 
 	deskYear.on('select2:select', function (e) {
 		var data = e.params.data;
 		$('#hd_year_value').val(data.id);
+		undisabledSubmit();
 	});
 
 	function setOption(ListOptions, now = 0) {
@@ -292,7 +289,18 @@ $(document).ready(function() {
 });
 // Desktop
 
-
+	function undisabledSubmit() {
+		var active = false;
+		console.log($('#hd_make_value').val());
+		if ($('#hd_make_value').val().length>0 && $('#hd_model_value').val().length>0 && $('#hd_model_text').val().length>0 && $('#hd_year_value').val().length>0) {
+			active = true;
+		}
+		console.log(active);
+		if (active) {
+			$('#submitCustom').removeAttr('disabled');
+			$('#submitCustom').removeClass('btn-gray').addClass('btn-yellow');
+		}
+	}
 	function getModelValue(dataObj){
 		$.ajax({
             headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
@@ -410,6 +418,8 @@ $(document).ready(function() {
 			$(".car-filter-ddl .content-zone").html('');
 			$("#car-keyin").addClass("d-none");
 		}
+
+		undisabledSubmit();
 	}
 
 

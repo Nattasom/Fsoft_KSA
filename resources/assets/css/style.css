@@ -846,7 +846,7 @@ label, input, .block {
 }
 
 .box__recommend-insurance .tab__info .list__info .ui-state-active a {
-  background: #ffd503;
+  background: #FFD400;
 }
 
 .box__recommend-insurance .tab__info .detail {
@@ -1074,7 +1074,7 @@ label, input, .block {
 }
 
 .box__recommend-insurance [class^="slider__insurance"] .box__compare .form-check-label {
-  color: #ffd503;
+  color: #FFD400;
   cursor: pointer;
   font-size: 3.90625vw;
   line-height: 10.28646vw;
@@ -1090,7 +1090,7 @@ label, input, .block {
 }
 
 .box__recommend-insurance [class^="slider__insurance"] .box__compare .link {
-  background: #ffd503;
+  background: #FFD400;
   display: inline-block;
   padding: 0 15px;
   text-align: center;
@@ -1352,7 +1352,7 @@ label, input, .block {
 }
 
 #footer .info .box__e-news .submit {
-  background: #ffd503;
+  background: #FFD400;
   border: 0;
   display: inline-block;
   margin: 0 5px 0 6px;
@@ -1551,7 +1551,7 @@ label, input, .block {
 }
 
 #footer .copyright {
-  background: #ffd503;
+  background: #FFD400;
   padding: 15px 5px 13px;
   text-align: center;
 }
