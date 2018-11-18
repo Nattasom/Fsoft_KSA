@@ -3,7 +3,7 @@
 <div class="box-header">
     <div class="container">
         <div class="col-md-12 text-center">
-            <p><img src="{{ Config::get('app.url_assets') }}assets/img/icon/car-header.png" alt=""> Honda / City 1500cc / 2016 / ชั้น 1,3+,3 </p>
+            <!-- <p><img src="{{ Config::get('app.url_assets') }}assets/img/icon/car-header.png" alt=""> Honda / City 1500cc / 2016 / ชั้น 1,3+,3 </p> -->
         </div>
     </div>
 </div>
