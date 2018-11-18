@@ -53,13 +53,13 @@
                     <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_1_d.jpg" alt="">
                 </a>
             </div>
-            <!-- <div class="item">
+            <div class="item">
                 <a href="{{ Config::get('app.url_main') }}Custom" class="info">
-                    <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/herobanner_top.png" alt="">
-                    <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-4.jpg" alt="">
+                    <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_2_m.jpg" alt="">
+                    <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_2_d.jpg" alt="">
                 </a>
             </div>
-            <div class="item">
+           <!--  <div class="item">
                 <a href="{{ Config::get('app.url_main') }}Custom" class="info">
                     <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/herobanner_top.png" alt="">
                     <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-4.jpg" alt="">
@@ -70,11 +70,10 @@
         <div class="slider-2">
             <div class="item">
                 <a href="#" class="info">
-                    <!-- <div class="visible__mobile" style="background: url('{{ Config::get('app.url_assets') }}assets/img/banner_suggest.png') no-repeat top center / contain; width:100%; height: 100%;"></div> -->
-                    <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_2_m.jpg" alt="">
+                    <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/banner_suggest.png" alt="">
                     <!-- <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-5.jpg" alt=""> -->
-                    <!-- <img class="visible__desktop" src="<?php echo $banners->banner_2; ?>" alt=""> -->
-                    <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_2_d.jpg" alt="">
+                    <img class="visible__desktop" src="<?php echo $banners->banner_2; ?>" alt="">
+                    <!-- <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_2_d.jpg" alt=""> -->
                 </a>
             </div>
         </div>
