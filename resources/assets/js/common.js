@@ -9,7 +9,7 @@ $(function(){
         $('#nav__main .detail').fadeOut('fast');
     });
     
-    if($(window).width() < 769){
+    if($(window).width() < 813){
         $('.scroll-pane').css({height:$(window).height() - 30}); 
         
         $('.scroll-pane').jScrollPane({
@@ -20,7 +20,7 @@ $(function(){
 });
 
 $(window).resize(function(){
-    if($(window).width() < 769){
+    if($(window).width() < 813){
         $('.scroll-pane').css({height:$(window).height() - 30});   
         
         $('.scroll-pane').jScrollPane({

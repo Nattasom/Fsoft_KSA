@@ -89,7 +89,7 @@
                     <?php if (count($categories) > 0) { ?>
                     <?php foreach ($categories as $category) { ?>
                     <li>
-                        <a href="#insurance-banner-<?php echo $category->id; ?>">
+                        <a href="#insurance-banner-<?php echo $category->id; ?>" class="insurance-category">
                             <span class="thumb"><?php echo !empty($category->icon) ? '<img src="'.$category->icon.'" alt="">' : '';?></span>
                             <span class="text"><?php echo $category->cat_name; ?></span>
                         </a>
@@ -133,7 +133,11 @@
                                 <div class="card-footer rounded-0 bg-card-footer px-2">
                                     <div class="row">
                                         <div class="col-7">
-                                            <p class="text-white mb-2">ทุนประกัน</p>
+                                            <p class="text-white mb-2">ทุนประกัน 
+                                               <a href="#" data-toggle="tooltip" data-html="true" title="@lang('info.insurance')">
+                                                    <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
+                                                </a>
+                                            </p>
                                         </div>
                                         <div class="col-5 text-right">
                                             <p class="text-white mb-2"><?php echo number_format($data->SumInsured,0); ?> บ.</p>
@@ -141,7 +145,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-7">
-                                            <p class="text-white mb-2">ค่าเสียหายส่วนแรก</p>
+                                            <p class="text-white mb-2">ค่าเสียหายส่วนแรก
+                                                <a href="#" data-toggle="tooltip" data-html="true" title="@lang('info.firstdamage')">
+                                                    <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
+                                                </a>
+                                            </p>
                                         </div>
                                         <div class="col-5 text-right">
                                             <p class="text-white mb-2"><?php echo !empty($data->DeductAmt) ? number_format($data->DeductAmt,0) : 'ไม่ต้องจ่าย'; ?></p>
@@ -149,7 +157,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-7">
-                                            <p class="text-white mb-2">ซ่อม</p>
+                                            <p class="text-white mb-2">ซ่อม
+                                                <a href="#" data-toggle="tooltip" data-html="true" title="@lang('info.repair')">
+                                                    <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
+                                                </a>
+                                            </p>
                                         </div>
                                         <div class="col-5 text-right">
                                             <p class="text-white mb-2"><?php echo $data->ClaimTypeValue == '01' ? 'อู่่' : 'ห้าง'; ?></p>
@@ -157,7 +169,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-7">
-                                            <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก</p>
+                                            <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก
+                                                <a href="#" data-toggle="tooltip" data-html="true" title="@lang('info.thirdpartyproperty')">
+                                                    <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
+                                                </a>
+                                            </p>
                                         </div>
                                         <div class="col-5 text-right">
                                             <p class="text-white mb-2"><?php echo number_format($data->TPPD,0); ?> บ.</p>
@@ -272,6 +288,10 @@
 @section('script')
 <script>
 $(document).ready(function() {
+    // $('[data-toggle="tooltip"]').tooltip({ 
+        // html: true
+    // });
+
     $('.owl-home').owlCarousel({
         loop:false,
         margin:10,
@@ -294,9 +314,45 @@ $(document).ready(function() {
 <script>
 jQuery(document).ready(function($) {
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    var path = "{{ Config::get('app.url_assets') }}";
 
     var w = $(window).width();
 
+    // $('.tab__info .ui-tabs-panel').each(function(index, el) {
+    //     console.log(index);
+    //     if (index>0) {
+    //         $(this).css({
+    //             display: 'block',
+    //             opacity: '0',
+    //             height: '0',
+    //             padding: '0'
+    //         });
+    //     } else {
+    //         $(this).css({
+    //             display: 'block',
+    //             opacity: '1',
+    //             height: 'auto',
+    //             padding: '1em 1.4em'
+    //         });
+    //     }
+    // });
+    // $('.insurance-category').click(function(event) {
+    //     var id = $(this).attr('href');
+    //     $('.tab__info .ui-tabs-panel').each(function(index, el) {
+    //         $(this).css({
+    //             display: 'block',
+    //             opacity: '0',
+    //             height: '0',
+    //             padding: '0'
+    //         });
+    //     });
+    //     $(id).css({
+    //         display: 'block',
+    //         opacity: '1',
+    //         height: 'auto',
+    //         padding: '1em 1.4em'
+    //     });
+    // });
 
     $('#modal-advance-filter .modal-dialog .modal-content').css('min-height', ($(window).outerHeight() - 80)+'px');
 
@@ -320,6 +376,12 @@ jQuery(document).ready(function($) {
 
         val_start = parseInt($('#newslide'+catid+' .item').length);
 
+        var info = new Array(
+            "@lang('info.insurance')",
+            "@lang('info.firstdamage')",
+            "@lang('info.repair')",
+            "@lang('info.thirdpartyproperty')",
+            );
 
 
         $.ajax({
@@ -358,7 +420,11 @@ jQuery(document).ready(function($) {
                         '        <div class="card-footer rounded-0 bg-card-footer px-2">'+
                         '            <div class="row">'+
                         '                <div class="col-7">'+
-                        '                    <p class="text-white mb-2">ทุนประกัน</p>'+
+                        '                    <p class="text-white mb-2">ทุนประกัน'+
+                        '                       <a href="#" data-toggle="tooltip" data-html="true" title="'+info[0]+'">'+
+                        '                           <img src="'+path+'assets/img/info.png" alt="information" >'+
+                        '                       </a>'+
+                        '                    </p>'+
                         '                </div>'+
                         '                <div class="col-5 text-right">'+
                         '                    <p class="text-white mb-2">'+addCommas(val.SumInsured)+' บ.</p>'+
@@ -366,15 +432,23 @@ jQuery(document).ready(function($) {
                         '            </div>'+
                         '            <div class="row">'+
                         '                <div class="col-7">'+
-                        '                    <p class="text-white mb-2">ค่าเสียหายส่วนแรก</p>'+
+                        '                    <p class="text-white mb-2">ค่าเสียหายส่วนแรก'+
+                        '                       <a href="#" data-toggle="tooltip" data-html="true" title="'+info[1]+'">'+
+                        '                           <img src="'+path+'assets/img/info.png" alt="information" >'+
+                        '                       </a>'+
+                        '                    </p>'+
                         '                </div>'+
                         '                <div class="col-5 text-right">'+
-                        '                    <p class="text-white mb-2">'+(val.DeductAmt!=null?addCommas(val.DeductAmt):'ไม่ต้องจ่าย')+'</p>'+
+                        '                    <p class="text-white mb-2">'+(val.DeductAmt!=null&&val.DeductAmt.length>0?addCommas(val.DeductAmt):'ไม่ต้องจ่าย')+'</p>'+
                         '                </div>'+
                         '            </div>'+
                         '            <div class="row">'+
                         '                <div class="col-7">'+
-                        '                    <p class="text-white mb-2">ซ่อม</p>'+
+                        '                    <p class="text-white mb-2">ซ่อม'+
+                        '                       <a href="#" data-toggle="tooltip" data-html="true" title="'+info[2]+'">'+
+                        '                           <img src="'+path+'assets/img/info.png" alt="information" >'+
+                        '                       </a>'+
+                        '                    </p>'+
                         '                </div>'+
                         '                <div class="col-5 text-right">'+
                         '                    <p class="text-white mb-2">'+(parseInt(val.ClaimTypeValue)== 1 ? 'อู่':'ห้าง')+'</p>'+
@@ -382,7 +456,11 @@ jQuery(document).ready(function($) {
                         '            </div>'+
                         '            <div class="row">'+
                         '                <div class="col-7">'+
-                        '                    <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก</p>'+
+                        '                    <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก'+
+                        '                       <a href="#" data-toggle="tooltip" data-html="true" title="'+info[3]+'">'+
+                        '                           <img src="'+path+'assets/img/info.png" alt="information" >'+
+                        '                       </a>'+
+                        '                    </p>'+
                         '                </div>'+
                         '                <div class="col-5 text-right">'+
                         '                    <p class="text-white mb-2">'+addCommas(val.TPPD)+' บ.</p>'+

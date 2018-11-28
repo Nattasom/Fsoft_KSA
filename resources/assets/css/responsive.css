@@ -26,6 +26,10 @@
 	.car-filter-tag input.form-control#car-keyin { font-size: 14px; }
 	.car-filter-tag { padding:10px; padding-top:15px; }
 
+	#header .container { height:130px; }
+	.box-header { margin-top:130px; }
+	#closeNav { display: block !important; }
+
 }
 
 /* Iphone X */
@@ -51,6 +55,10 @@
 	#header .call-center { right:65px; top:50px; }
 	.car-filter-tag input.form-control#car-keyin { font-size: 14px; }
 	.car-filter-tag { padding:10px; padding-top:15px; }
+
+	#header .container { height:130px; }
+	.box-header { margin-top:130px; }
+	#closeNav { display: block !important; }
 }
 @media(min-width:414px) {
 	.slider__keyvisual .slider-1 .slick-dots { bottom:15px; }
@@ -59,18 +67,71 @@
 	#header .call-center { right: 70px; top:50px; }
 	.car-filter-tag input.form-control#car-keyin { font-size: 14px; }
 	.car-filter-tag { padding:10px; padding-top:15px; }
+
+	#header .container { height:130px; }
+	.box-header { margin-top:130px; }
+	#nav__main .detail { width:70vw; }
+	#nav__main .box__description { padding:15px 20px; }
+	#nav__main .list__main a { font-size: 1em; line-height: 1.8em; }
 }
 
+/* iphone 6plus */
+@media(min-width:736px) {
+	#header .container { height:130px; }
+	.box-header { margin-top:130px; }
+	#nav__main .detail { width:50vw; }
+	#nav__main .box__description { padding:15px 20px; }
+	#nav__main .list__main a { font-size: 0.6em; line-height: 1.8em; }
+	#closeNav { display: block !important; }
+}
 
 @media(min-width:768px) {
 	.datepicker-dropdown { position:fixed; top:50px !important; left:0 !important; width:100%; }
 	.datepicker table { width:100%; }
 	.datepicker table td, .datepicker table th { height: 50px; }
+	#nav__main .detail { display: none; }
+	
+	#header .container { height:130px; }
+	.box-header { margin-top:130px; }
+}
+/* iPhoneX  horizontal */
+@media(min-width:812px) {
+	.datepicker-dropdown { position:fixed; top:50px !important; left:0 !important; width:100%; }
+	.datepicker table { width:100%; }
+	.datepicker table td, .datepicker table th { height: 50px; }
+	#nav__main .detail { display: block; }
+	/*#nav__main .menu-toggle {display: none;}*/
+	/*#header .call-center {right:0;}*/
+	
+	#header .container { height:130px; }
+	.box-header { margin-top:130px; }
+	#nav__main .list__main { top:15px; padding:0 0 0 13vw; }
+	#nav__main .list__main a { font-size:0.9em; padding:5px 10px; line-height: 1.2em; color:#fff; }
+	#nav__main .list__main {margin:0; padding: 10px 15px;}
+	#nav__main .list__main li { width:100%; }
+	#nav__main .detail {
+		display: none;
+		background:#6f5f5e !important;
+		overflow: hidden;
+		padding:15px 0;
+		z-index: 5;
+		position: absolute;
+		top:0; right:0;
+	}
+	#header {border-bottom:0;}
+	
 }
 @media(min-width:992px) {
+	#header {border-bottom:0;}
+	#closeNav { display: none !important; }
+	#header .container { height:130px; }
+	.box-header { margin-top:130px; }
+	#nav__main .detail { display: block; background: transparent !important; width:100%; height:130px; }
+	#nav__main .list__main li { width:auto; }
+	#nav__main .list__main a { color:#333; }
 	.visible__desktop  { display: block !important; }
 	#nav__main .box__description {padding:0;}
-	#nav__main .list__main { top:5px; width:85%; }
+	#nav__main .list__main { top:15px; width:85%; padding:0 0 0 10vw; }
 	#nav__main .list__main a { font-size: 14px; font-weight: lighter; padding:5px; 
 		-webkit-transition: all .25s;
 		   -moz-transition: all .25s;
@@ -81,7 +142,7 @@
 	 #header .call-center button { font-size:12px; }
 	#nav__main .list__main a:hover { text-decoration: none; color: #FFD503; }
 	#nav__main .menu-toggle { display: none; }
-	#header .call-center { position: absolute; top: 30px; right: 0; cursor: pointer; }
+	#header .call-center { position: absolute; top: 50px; right: 0; cursor: pointer; }
 	#nav__main .list__main li a:after { content: '|'; display: inline-block; margin-left:10px; color:#CFCFCF; }
 	#nav__main .list__main li:last-child a:after { content:''; }
 	#header { border-bottom: 0; }
@@ -95,8 +156,7 @@
 	#contentAjax { padding:0; margin:0; }
 	.slider__keyvisual .slider-1 .slick-prev { left:13%; }
 	.slider__keyvisual .slider-1 .slick-next { right:13%; }
-	#nav__main .list__main { top:0px; }
-	#header .call-center { top:30px; }
+	#header .call-center { top:50px; }
 	.box__recommend-insurance [class^="slider__insurance"] .item { padding:0; padding:0 15px; }
 	.card-bc .show-text { display: none; }
 	.card-item .card-footer p { font-size:13px; }
@@ -106,10 +166,13 @@
 	.datepicker table { width:auto; }
 	.datepicker table td, .datepicker table th { height: auto; }
 
+	#nav__main .menu-toggle {display: none;}
+	#header .call-center {right:0;}
+
 }
 @media(min-width:1200px) {
 	#nav__main .list__main { top:10px; }
-	#header .call-center { top:35px; }	
+	#header .call-center { top:50px; }	
 	#header .call-center button { font-size:14px; }
 	.box__recommend-insurance { padding:50px 0; padding-bottom: 60px; }
 	.slider__keyvisual .slider-1 .slick-prev { left:7%; background-size: 18px 30px; }
@@ -122,7 +185,7 @@
 }
 @media(min-width:1366px) {
 	#nav__main .list__main { top:15px; }
-	#header .call-center { top:40px; }	
+	#header .call-center { top:50px; }	
 	.slider__keyvisual .slider-1 .slick-prev { left:10%; background-size: 25px 45px;  }
 	.slider__keyvisual .slider-1 .slick-next { right:10%; background-size: 25px 45px;  }
 }

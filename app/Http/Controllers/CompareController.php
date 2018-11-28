@@ -13,10 +13,6 @@ class CompareController extends Controller
 		if (count($compareLists) > 0) {
 			foreach ($compareLists as $key => $list) {
 				$json = json_decode(urldecode($list));
-                // echo '<pre>';
-                // print_r($json);
-                // echo '</pre>';
-                // exit();
                 $json->InsurerName = isset($json->InsurerName) ? $json->InsurerName : $json->CatProductName;    
                 $json->CatProductName = isset($json->CatProductName) ? $json->CatProductName : $json->InsurerName;
                 $data['compare_list'][$key] = $json;
