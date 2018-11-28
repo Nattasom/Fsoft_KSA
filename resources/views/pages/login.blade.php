@@ -31,11 +31,11 @@
 					<form action="<?php echo $link_action; ?>" method="post">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Username</label>
-							<input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" required>
+							<input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" value="admin" required>
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">Password</label>
-							<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+							<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value="P@ssw0rd" required>
 						</div>
 						{!! csrf_field() !!}
 						<button type="submit" class="btn btn-yellow">Submit</button>

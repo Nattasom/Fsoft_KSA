@@ -1,6 +1,6 @@
 <script src="{{ Config::get('app.url_assets') }}assets/js/jquery-3.2.1.min.js"></script>
 <script src="{{ Config::get('app.url_assets') }}assets/js/popper.min.js"></script>
-<script src="{{ Config::get('app.url_assets') }}assets/bootstrap/js/bootstrap.min.js"></script>
+
 <script src="{{ Config::get('app.url_assets') }}assets/js/scrollpane/jquery.jscrollpane.min.js"></script>
 <script src="{{ Config::get('app.url_assets') }}assets/js/scrollpane/jquery.mousewheel.js"></script>
 <script src="{{ Config::get('app.url_assets') }}assets/js/slick/slick.min.js"></script>
@@ -10,7 +10,7 @@
 <script src="{{ Config::get('app.url_assets') }}assets/js/common.js"></script>
 
 <!-- Jquery Rangeslider  -->
-<script src="{{ Config::get('app.url_assets') }}assets/jquery-ui/jquery-ui.min.js"></script>
+<!-- <script src="{{ Config::get('app.url_assets') }}assets/jquery-ui/jquery-ui.min.js"></script> -->
 <script src="{{ Config::get('app.url_assets') }}assets/js/jquerytouchpunch.js"></script>
 <!-- <script src="{{ Config::get('app.url_assets') }}assets/rangeslider/rangeslider.min.js"></script> -->
 <!-- <script src="{{ Config::get('app.url_assets') }}assets/jqueryrange/multirange.js"></script> -->
@@ -23,8 +23,15 @@
 
 <!-- Bootstrap Tagsinput -->
 <script src="{{ Config::get('app.url_assets') }}assets/select2/js/select2.full.min.js"></script>
+<script src="{{ Config::get('app.url_assets') }}assets/bootstrap/js/bootstrap.min.js"></script>
 <!-- <script src="{{ Config::get('app.url_assets') }}assets/bootstrap-tagsinput/bootstrap-tagsinput.min.js.map"></script> -->
 <script>
+    $(document).ready(function() {
+        $("body").tooltip({ selector: '[data-toggle=tooltip]', html: true });
+        // $('[data-toggle=tooltip]').on('show.bs.tooltip', function (e) {
+        //     console.log(e);
+        // });
+    });
     $(document).ready(function() {
         $('.datepicker').datepicker({
             format: 'dd/mm/yyyy',
@@ -80,12 +87,59 @@
             });
         });
     });
+
+
+
+    $('#ModalFilterRange').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var form = button.data('form') // Extract info from data-* attributes
+      var input = button.data('input') // Extract info from data-* attributes
+      var rangeid = button.data('rangeid') // Extract info from data-* attributes
+      var rangetype = button.data('rangetype') // Extract info from data-* attributes
+      var modal = $(this)
+      console.log(rangeid);
+      modal.find('.modal-body input[type="number"]').val('');
+        var min = parseInt($('[datatoid="'+rangeid+'"]').attr('min'));
+        var max = parseInt($('[datatoid="'+rangeid+'"]').attr('max'));
+        modal.find('.modal-body input[type="number"]').attr('placeholder','Min:'+addCommas(min)+' / Max:'+addCommas(max));
+        modal.find('.modal-body input[type="number"]').attr('min', min);
+        modal.find('.modal-body input[type="number"]').attr('max', max);
+      $('#filter-form').val(form);
+      $('#filter-input').val(input);
+      $('#filter-rangeid').val(rangeid);
+      if (rangetype != null && rangetype != undefined) {
+        $('#filter-rangetype').val(rangetype);  
+      }
+    });
+    $('#submitFilterRange').click(function(event) {
+        var num = $('#ModalFilterRange input[type="number"]').val();
+        var form = $('#ModalFilterRange #filter-form').val();
+        var input = $('#ModalFilterRange #filter-input').val();
+        var rangeid = $('#ModalFilterRange #filter-rangeid').val();
+        var rangetype = $('#ModalFilterRange #filter-rangetype').val();
+        $(form).html(addCommas(num));
+        if ($('[datatoid="'+rangeid+'"]').hasClass('slider-range-multiple')==true) {
+            if (rangetype != null && rangetype != undefined && rangetype=='min') {
+                $('[datatoid="'+rangeid+'"]').slider( "values", 0, num);
+            }
+            if (rangetype != null && rangetype != undefined && rangetype=='max') {
+                $('[datatoid="'+rangeid+'"]').slider( "values", 1, num);
+            }
+        } else {
+            $('[datatoid="'+rangeid+'"]').slider( "value", num );
+        }
+            
+        if (input != '#' && input != '') {
+            $(input).val(num);  
+        }
+        $('#ModalFilterRange').modal('hide');   
+    });
         
     $(window).resize(function(){
         $('.slider__keyvisual .slider-1 .info, .slider__keyvisual .slider-2 .info').css({height:($(window).height() /2) - ($('#header').height() /2)});
     });
     function msgAlert(msg){
-        $("#modal-alert").find(".msg-alert").text(msg);
+        $("#modal-alert").find(".msg-alert").html(msg);
         $("#modal-alert").modal("show");
     }
     function addCommas(nStr)

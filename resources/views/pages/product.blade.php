@@ -34,7 +34,7 @@
 						<!-- Filter Val Zone -->
 						<p class="mb-1"><img src="{{ Config::get('app.url_assets') }}assets/img/car.png" alt="" height="10" class="align-middle">&nbsp;&nbsp;<span id="lbl-mb-car-text" class="text-brown title1">{{$car_text}}</span> </p>
 						
-						<p class="title2">เบี้ยเริ่มต้น <span id="lbl-mb-premium-text" class="lbl-start-premium">{{number_format($premium_value)}}</span> บาท/ปี</p>
+						<p class="title2">งบประมาณไม่เกิน <span id="lbl-mb-premium-text" class="lbl-start-premium">{{number_format($premium_value)}}</span> บาท/ปี</p>
 						<p class="title3">ประกันชั้น <span id="lbl-mb-product-type">{{$product_type_text}}</span></p>
 					</div>
 					<div class="show-form">
@@ -321,9 +321,9 @@
 				</div>
 				<div class="card-body">
 					<div class="show-text">
-						<p class="mb-1"><img src="{{ Config::get('app.url_assets') }}assets/img/car.png" alt="" height="10" class="align-middle">&nbsp;&nbsp;<span class="text-brown title1">Honda / City (1500) / 2016</span> </p>
-						<p class="title2">เบี้ยเริ่มต้น <span>8,000</span> บาท/ปี</p>
-						<p class="title3">ประกันชั้น <span>1 / 3+ / 3</span></p>
+						<!-- <p class="mb-1"><img src="{{ Config::get('app.url_assets') }}assets/img/car.png" alt="" height="10" class="align-middle">&nbsp;&nbsp;<span class="text-brown title1">Honda / City (1500) / 2016</span> </p>
+						<p class="title2">งบประมาณไม่เกิน <span>8,000</span> บาท/ปี</p>
+						<p class="title3">ประกันชั้น <span>1 / 3+ / 3</span></p> -->
 					</div>
 					<div class="show-form">
 						<div class="d-block d-sm-none">
@@ -350,7 +350,7 @@
 
 						<div class="row mb-3">
 							<div class="col-12 text-center">
-								<p class="mb-0">เบี้ยเริ่มต้น <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
+								<p class="mb-0">งบประมาณไม่เกิน <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 							</div>
 							<div class="col-12 text-center">
 								<p class="mb-0">
@@ -599,30 +599,6 @@
 </div>
 <div id="card-template" class="d-none">
 
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="ModalFilterRange" tabindex="-1" role="dialog" aria-labelledby="ModalFilterRangeLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <form>
-		  <div class="form-group">
-		    <label for="title"></label>
-		    <input type="number" class="form-control" id="" placeholder="" value="">
-		    <input type="hidden" id="filter-form" value="">
-		    <input type="hidden" id="filter-input" value="">
-		    <input type="hidden" id="filter-rangeid" value="">
-		    <input type="hidden" id="filter-rangetype" value="">
-		  </div>
-		</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="submitFilterRange" class="btn btn-sm btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
 @stop
 
@@ -1084,51 +1060,6 @@ $(document).ready(function() {
 	funcSlideMulti($('.slider-range-multiple[datatoid="tppd1"]'));
 	callProductList();
 
-
-	$('#ModalFilterRange').on('show.bs.modal', function (event) {
-	  var button = $(event.relatedTarget) // Button that triggered the modal
-	  var form = button.data('form') // Extract info from data-* attributes
-	  var input = button.data('input') // Extract info from data-* attributes
-	  var rangeid = button.data('rangeid') // Extract info from data-* attributes
-	  var rangetype = button.data('rangetype') // Extract info from data-* attributes
-	  var modal = $(this)
-	  modal.find('.modal-body input[type="number"]').val('');
-		var min = parseInt($('[datatoid="'+rangeid+'"]').attr('min'));
-		var max = parseInt($('[datatoid="'+rangeid+'"]').attr('max'));
-		modal.find('.modal-body input[type="number"]').attr('placeholder','Min:'+addCommas(min)+' / Max:'+addCommas(max));
-		modal.find('.modal-body input[type="number"]').attr('min', min);
-		modal.find('.modal-body input[type="number"]').attr('max', max);
-	  $('#filter-form').val(form);
-	  $('#filter-input').val(input);
-	  $('#filter-rangeid').val(rangeid);
-	  if (rangetype != null && rangetype != undefined) {
-	  	$('#filter-rangetype').val(rangetype);	
-	  }
-	  
-	});
-	$('#submitFilterRange').click(function(event) {
-		var num = $('#ModalFilterRange input[type="number"]').val();
-		var form = $('#ModalFilterRange #filter-form').val();
-		var input = $('#ModalFilterRange #filter-input').val();
-		var rangeid = $('#ModalFilterRange #filter-rangeid').val();
-		var rangetype = $('#ModalFilterRange #filter-rangetype').val();
-		$(form).html(addCommas(num));
-		if ($('[datatoid="'+rangeid+'"]').hasClass('slider-range-multiple')==true) {
-		  	if (rangetype != null && rangetype != undefined && rangetype=='min') {
-				$('[datatoid="'+rangeid+'"]').slider( "values", 0, num);
-			}
-			if (rangetype != null && rangetype != undefined && rangetype=='max') {
-				$('[datatoid="'+rangeid+'"]').slider( "values", 1, num);
-			}
-		} else {
-			$('[datatoid="'+rangeid+'"]').slider( "value", num );
-		}
-			
-		if (input != '#' && input != '') {
-			$(input).val(num);	
-		}
-		$('#ModalFilterRange').modal('hide');	
-	});
 });	
 
 

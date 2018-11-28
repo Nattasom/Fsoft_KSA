@@ -150,6 +150,30 @@
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="ModalFilterRange" tabindex="-1" role="dialog" aria-labelledby="ModalFilterRangeLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="title"></label>
+            <input type="number" class="form-control" id="" placeholder="" value="">
+            <input type="hidden" id="filter-form" value="">
+            <input type="hidden" id="filter-input" value="">
+            <input type="hidden" id="filter-rangeid" value="">
+            <input type="hidden" id="filter-rangetype" value="">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">ปิด</button>
+        <button type="button" id="submitFilterRange" class="btn btn-sm btn-primary">ตกลง</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal fade" id="modal-reinsu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">

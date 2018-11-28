@@ -5,7 +5,7 @@ $ratio-tablet          : ($percent / $resolution) * ($resolution/1024);
 $ratio-pc              : ($percent / $resolution) * ($resolution/1920);
 
 @mixin desktop {
-    @media (min-width: 769px) {
+    @media (min-width: 812px) {
         @content;
     }
 }

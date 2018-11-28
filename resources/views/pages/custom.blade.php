@@ -85,8 +85,13 @@
 				<div class="card card-yellow">
 					<div class="card-body">
 						<p class="pt-2 pb-1 text-20">งบประมาณไม่เกิน</p>
-						<h2 class="position-relative"><span id="price" class="font-weight-normal">0</span> <span class="position-absolute">บาท/ปี</span></h2>
-						<div class="slider"></div>
+						<h2 class="position-relative">
+							<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#price" data-input="#hd_premium_value" data-rangeid="slider">
+							<span id="price" class="font-weight-normal">0</span>
+							</a> 
+							<span class="position-absolute">บาท/ปี</span>
+						</h2>
+						<div class="slider" datatoid="slider" min="0" max="{{$premium_filter->Maximum}}"></div>
 						<!-- <div class="slider"><div class="dot"></div></div> -->
 						<!-- <div class="clearfix"></div> -->
 					</div>
@@ -100,11 +105,11 @@
 					</div>
 					<div class="col-8">
 						<div class="row mx-0 customizetype">
-							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border">1</a></div>
-							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border">2+</a></div>
-							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border">2</a></div>
-							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border">3+</a></div>
-							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border ">3</a></div>
+							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border" data-value="1">1</a></div>
+							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border" data-value="2+">2+</a></div>
+							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border" data-value="2">2</a></div>
+							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border" data-value="3+">3+</a></div>
+							<div class="col px-1 py-0 text-center"><a class="py-2 text-dark d-block border" data-value="3">3</a></div>
 						</div>
 					</div>
 				</div>
@@ -136,6 +141,10 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function() {
 	// $("#btn-ddl-car").click();
 	$('#submitCustom').attr('disabled','disabled');
+	$('#submitCustom').click(function(event) {
+		var hd_premium_value = $('#hd_premium_value').val();
+		msgAlert("ขออภัยค่ะ<br>เราไม่สามารถทำประกันภายใต้งบประมาณที่คุณเลือกให้กับรถยนต์รุ่นนี้ได้<br>กรุงศรี ออโต้ อินชัวรันส์ โบรกเกอร์<br>ขอแนะนำราคาเบี้ยประกันขั้นต่ำสำหรับรถยนต์รุ่นนี้ คือ <br>"+addCommas(hd_premium_value)+" บาท/ปี");
+	});
 	$('.customizetype a').click(function(event) {
 		if ($(this).hasClass('disabled') == false) {
 			// $('.customizetype a:not(.disabled)').removeClass('active');
@@ -144,9 +153,21 @@ $(document).ready(function() {
 			} else {
 				$(this).addClass('active');
 			}
-			
+			getProductType();
+			undisabledSubmit();
 		}
 	});
+	function getProductType () {
+		var temp = new Array();
+		$('.customizetype a').each(function(index, el) {
+			var value = $(this).data('value');
+			if ($(this).hasClass('active')) {
+				temp.push(value);
+			}
+		});
+		var json = temp.join(',');
+		$('#hd_product_type').val(json);
+	}
 	$("#form-custom").submit(function(){
 		var make = $("#hd_make_value").val();
 		var model = $("#hd_model_value").val();
@@ -291,14 +312,23 @@ $(document).ready(function() {
 
 	function undisabledSubmit() {
 		var active = false;
-		console.log($('#hd_make_value').val());
-		if ($('#hd_make_value').val().length>0 && $('#hd_model_value').val().length>0 && $('#hd_model_text').val().length>0 && $('#hd_year_value').val().length>0) {
+		if ($('#hd_make_value').val().length>0 && 
+			$('#hd_model_value').val().length>0 && 
+			$('#hd_model_text').val().length>0 && 
+			$('#hd_year_value').val().length>0 &&
+			$('#hd_premium_value').val().length>0 &&
+			$('#hd_premium_value').val() > 0 &&
+			$('#hd_product_type').val().length>0
+			) {
 			active = true;
 		}
 		console.log(active);
-		if (active) {
+		if (active==true) {
 			$('#submitCustom').removeAttr('disabled');
 			$('#submitCustom').removeClass('btn-gray').addClass('btn-yellow');
+		} else {
+			$('#submitCustom').removeClass('btn-yellow').addClass('btn-gray');
+			$('#submitCustom').attr('disabled','disabled');
 		}
 	}
 	function getModelValue(dataObj){
@@ -434,6 +464,7 @@ $(document).ready(function() {
     		max: maxPrice,
 			slide: function( event, ui ) {
 				$('#price').html(addCommas(ui.value));
+				undisabledSubmit();
 			},
 			change: function(event, ui) { 
 				// console.log(ui.value); 

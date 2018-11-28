@@ -12,7 +12,6 @@ class HomeController extends Controller
 
     public function Index(Request $request)
     {
-
         $data['banners'] = array();
         $data['categories'] = array();
 

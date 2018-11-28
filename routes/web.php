@@ -18,6 +18,11 @@
 Route::any('/', 'HomeController@Login');
 Route::any('/Login', 'HomeController@Login');
 
+Route::get('setlocale/{locale}', function ($locale) {
+    Session::put('locale', $locale);
+    return redirect()->back();
+});
+
 Route::group(['middleware' => 'usersession'], function () {
     Route::get('/Home', 'HomeController@Index');
     Route::get('/Home/ProductDetail/{cat}/{id}', 'HomeController@ProductDetail');
@@ -37,6 +42,12 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::post('/ajaxModelYearValue', 'CustomController@ajaxLoadYearModel');
 
     Route::get('/Success', 'SuccessController@Index');
+
+    Route::get('/Signin', 'SigninController@Index');
+    Route::post('/Vertificate', 'SigninController@Vertificate');
+
+    Route::post('/Renew', 'RenewController@Index');
+    Route::get('/RenewSuccess', 'RenewController@Success');
 
 
     //template
