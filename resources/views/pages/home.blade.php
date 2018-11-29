@@ -43,36 +43,25 @@
 <div id="box__home" >
     <div class="slider__keyvisual">
         <div class="slider-1">
-            <div class="item">
-                <a href="{{ Config::get('app.url_main') }}Custom" class="info">
-                    <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_1_m.jpg" alt="">
+            @foreach($slider as $key=>$value)
+                <div class="item">
+                    <a href="{{(empty($value->BannerLink) ? '' : $value->BannerLink)}}" class="info">
+                        <img class="visible__mobile" src="{{ $value->BannerImageMobile}}" alt="">
 
-                    <!-- <div class="visible__mobile" style="background: url('{{ Config::get('app.url_assets') }}assets/img/herobanner_top.png') no-repeat top center / contain; width:100%; height: 100%;"></div> -->
-                    <!-- <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-4.jpg" alt=""> -->
-                    <!-- <img class="visible__desktop" src="<?php echo $banners->banner_1; ?>" alt=""> -->
-                    <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_1_d.jpg" alt="">
-                </a>
-            </div>
-            <div class="item">
-                <a href="{{ Config::get('app.url_main') }}Custom" class="info">
-                    <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_2_m.jpg" alt="">
-                    <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_2_d.jpg" alt="">
-                </a>
-            </div>
-           <!--  <div class="item">
-                <a href="{{ Config::get('app.url_main') }}Custom" class="info">
-                    <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/herobanner_top.png" alt="">
-                    <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-4.jpg" alt="">
-                </a>
-            </div> -->
+                        <!-- <div class="visible__mobile" style="background: url('{{ Config::get('app.url_assets') }}assets/img/herobanner_top.png') no-repeat top center / contain; width:100%; height: 100%;"></div> -->
+                        <!-- <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-4.jpg" alt=""> -->
+                        <img class="visible__desktop" src="{{ $value->BannerImage}}" alt="">
+                    </a>
+                </div>
+            @endforeach
         </div>
 
         <div class="slider-2">
             <div class="item">
                 <a href="#" class="info">
-                    <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/banner_suggest.png" alt="">
+                    <img class="visible__mobile" src="<?php echo $banners->banner_mb; ?>" alt="">
                     <!-- <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/exam/jpg-5.jpg" alt=""> -->
-                    <img class="visible__desktop" src="<?php echo $banners->banner_2; ?>" alt="">
+                    <img class="visible__desktop" src="<?php echo $banners->banner_pc; ?>" alt="">
                     <!-- <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/krungsriauto_2_d.jpg" alt=""> -->
                 </a>
             </div>
@@ -134,7 +123,7 @@
                                     <div class="row">
                                         <div class="col-7">
                                             <p class="text-white mb-2">ทุนประกัน 
-                                               <a href="#" data-toggle="tooltip" data-html="true" title="@lang('info.insurance')">
+                                               <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.insurance')">
                                                     <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
                                                 </a>
                                             </p>
@@ -146,7 +135,7 @@
                                     <div class="row">
                                         <div class="col-7">
                                             <p class="text-white mb-2">ค่าเสียหายส่วนแรก
-                                                <a href="#" data-toggle="tooltip" data-html="true" title="@lang('info.firstdamage')">
+                                                <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.firstdamage')">
                                                     <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
                                                 </a>
                                             </p>
@@ -158,7 +147,7 @@
                                     <div class="row">
                                         <div class="col-7">
                                             <p class="text-white mb-2">ซ่อม
-                                                <a href="#" data-toggle="tooltip" data-html="true" title="@lang('info.repair')">
+                                                <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.repair')">
                                                     <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
                                                 </a>
                                             </p>
@@ -170,7 +159,7 @@
                                     <div class="row">
                                         <div class="col-7">
                                             <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก
-                                                <a href="#" data-toggle="tooltip" data-html="true" title="@lang('info.thirdpartyproperty')">
+                                                <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.thirdpartyproperty')">
                                                     <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
                                                 </a>
                                             </p>
@@ -241,7 +230,7 @@
             <div class="text-center py-4 px-4 afferminate">
                 <h6>ร่วมกับพันธมิตร ประกันภัยชั้นนำ</h6>
                 <div class="row">
-                    <div class="col-12 col-md-8 offset-md-2"><img src="{{ Config::get('app.url_assets') }}assets/img/Groupinsu.png" alt="" class="img-fluid"></div>
+                    <div class="col-12 col-md-8 offset-md-2"><img src="{{ Config::get('app.url_assets') }}assets/img/Groupinsu_1.png" alt="" class="img-fluid"></div>
                 </div>
             </div>
         </div>
@@ -421,7 +410,7 @@ jQuery(document).ready(function($) {
                         '            <div class="row">'+
                         '                <div class="col-7">'+
                         '                    <p class="text-white mb-2">ทุนประกัน'+
-                        '                       <a href="#" data-toggle="tooltip" data-html="true" title="'+info[0]+'">'+
+                        '                       <a href="javascript:;" data-toggle="tooltip" data-html="true" title="'+info[0]+'">'+
                         '                           <img src="'+path+'assets/img/info.png" alt="information" >'+
                         '                       </a>'+
                         '                    </p>'+
@@ -433,7 +422,7 @@ jQuery(document).ready(function($) {
                         '            <div class="row">'+
                         '                <div class="col-7">'+
                         '                    <p class="text-white mb-2">ค่าเสียหายส่วนแรก'+
-                        '                       <a href="#" data-toggle="tooltip" data-html="true" title="'+info[1]+'">'+
+                        '                       <a href="javascript:;" data-toggle="tooltip" data-html="true" title="'+info[1]+'">'+
                         '                           <img src="'+path+'assets/img/info.png" alt="information" >'+
                         '                       </a>'+
                         '                    </p>'+
@@ -445,7 +434,7 @@ jQuery(document).ready(function($) {
                         '            <div class="row">'+
                         '                <div class="col-7">'+
                         '                    <p class="text-white mb-2">ซ่อม'+
-                        '                       <a href="#" data-toggle="tooltip" data-html="true" title="'+info[2]+'">'+
+                        '                       <a href="javascript:;" data-toggle="tooltip" data-html="true" title="'+info[2]+'">'+
                         '                           <img src="'+path+'assets/img/info.png" alt="information" >'+
                         '                       </a>'+
                         '                    </p>'+
@@ -457,7 +446,7 @@ jQuery(document).ready(function($) {
                         '            <div class="row">'+
                         '                <div class="col-7">'+
                         '                    <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก'+
-                        '                       <a href="#" data-toggle="tooltip" data-html="true" title="'+info[3]+'">'+
+                        '                       <a href="javascript:;" data-toggle="tooltip" data-html="true" title="'+info[3]+'">'+
                         '                           <img src="'+path+'assets/img/info.png" alt="information" >'+
                         '                       </a>'+
                         '                    </p>'+

@@ -6,7 +6,7 @@
                     <div class="box__e-news">
                         <div class="row mb-3">
                             <div class="col-6 text-right"><h5 class="text-white mb-0 py-1 text-20">พูดคุยกับเรา</h5></div>
-                            <div class="col-4 text-left pl-0"><img src="{{ Config::Get('app.url_assets') }}assets/img/icon-line.png" alt="" class="" height="35" style="max-width: initial;"></div>
+                            <div class="col-4 text-left pl-0"><img src="{{ Config::Get('app.url_assets') }}assets/img/line_ic.png" alt="" class="" height="35" style="max-width: initial;"></div>
                         </div>
 
                     </div>
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <p class="text-white text-18 mb-2">พูดคุยกับเรา</p>
-                                <img src="{{ Config::Get('app.url_assets') }}assets/img/addline.png" alt="" class="mr-1" height="35" style="max-width: initial;">
+                                <img src="{{ Config::Get('app.url_assets') }}assets/img/line_ic.png" alt="" class="mr-1" height="35" style="max-width: initial;">
                                 <a href="#" class="mx-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconfacebook.png" alt="" height="35" ></a>
                                 <a href="#" class="mx-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconyoutube.png" alt="" height="35" ></a>
                             </div>

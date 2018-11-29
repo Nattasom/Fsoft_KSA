@@ -34,7 +34,11 @@
         <div class="card-footer rounded-0 bg-card-footer px-2">
             <div class="row">
                 <div class="col-7">
-                    <p class="text-white mb-2">ทุนประกัน</p>
+                    <p class="text-white mb-2">ทุนประกัน
+                        <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.insurance')">
+                            <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
+                        </a>
+                    </p>
                 </div>
                 <div class="col-5 text-right">
                     <p class="text-white mb-2">[suminsured]</p>
@@ -42,7 +46,11 @@
             </div>
             <div class="row">
                 <div class="col-7">
-                    <p class="text-white mb-2">ค่าเสียหายส่วนแรก</p>
+                    <p class="text-white mb-2">ค่าเสียหายส่วนแรก
+                        <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.firstdamage')">
+                            <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
+                        </a>
+                    </p>
                 </div>
                 <div class="col-5 text-right">
                     <p class="text-white mb-2">[deduct]</p>
@@ -50,7 +58,11 @@
             </div>
             <div class="row">
                 <div class="col-7">
-                    <p class="text-white mb-2">ซ่อม</p>
+                    <p class="text-white mb-2">ซ่อม
+                        <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.repair')">
+                            <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
+                        </a>
+                    </p>
                 </div>
                 <div class="col-5 text-right">
                     <p class="text-white mb-2">[claim_type]</p>
@@ -58,7 +70,11 @@
             </div>
             <div class="row">
                 <div class="col-7">
-                    <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก</p>
+                    <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก
+                        <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.thirdpartyproperty')">
+                            <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
+                        </a>
+                    </p>
                 </div>
                 <div class="col-5 text-right">
                     <p class="text-white mb-2">[tppd]</p>

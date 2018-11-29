@@ -13,9 +13,11 @@ class HomeController extends Controller
     public function Index(Request $request)
     {
         $data['banners'] = array();
+        $data['slider'] = array();
         $data['categories'] = array();
 
         $data['banners'] = $this->getBanner();
+        $data['slider'] = $this->getBannerSlider();
 
         $categories = $this->getCategories();
         if (count($categories) > 0) {
@@ -113,6 +115,26 @@ class HomeController extends Controller
          try {
             $client = new \GuzzleHttp\Client();
             $response = $client->request('POST', config('app.url_api').'get_banner', [
+                'headers' => ['Accept' => 'application/json', 'Content-Type' => 'application/x-www-form-urlencoded' ],
+                'form_params' => [
+                    'lang' => 'th',
+                ]
+            ]);
+            if ($response->getStatusCode()==200) {
+                return json_decode($response->getBody());
+            }
+        } catch (RequestException $e) {
+            echo Psr7\str($e->getRequest());
+            if ($e->hasResponse()) {
+                echo Psr7\str($e->getResponse());
+                exit();
+            }
+        }
+    }
+    private function getBannerSlider() {
+         try {
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request('POST', config('app.url_api').'get_banner_slider', [
                 'headers' => ['Accept' => 'application/json', 'Content-Type' => 'application/x-www-form-urlencoded' ],
                 'form_params' => [
                     'lang' => 'th',

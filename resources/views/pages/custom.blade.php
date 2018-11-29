@@ -143,7 +143,7 @@ $(document).ready(function() {
 	$('#submitCustom').attr('disabled','disabled');
 	$('#submitCustom').click(function(event) {
 		var hd_premium_value = $('#hd_premium_value').val();
-		msgAlert("ขออภัยค่ะ<br>เราไม่สามารถทำประกันภายใต้งบประมาณที่คุณเลือกให้กับรถยนต์รุ่นนี้ได้<br>กรุงศรี ออโต้ อินชัวรันส์ โบรกเกอร์<br>ขอแนะนำราคาเบี้ยประกันขั้นต่ำสำหรับรถยนต์รุ่นนี้ คือ <br>"+addCommas(hd_premium_value)+" บาท/ปี");
+		//msgAlert("ขออภัยค่ะ<br>เราไม่สามารถทำประกันภายใต้งบประมาณที่คุณเลือกให้กับรถยนต์รุ่นนี้ได้<br>กรุงศรี ออโต้ อินชัวรันส์ โบรกเกอร์<br>ขอแนะนำราคาเบี้ยประกันขั้นต่ำสำหรับรถยนต์รุ่นนี้ คือ <br>"+addCommas(hd_premium_value)+" บาท/ปี");
 	});
 	$('.customizetype a').click(function(event) {
 		if ($(this).hasClass('disabled') == false) {
@@ -464,11 +464,12 @@ $(document).ready(function() {
     		max: maxPrice,
 			slide: function( event, ui ) {
 				$('#price').html(addCommas(ui.value));
-				undisabledSubmit();
+				
 			},
 			change: function(event, ui) { 
 				// console.log(ui.value); 
 				$("#hd_premium_value").val(ui.value);
+				undisabledSubmit();
 			} 
     	});
   	} );
