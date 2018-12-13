@@ -84,26 +84,29 @@
             <div class="col-12 text-center"><p class="mb-3"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;รายละเอียดในการติดต่อกลับ</p></div>
             <div class="col-12">
                 <form>
+                    <div class="alert alert-danger d-none" id="error-interest">
+
+                    </div>
                     <div class="form-group row mb-1">
-                        <label for="" class="col-4 col-form-label text-right">ชื่อ นามสกุล</label>
+                        <label for="" class="col-4 col-form-label text-right">ชื่อ นามสกุล <sup class="text-danger">*</sup></label>
                         <div class="col-8">
                             <input type="text" name="name" class="form-control form-control-sm" id="interest-name" value="" placeholder="จำลอง ตัวอย่าง" required>
                         </div>
                     </div>
                     <div class="form-group row mb-1">
-                        <label for="" class="col-4 col-form-label text-right">โทรศัพท์ติดต่อ</label>
+                        <label for="" class="col-4 col-form-label text-right">โทรศัพท์ติดต่อ <sup class="text-danger">*</sup></label>
                         <div class="col-8">
                             <input type="text" name="tel" class="form-control form-control-sm" id="interest-tel" value="" placeholder="088 888 8888" required>
                         </div>
                     </div>
                     <div class="form-group row mb-1">
-                        <label for="" class="col-4 col-form-label text-right">อีเมล</label>
+                        <label for="" class="col-4 col-form-label text-right">อีเมล <sup class="text-danger">*</sup></label>
                         <div class="col-8">
                             <input type="text" name="email" class="form-control form-control-sm" id="interest-email" value="" placeholder="join@email.com" >
                         </div>
                     </div>
                     <div class="form-group row mb-1">
-                        <label for="" class="col-4 col-form-label text-right">วัน เวลา ติดต่อกลับ</label>
+                        <label for="" class="col-4 col-form-label text-right">วัน เวลา ติดต่อกลับ <sup class="text-danger">*</sup></label>
                         <div class="col-4 pr-0">
                             <div class="boxdatepicker">
                             <input type="text" name="callback_date" id="interest-callback_date" class="form-control-sm form-control datepicker" placeholder="dd/mm/yyyy" required="required">
@@ -130,6 +133,14 @@
                         <label for="" class="col-4 col-form-label text-right">รายละเอียดเพิ่มเติม</label>
                         <div class="col-8">
                             <textarea name="remark" id="interest-remark" cols="30" rows="3" class="form-control form-control-sm" placeholder="ข้อมูลเพิ่มเติม"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-1">
+                        <label for="" class="col-4 col-form-label text-right">Captcha <sup class="text-danger">*</sup></label>
+                        <div class="col-8">
+                            <span id="interest-captcha-img">{!! captcha_img() !!}</span>
+                            
+                            <input  type="text" name="captcha" value="" id="interest-captcha" maxlength="5" class="form-control" style="width:100px; display:inline-block;" autocomplete='off'/>
                         </div>
                     </div>
                     <input type="hidden" name="make" id="interest-makevalue" value="">

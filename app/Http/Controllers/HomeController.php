@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {
@@ -66,6 +68,31 @@ class HomeController extends Controller
 
     public function SendInterest(Request $request) {
         try {
+            $rules = [
+                'name' => 'required',
+                'captcha' => 'required|captcha',
+                'tel' => 'required',
+                'email' => 'required|email',
+                'callback_date' => 'required',
+            ];
+            $messages = [
+                'required' => 'กรุณากรอกข้อมูลให้ครบถ้วน',
+                'email' => 'กรุณากรอกอีเมล์ให้ถูกต้อง',
+                'captcha' => 'กรุณากรอกตัวอักษร captcha ให้ถูกต้อง'
+            ];
+            $validator = Validator::make(Input::all(), $rules,$messages);
+            if ($validator->fails())
+            {   
+                $errors = $validator->errors();
+                $msg = "กรุณากรอกข้อมูลให้ครบถ้วน";
+                if($errors->has('email')){
+                    $msg = $errors->first('email');
+                }
+                if($errors->has('captcha')){
+                    $msg = $errors->first('captcha');
+                }
+                return json_encode(array('fail' => $msg ,'captcha'=>captcha_img()));
+            }
             $sendData = array();
             $sendData['name'] = $request->post('name');
             $sendData['tel'] = $request->post('tel');

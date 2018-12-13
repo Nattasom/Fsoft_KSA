@@ -57,35 +57,27 @@
             </div>
             <form action="" id="form-droplead" method="post" class="py-4">
                 <div class="form-group row mb-2">
-                    <label for="" class="col-4 col-form-label text-right">ชื่อ นามสกุล</label>
+                    <label for="" class="col-4 col-form-label text-right">ชื่อ นามสกุล <sup class="text-danger">*</sup></label>
                     <div class="col-8">
                         <input type="text" class="form-control" name="name" id="" value="" placeholder="จำลอง ตัวอย่าง">
                     </div>
                 </div>
                 <div class="form-group row mb-2">
-                    <label for="" class="col-4 col-form-label text-right">โทรศัพท์ติดต่อ</label>
+                    <label for="" class="col-4 col-form-label text-right">โทรศัพท์ติดต่อ <sup class="text-danger">*</sup></label>
                     <div class="col-8">
                         <input type="text" class="form-control" name="tel" id="" value="" placeholder="088 888 8888">
                     </div>
                 </div>
                 <div class="form-group row mb-2">
-                    <label for="" class="col-4 col-form-label text-right">อีเมล</label>
+                    <label for="" class="col-4 col-form-label text-right">อีเมล <sup class="text-danger">*</sup></label>
                     <div class="col-8">
                         <input type="text" class="form-control" name="email" id="" value="" placeholder="join@email.com">
                     </div>
                 </div>
                 <div class="form-group row mb-2">
-                    <label for="" class="col-4 col-form-label text-right">วัน เวลา ติดต่อกลับ</label>
+                    <label for="" class="col-4 col-form-label text-right">วัน เวลา ติดต่อกลับ <sup class="text-danger">*</sup></label>
                     <div class="col-4 pr-0">
-                        <?php  
-                            $begin = time();
-                            $end = strtotime('+14day');
-                            ?>
-                        <select name="callback_date" id="" class="form-control">
-                            <?php for ($i = $begin; $i <= $end; $i = $i + 86400) { ?>
-                            <option value="<?php echo date('Y-m-d', $i); ?>"><?php echo date('D j M y', $i); ?></option>
-                            <?php } ?>
-                        </select>
+                        <input type="text" name="callback_date" id="interest-callback_date" class="form-control-sm form-control datepicker" placeholder="dd/mm/yyyy" required="required">
                     </div>
                     <div class="col-4">
                         <select name="callback_time" id="" class="form-control">

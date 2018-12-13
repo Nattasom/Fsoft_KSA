@@ -54,22 +54,13 @@ $(function(){
         modal.find('#interest-motortype').val(motortype);
         modal.find('#interest-seat').val(seat);
         modal.find('#interest-cc').val(cc);
+        var $alert = $("#error-interest");
+        $alert.addClass("d-none");
     })
     $('#btn-interest').click(function(event) {
         var linkInterest = $('#url_main').val() + "Home/SendInterest";
-        if (
-            $('#interest-name').val().length>0 &&
-            $('#interest-tel').val().length>0 &&
-            $('#interest-email').val().length>0 &&
-            $('#interest-callback_date').val().length>0 &&
-            $('#interest-callback_time').val().length>0 &&
-            $('#interest-makevalue').val().length>0 &&
-            $('#interest-modelvalue').val().length>0 &&
-            $('#interest-motortype').val().length>0 &&
-            $('#interest-seat').val().length>0 &&
-            $('#interest-cc').val().length>0 
-            )
-        {
+        var $alert = $("#error-interest");
+
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 url: linkInterest,
@@ -87,11 +78,15 @@ $(function(){
                     motor_type: $('#interest-motortype').val(),
                     seat: $('#interest-seat').val(),
                     cc: $('#interest-cc').val(),
+                    captcha: $("#interest-captcha").val()
                 },
                 success: function(data) {
                     //console.log(data);
                     if (data.fail != null || data.fail != undefined) {
-                        msgAlert(data.fail);
+                        // msgAlert(data.fail);
+                        $alert.removeClass("d-none");
+                        $alert.text(data.fail);
+                        $("#interest-captcha-img").html(data.captcha);
                     }
                     if (data.status == '01') {
                         window.location.href = $('#url_main').val() + 'Success';
@@ -102,10 +97,7 @@ $(function(){
                     console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                 }
             });
-        } else {
-            msgAlert('กรุณากรอกข้อมูลให้ครบถ้วน');
-            // $(this).html('กรุณากรอกข้อมูลให้ครบถ้วน').delay(5000).html('ยืนยันข้อมูล');
-        }
+        
         
     });
 

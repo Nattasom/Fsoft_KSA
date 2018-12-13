@@ -7,7 +7,7 @@
 <script src="{{ Config::get('app.url_assets') }}assets/js/jquery-ui.tabs.min.js"></script>
 <!-- <script src="{{ Config::get('app.url_assets') }}assets/chosen_v1.8.7/chosen.jquery.js"></script> -->
 <script src="{{ Config::get('app.url_assets') }}assets/jquery-ui/jquery-ui.min.js"></script>
-<script src="{{ Config::get('app.url_assets') }}assets/js/common.js"></script>
+<script src="{{ Config::get('app.url_assets') }}assets/js/common.js?v={{time()}}"></script>
 
 <!-- Jquery Rangeslider  -->
 <!-- <script src="{{ Config::get('app.url_assets') }}assets/jquery-ui/jquery-ui.min.js"></script> -->
@@ -19,7 +19,7 @@
 <script src="{{ Config::get('app.url_assets') }}assets/owlcarousel2/owl.carousel.min.js"></script>
 
 <!-- Bootstrap Datepicker -->
-<script src="{{ COnfig::get('app.url_assets') }}assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<script src="{{ Config::get('app.url_assets') }}assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 
 <!-- Bootstrap Tagsinput -->
 <script src="{{ Config::get('app.url_assets') }}assets/select2/js/select2.full.min.js"></script>
@@ -39,6 +39,18 @@
             startDate: '+1d',
             container: '.boxdatepicker'
         });
+       $(".datepicker-reg-mb").datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            startDate: '+1d',
+        });
+        $(".datepicker-reg-pc").datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            startDate: '+1d',
+            container: '.pc-datepicker'
+        });
+        
     });
     $(function(){
 
