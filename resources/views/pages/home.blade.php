@@ -223,8 +223,8 @@
     </div>
 
     <div class="pic-good-choice">
-        <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/bannerdown.png" alt="">
-        <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/bannerdownpc.png" alt="">
+        <img class="visible__mobile" src="{{ Config::get('app.url_assets') }}assets/img/bannerdown_mb.png" alt="">
+        <img class="visible__desktop" src="{{ Config::get('app.url_assets') }}assets/img/bannerdown_pc.png" alt="">
 
         <div class="container">
             <div class="text-center py-4 px-4 afferminate">
