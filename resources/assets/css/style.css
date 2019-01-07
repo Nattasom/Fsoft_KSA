@@ -206,7 +206,7 @@ label, input, .block {
   background: url(../img/icon/logo__krungsri.png) no-repeat;
   background-size: 12.76042vw 19.66146vw;
   text-indent: -9998px;
-  z-index: 10;
+  z-index: 999;
   width: 12.76042vw;
   height: 19.66146vw;
   position: absolute;

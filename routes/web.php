@@ -72,7 +72,9 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::any('/Products', 'ProductController@Index');
     Route::get('/Product/Detail/{id}', 'ProductController@Detail');
     Route::post('/ajaxLoadProductList', 'ProductController@ajaxLoadProductList');
-    Route::get('/Contents', 'ContentController@Index');
+    Route::any('/Content', 'ContentController@Index');
+    Route::any('/Content/More', 'ContentController@ajaxGetMoreContent');
+    Route::any('/Contents/Detail/{id}', 'ContentController@Detail');
     // Route::get('/Product/Detail', 'ProductController@Detail');
     Route::get('/Compare', 'CompareController@Index');
 	Route::any('/Compare/AddCompare', 'CompareController@AddCompare');

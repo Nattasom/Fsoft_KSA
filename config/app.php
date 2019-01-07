@@ -52,11 +52,12 @@ return [
     |
     */
     
-    'url' => env('APP_URL', 'http://localhost/gitkrungsri/'),
+    'url' => env('APP_URL', 'http://localhost/'),
 
     'url_main' => '/ksa-front/',
     'url_assets' => '/ksa-front/resources/',
-    'url_api' => 'http://atc-th.com/krungsri/ksa-admin/api/',
+    // 'url_api' => 'http://atc-th.com/krungsri/ksa-admin/api/',
+    'url_api' => 'http://localhost:8080/ksa-admin/api/',
 
     /*
     |--------------------------------------------------------------------------

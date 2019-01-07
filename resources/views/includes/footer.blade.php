@@ -6,14 +6,14 @@
                     <div class="box__e-news">
                         <div class="row mb-3">
                             <div class="col-6 text-right"><h5 class="text-white mb-0 py-1 text-20">พูดคุยกับเรา</h5></div>
-                            <div class="col-4 text-left pl-0"><img src="{{ Config::Get('app.url_assets') }}assets/img/line_ic.png" alt="" class="" height="35" style="max-width: initial;"></div>
+                            <div class="col-4 text-left pl-0"><a target="_blank" href=" https://line.me/R/ti/p/%40krungsriauto"><img src="{{ Config::Get('app.url_assets') }}assets/img/line_ic.png" alt="" class="" height="35" style="max-width: initial;"></a></div>
                         </div>
 
                     </div>
                 </div>
                 <div class="col-12 col-lg-4 text-center iconsocial">
-                    <a href="#" class="mr-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconfacebook.png" alt="" ></a>
-                    <a href="#" class="mr-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconyoutube.png" alt="" ></a>
+                    <a href="https://www.facebook.com/KrungsriAuto" target="_blank" class="mr-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconfacebook.png" alt="" ></a>
+                    <a href="https://www.youtube.com/KrungsriAutoTV" target="_blank" class="mr-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconyoutube.png" alt="" ></a>
                     
                     <div class="ml-1 d-inline-block">
                         <i class="fa fa-phone text-white fa-2x" aria-hidden="true"></i>
@@ -21,7 +21,7 @@
                     <div class="d-inline-block ml-1 align-bottom">
                         <p class="text-left">
                             <span class="text-white">CALL CENTER</span><br>
-                            <h4 class="text-white mb-0 font-weight-bold">0-2828-7888</h4>
+                            <h4 class="text-white mb-0 font-weight-bold"><a href="tel:028287888" style="color:inherit;">0-2828-7888</a></h4>
                         </p>
                     </div>
                 </div>
@@ -44,13 +44,13 @@
                         <div class="row">
                             <div class="col-6">
                                 <p class="text-white text-18 mb-2">พูดคุยกับเรา</p>
-                                <img src="{{ Config::Get('app.url_assets') }}assets/img/line_ic.png" alt="" class="mr-1" height="35" style="max-width: initial;">
-                                <a href="#" class="mx-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconfacebook.png" alt="" height="35" ></a>
-                                <a href="#" class="mx-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconyoutube.png" alt="" height="35" ></a>
+                                <a target="_blank" href=" https://line.me/R/ti/p/%40krungsriauto"><img src="{{ Config::Get('app.url_assets') }}assets/img/line_ic.png" alt="" class="mr-1" height="35" style="max-width: initial;"></a>
+                                <a href="https://www.facebook.com/KrungsriAuto" target="_blank" class="mx-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconfacebook.png" alt="" height="35" ></a>
+                                <a href="https://www.youtube.com/KrungsriAutoTV" target="_blank" class="mx-1 d-inline-block align-top"><img src="{{ Config::Get('app.url_assets') }}assets/img/iconyoutube.png" alt="" height="35" ></a>
                             </div>
                             <div class="col-6 pl-0">
                                 <p class="text-white text-16 mb-0 ml-4">CALL CENTER</p>
-                                <p class="text-white font-weight-bold text-22"><i class="fa fa-phone text-white" aria-hidden="true"></i> 02-828-7888</p>
+                                <p class="text-white font-weight-bold text-22"><a href="tel:028287888" style="color:inherit;"><i class="fa fa-phone text-white" aria-hidden="true"></i> 02-828-7888</a></p>
                             </div>
                         </div>
                     </div>

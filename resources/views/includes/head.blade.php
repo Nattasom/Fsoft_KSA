@@ -3,7 +3,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="theme-color" content="#ffd600" />
-	<title>krungsri กรุงศรี @yield('title')</title>
+	<title> @yield('title')</title>
 	<link href="{{ Config::get('app.url_main') }}favicon.ico" type="image/x-icon" rel="shortcut icon">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<link type="text/css" rel="stylesheet" href="{{ Config::get('app.url_assets') }}assets/css/style.css" />

@@ -240,31 +240,20 @@
         <div class="container">
             <p class="head__info"><span>เรื่องรถน่ารู้</span></p>
             <ul class="list px-0">
-                <li class="">
-                    <a href="#">
-                        <p class="pic"><img src="{{ Config::get('app.url_assets') }}assets/img/general/keyvisual-2.jpg" alt=""></p>
-                        <p class="description">10 สิ่งเกี่ยวกับรถที่ควรเช็คให้เป็นนิสัย Krungsri Auto เชื่อว่า ไม่ว่าใครก็คง อยากให้รถสุดรักอยู่กับเราไปนานๆ</p>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#">
-                        <p class="pic"><img src="{{ Config::get('app.url_assets') }}assets/img/general/keyvisual-3.jpg" alt=""></p>
-                        <p class="description">มือใหม่ต้องรู้ สุดยอดเคล็ดลับเรื่องรถยนต์ที่ควรจำ ในการใช้งานรถยนต์นั้น เราก็ควรรอบรู้เรื่องรถยนต์</p>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#">
-                        <p class="pic"><img src="{{ Config::get('app.url_assets') }}assets/img/shutterstock-264806741.png" alt=""></p>
-                        <p class="description">8 ระบบของเหลวในรถ ที่ควรหมั่นตรวจเช็คเป็นประจำยืดอายุการใช้งานของรถให้ยาวนาน ระบบของเหลวในรถ</p>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#">
-                        <p class="pic"><img src="{{ Config::get('app.url_assets') }}assets/img/ss3.png" alt=""></p>
-                        <p class="description">ท่า เข็นรถ ที่ถูกวิธีแบบที่ไม่ต้องออกแรง ทุกครั้งเวลาที่เจอรถจอดขวาง ตามสถานที่จอดรถต่างๆ</p>
-                    </a>
-                </li>
+                @foreach($contents->list as $key=>$value)
+                    <li class="">
+                        <a href="{{url('/Contents/Detail',[$value->ContentID])}}">
+                            <p class="pic"><img src="{{ $value->Thumbnail }}" alt=""></p>
+                            <p class="description">{{$value->Title}}</p>
+                        </a>
+                    </li>
+                @endforeach
             </ul>
+            <div class="text-center">
+                <a href="{{url('/Content')}}"  class="btn btn-default btn-theme2 py-2 px-4">ดูบทความเพิ่มเติม <i class="fa fa-chevron-right"></i>
+		        </a>
+            </div>
+            
         </div>
     </div>
 </div>

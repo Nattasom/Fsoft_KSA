@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <p class="logo__krungsri"><a href="{{ Config::get('app.url_assets') }}../">Krungsri</a></p>
+        <div class="logo__krungsri" ><a href="{{ url('/Home') }}">Krungsri</a></div>
         <p class="call-center">
             <!-- <button type="button" class="btn btn-yellow btn-text-xs" data-toggle="modal" data-target="#modal-reinsu">ลูกค้า กรุงศรี ออโต้ ต่อประกัน</button> -->
             <!-- <a href="http://bit.ly/2qS0rA9" target="_blank" class="btn btn-yellow btn-text-xs" >ลูกค้า กรุงศรี ออโต้ ต่อประกัน</a> -->
