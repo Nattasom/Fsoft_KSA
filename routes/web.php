@@ -82,6 +82,7 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('/Custom', 'CustomController@Index');
     Route::post('/ajaxModelValue', 'CustomController@ajaxLoadModel');
     Route::post('/ajaxModelYearValue', 'CustomController@ajaxLoadYearModel');
+    Route::post('/ajaxSubModelValue', 'CustomController@ajaxSubModelValue');
 
     Route::get('/Success', 'SuccessController@Index');
 

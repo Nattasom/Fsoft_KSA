@@ -41,6 +41,12 @@
 								<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
 								</svg></span></span>
 							</button>
+							<button type="button" id="tag-sub-model" class="btn-pill btn btn-inverse btn-sm btn-filter-tag d-none" data-step="4">
+								<span><span><span class="text"></span>
+								<svg id="Layer_1" width="14.13" height="14.13" viewBox="0 0 14.13 14.13">
+								<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
+								</svg></span></span>
+							</button>
 							<input type="text" class="form-control" id="car-keyin" onkeyup="filterFunction()" placeholder="เลือกยี่ห้อรถ" />
 						</div>
 						<div class="dropdown car-filter-ddl">
@@ -69,6 +75,10 @@
 					<select name="" id="desk-year" class="form-control">
 						<option value="">เลือกปีรถยนต์</option>
 					</select>
+					<p class="text-center mb-1 mt-4">รุ่นย่อย</p>
+					<select name="" id="desk-sub-model" class="form-control">
+						<option value="">เลือกรุ่นย่อย</option>
+					</select>
 				</div>
 				<!-- <select name="" id="" class="form-control select2car">
 					<option value="toyota">Toyota</option>
@@ -91,7 +101,7 @@
 							</a> 
 							<span class="position-absolute">บาท/ปี</span>
 						</h2>
-						<div class="slider" datatoid="slider" min="0" max="{{$premium_filter->Maximum}}"></div>
+						<div class="slider" datatoid="slider"></div>
 						<!-- <div class="slider"><div class="dot"></div></div> -->
 						<!-- <div class="clearfix"></div> -->
 					</div>
@@ -195,15 +205,16 @@ var car = $.parseJSON('{!!json_encode($make_value_list)!!}');
 //new Array('Toyota', 'Honda', 'Nissan', 'Isuzu', 'Mitsubishi');
 var carmodel = new Array();
 var year = new Array();
+var submodel = new Array();
 
-var dataList = [car,carmodel,year];
+var dataList = [car,carmodel,year,submodel];
 $(document).ready(function() {
 	$(document).on("focus","#car-keyin",function(){
 		$(".car-filter-ddl .dropdown-menu").addClass("show");
 	});
 	$(document).on("click",".btn-filter-tag",function(){
 		var step = $(this).attr("data-step");
-		var limit = 3;
+		var limit = 4;
 		for(var i = step;i <= limit;i++){
 			$(".btn-filter-tag[data-step="+i+"]").addClass("d-none");
 		}
@@ -225,6 +236,11 @@ $(document).ready(function() {
 				$("#car-keyin").attr("placeholder","เลือกปีรถ");
 				initOption(dataList[2], dataObj,3);
 				break;
+			case "4":
+				var dataObj = {id:$("#hd_year_value").val(),text:$(".btn-filter-tag[data-step=3] .text").text()};
+				$("#car-keyin").attr("placeholder","เลือกรุ่นย่อย");
+				initOption(dataList[3], dataObj,4);
+				break;
 			default:
 				break;
 		}
@@ -237,6 +253,7 @@ $(document).ready(function() {
 	var deskMake = $('#desk-make');
 	var deskModel = $('#desk-model');
 	var deskYear = $('#desk-year');
+	var deskSubModel = $('#desk-sub-model');
 
 	deskMake.html(setOption(car));
 	deskMake.select2({ 
@@ -255,6 +272,11 @@ $(document).ready(function() {
 		placeholder: "กรุณาเลือกปีรถยนต์"
 	});
 
+	deskSubModel.html(option);
+	deskSubModel.select2({ 
+		placeholder: "กรุณาเลือกรุ่นย่อย"
+	});
+
 	deskMake.on('select2:select', function (e) {
 		var data = e.params.data;
 		$('#hd_make_value').val(data.id);
@@ -271,10 +293,9 @@ $(document).ready(function() {
 	deskModel.on('select2:select', function (e) {
 		var data = e.params.data;
 		$('#hd_model_value').val(data.id);
-		$('#hd_model_text').val(data.text);
+		// $('#hd_model_text').val(data.text);
 		var sendData = {text:data.text, id:data.id};
 		getModelYearValue(sendData);
-		console.log(dataList);
 		deskYear.html(setOption(dataList[2], 2));
 		deskYear.select2({ 
 			placeholder: "กรุณาเลือกปีรถยนต์"
@@ -285,6 +306,18 @@ $(document).ready(function() {
 	deskYear.on('select2:select', function (e) {
 		var data = e.params.data;
 		$('#hd_year_value').val(data.id);
+		var sendData = {text:data.text, id:data.id};
+		getSubModelValue(sendData);
+		deskSubModel.html(setOption(dataList[3], 3));
+		deskSubModel.select2({ 
+			placeholder: "กรุณาเลือกรุ่นย่อย"
+		});
+		deskSubModel.select2('open');
+	});
+
+	deskSubModel.on('select2:select', function (e) {
+		var data = e.params.data;
+		$('#hd_model_text').val(data.id);
 		undisabledSubmit();
 	});
 
@@ -295,10 +328,14 @@ $(document).ready(function() {
 			var opValue = val.MakeValueName;
 			if (now==1) {
 				opKey = val.ModelValue;
-				opValue = val.ModelValue+'('+val.CC+')';
+				opValue = val.ModelValue;
 			} else if (now==2) {
 				opKey = val;
 				opValue = val;
+			}
+			else if (now==3) {
+				opKey = val.ModelDescription;
+				opValue = val.ModelDescription;
 			}
 			// console.log(opKey+' '+opValue);
 			option += '<option value="'+opKey+'">';
@@ -314,7 +351,7 @@ $(document).ready(function() {
 		var active = false;
 		if ($('#hd_make_value').val().length>0 && 
 			$('#hd_model_value').val().length>0 && 
-			$('#hd_model_text').val().length>0 && 
+			// $('#hd_model_text').val().length>0 && 
 			$('#hd_year_value').val().length>0 &&
 			$('#hd_premium_value').val().length>0 &&
 			$('#hd_premium_value').val() > 0 &&
@@ -322,7 +359,6 @@ $(document).ready(function() {
 			) {
 			active = true;
 		}
-		console.log(active);
 		if (active==true) {
 			$('#submitCustom').removeAttr('disabled');
 			$('#submitCustom').removeClass('btn-gray').addClass('btn-yellow');
@@ -371,6 +407,27 @@ $(document).ready(function() {
             }
 		});
 	}
+	function getSubModelValue(dataObj){
+		$.ajax({
+            headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
+            url: "{{url('/ajaxSubModelValue')}}",
+            type: 'POST',
+            dataType: 'json',
+	        async: false, // wait ajax finish
+	        cache: false,
+            data: {model: $("#hd_model_value").val(),year:dataObj.id},
+            success: function(data) {
+				dataList[3] = data;
+				$("#car-keyin").attr("placeholder","เลือกรุ่นย่อย");
+				initOption(dataList[3], dataObj,4);
+				
+			},
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                // console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+		});
+	}
 	function selectCarItem(element){
 		var type = $(element).parents(".content-zone").attr("data-type");
 		var val = $(element).attr("data-val");
@@ -385,11 +442,15 @@ $(document).ready(function() {
 				break;
 			case "model":
 				$("#hd_model_value").val(data.id);
-				$("#hd_model_text").val(data.text);
 				getModelYearValue(data);
 				break;
 			case "year":
 				$("#hd_year_value").val(data.id);
+				getSubModelValue(data);
+				break;
+			case "submodel":
+				//$("#hd_year_value").val(data.id);
+				$("#hd_model_text").val(data.text);
 				initOption(null, data,0);
 				break;
 			
@@ -420,9 +481,14 @@ $(document).ready(function() {
 			}else if(step==3){
 				$("#tag-model").removeClass("d-none");
 				$("#tag-model").find(".text").text(nowData.text);
-			}else{
+			}
+			else if(step==4){
 				$("#tag-year").removeClass("d-none");
 				$("#tag-year").find(".text").text(nowData.text);
+			}
+			else{
+				$("#tag-sub-model").removeClass("d-none");
+				$("#tag-sub-model").find(".text").text(nowData.text);
 			}
 		}
 		// $('#chooseMain').html('');
@@ -435,11 +501,15 @@ $(document).ready(function() {
 				$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val["MakeValue"]+'" href="javascript:;" onclick="selectCarItem(this);">'+val["MakeValueName"]+'</a>');
 				}else if(step == 2){
 					$(".car-filter-ddl .content-zone").attr("data-type","model");
-					$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val["ModelValue"]+'" href="javascript:;" onclick="selectCarItem(this);">'+val["ModelValue"]+'('+val["CC"]+')</a>');
+					$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val["ModelValue"]+'" href="javascript:;" onclick="selectCarItem(this);">'+val["ModelValue"]+'</a>');
 				}
 				else if(step == 3){
 					$(".car-filter-ddl .content-zone").attr("data-type","year");
 					$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val+'" href="javascript:;" onclick="selectCarItem(this);">'+val+'</a>');
+				}
+				else if(step == 4){
+					$(".car-filter-ddl .content-zone").attr("data-type","submodel");
+					$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val["ModelDescription"]+'" href="javascript:;" onclick="selectCarItem(this);">'+val["ModelDescription"]+'</a>');
 				}
 			});
 

@@ -23,6 +23,7 @@ class ProductController extends Controller
 		}
 		if(!is_null($request->input("model_value"))){
             $model = ucfirst($request->input("model_value"));
+            $cartext .=" / ".ucfirst($model);
 		}
 		if(!is_null($request->input("model_text"))){
 			$model_text = $request->input("model_text");

@@ -14,7 +14,7 @@
 						<!-- Filter Val Zone -->
 						<input type="hidden" id="hd-make-filter" value="{{$make_value}}"/>
 						<input type="hidden" id="hd-model-filter" value="{{$model_value}}"/>
-						<input type="hidden" id="hd-model-text-filter" value="{{$model_value}}"/>
+						<input type="hidden" id="hd-model-text-filter" value="{{$model_text_value}}"/>
 						<input type="hidden" id="hd-model-year-filter" value="{{$model_year_value}}"/>
 						<input type="hidden" id="hd-product-type-filter" value="{{$product_type_value}}"/>
 						<input type="hidden" id="hd-premium-filter" value="{{$premium_value}}"/>
@@ -52,7 +52,7 @@
 									</svg></span></span>
 								</button>
 								<button type="button" id="tag-model" class="btn-pill btn btn-inverse btn-sm btn-filter-tag {{(!empty($model_value)) ? '':'d-none'}}" data-step="2">
-									<span><span><span class="text" >{{$model_text_value}}</span>
+									<span><span><span class="text" >{{$model_value}}</span>
 									<svg id="Layer_1" width="14.13" height="14.13" viewBox="0 0 14.13 14.13">
 									<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
 									</svg></span></span>
@@ -63,7 +63,13 @@
 									<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
 									</svg></span></span>
 								</button>
-								<input type="text" class="form-control {{(!empty($model_year_value)) ? 'd-none':''}}" id="car-keyin" onkeyup="filterFunction()" placeholder="เลือกยี่ห้อรถ" />
+								<button type="button" id="tag-sub-model" class="btn-pill btn btn-inverse btn-sm btn-filter-tag {{(!empty($model_text_value)) ? '':'d-none'}}" data-step="4">
+								<span><span><span class="text">{{$model_text_value}}</span>
+								<svg id="Layer_1" width="14.13" height="14.13" viewBox="0 0 14.13 14.13">
+								<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
+								</svg></span></span>
+							</button>
+								<input type="text" class="form-control {{(!empty($model_text_value)) ? 'd-none':''}}" id="car-keyin" onkeyup="filterFunction()" placeholder="เลือกยี่ห้อรถ" />
 							</div>
 							<div class="dropdown car-filter-ddl">
 								<button type="button" id="btn-ddl-car" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">DROPDOWN</button>
@@ -346,6 +352,10 @@
 								<option value="">เลือกปีรถยนต์</option>
 								<option value="">2016</option>
 							</select>
+							<select name="" id="desk-sub-model" class="form-control mb-2">
+								<option value="">เลือกรุ่นย่อย</option>
+								<option value=""></option>
+							</select>
 						</div>
 
 						<div class="row mb-3">
@@ -616,8 +626,9 @@ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 var car =$.parseJSON('{!!json_encode($make_value_list)!!}');//new Array('Toyota', 'Honda', 'Nissan', 'Isuzu', 'Mitsubishi');
 var carmodel = new Array();
 var year = new Array();
+var submodel = new Array();
 
-var dataList = [car,carmodel,year];
+var dataList = [car,carmodel,year,submodel];
 $(document).ready(function() {
 
 	//car filter mobile
@@ -627,12 +638,15 @@ $(document).ready(function() {
 	if($("#hd-model-filter").val()!=""){
 		getModelYearValueInit($("#hd-model-filter").val());
 	}
+	if($("#hd-year-filter").val()!=""){
+		getSubModelValueInit($("#hd-year-filter").val());
+	}
 	$(document).on("focus","#car-keyin",function(){
 		$(".car-filter-ddl .dropdown-menu").addClass("show");
 	});
 	$(document).on("click",".btn-filter-tag",function(){
 		var step = $(this).attr("data-step");
-		var limit = 3;
+		var limit = 4;
 		for(var i = step;i <= limit;i++){
 			$(".btn-filter-tag[data-step="+i+"]").addClass("d-none");
 		}
@@ -645,20 +659,25 @@ $(document).ready(function() {
 				break;
 			case "2":
 				$("#car-keyin").attr("placeholder","เลือกรุ่นรถ");
-				var dataObj = {id:$("#hd_make_value").val(),text:$(".btn-filter-tag[data-step=1] .text").text()};
+				var dataObj = {id:$("#hd-make-filter").val(),text:$(".btn-filter-tag[data-step=1] .text").text()};
 				// getModelValue(data);
 				initOption(dataList[1], dataObj,2);
 					break;
 			case "3":
-				var dataObj = {id:$("#hd_model_value").val(),text:$(".btn-filter-tag[data-step=2] .text").text()};
+				var dataObj = {id:$("#hd-model-filter").val(),text:$(".btn-filter-tag[data-step=2] .text").text()};
 				$("#car-keyin").attr("placeholder","เลือกปีรถ");
 				initOption(dataList[2], dataObj,3);
+				break;
+			case "4":
+				var dataObj = {id:$("#hd-model-year-filter").val(),text:$(".btn-filter-tag[data-step=3] .text").text()};
+				$("#car-keyin").attr("placeholder","เลือกรุ่นย่อย");
+				initOption(dataList[3], dataObj,4);
 				break;
 			default:
 				break;
 		}
 	});
-	initOption(dataList[0],null,1);
+	//initOption(dataList[0],null,1);
 	//car filter mobile
 
 
@@ -681,6 +700,9 @@ $(document).ready(function() {
 				}
 				if($("#tag-model:not(.d-none) .text").length>0){
 					car_text += " / " + $("#tag-model:not(.d-none) .text").text();
+				}
+				if($("#tag-sub-model:not(.d-none) .text").length>0){
+					car_text += " / " + $("#tag-sub-model:not(.d-none) .text").text();
 				}
 				if($("#tag-year:not(.d-none) .text").length>0){
 					car_text += " / " + $("#tag-year:not(.d-none) .text").text();
@@ -794,6 +816,7 @@ $(document).ready(function() {
 	var deskMake = $('#desk-make');
 	var deskModel = $('#desk-model');
 	var deskYear = $('#desk-year');
+	var deskSubModel = $('#desk-sub-model');
 
 	deskMake.html(setOption(car));
 	deskMake.select2({ 
@@ -807,7 +830,7 @@ $(document).ready(function() {
 
 	@if (isset($model_value) && !empty($model_value))
 	var sendData = {text:'{{$make_value}}', id:'{{$make_value}}'};
-	getModelValue(sendData);
+	getModelValueInit(sendData.id);
 	deskModel.html(setOption(dataList[1], 1));
 	deskModel.select2({ 
 		placeholder: "กรุณาเลือกรุ่นรถยนต์",
@@ -825,7 +848,7 @@ $(document).ready(function() {
 
 	@if (isset($model_year_value) && !empty($model_year_value))
 	var sendData = {text:'{{$model_text_value}}', id:'{{$model_value}}'};
-	getModelYearValue(sendData);
+	getModelYearValueInit(sendData.id);
 	deskYear.html(setOption(dataList[2], 2));
 	deskYear.select2({ 
 		placeholder: "กรุณาเลือกปีรถยนต์",
@@ -837,6 +860,24 @@ $(document).ready(function() {
 	deskYear.html(option);
 	deskYear.select2({ 
 		placeholder: "กรุณาเลือกปีรถยนต์",
+		containerCssClass: 'mb-2'
+	});
+	@endif
+
+	@if (isset($model_text_value) && !empty($model_text_value))
+	var sendData = {text:'{{$model_text_value}}', id:'{{$model_text_value}}'};
+	getSubModelValueInit(sendData.id);
+	deskSubModel.html(setOption(dataList[3], 3));
+	deskSubModel.select2({ 
+		placeholder: "กรุณาเลือกรุ่นย่อย",
+		containerCssClass: 'mb-2'
+	});
+	deskSubModel.val('{{$model_text_value}}').trigger('change');
+	@else
+	var option = "<option></option>";
+	deskSubModel.html(option);
+	deskSubModel.select2({ 
+		placeholder: "กรุณาเลือกรุ่นย่อย",
 		containerCssClass: 'mb-2'
 	});
 	@endif
@@ -873,6 +914,17 @@ $(document).ready(function() {
 	deskYear.on('select2:select', function (e) {
 		var data = e.params.data;
 		$('#hd-model-year-filter').val(data.id);
+		var sendData = {text:data.text, id:data.id};
+		getSubModelValue(sendData);
+		deskSubModel.html(setOption(dataList[3], 3));
+		deskSubModel.select2({ 
+			placeholder: "กรุณาเลือกรุ่นย่อย"
+		});
+		deskSubModel.select2('open');
+	});
+	deskSubModel.on('select2:select', function (e) {
+		var data = e.params.data;
+		$('#hd-model-text-filter').val(data.id);
 	});
 
 	function setInputFilter(mobile=true) {
@@ -946,6 +998,21 @@ $(document).ready(function() {
 		$("#hd-sperate-filter").val(sperate);
 		$("#hd-order-field").val(order_field);
 		$("#hd-order-type").val(order_type);
+
+		var car_text = "";
+		if($("#tag-make:not(.d-none) .text").length>0){
+			car_text += $("#tag-make:not(.d-none) .text").text();
+		}
+		if($("#tag-model:not(.d-none) .text").length>0){
+			car_text += " / " + $("#tag-model:not(.d-none) .text").text();
+		}
+		if($("#tag-sub-model:not(.d-none) .text").length>0){
+			car_text += " / " + $("#tag-sub-model:not(.d-none) .text").text();
+		}
+		if($("#tag-year:not(.d-none) .text").length>0){
+			car_text += " / " + $("#tag-year:not(.d-none) .text").text();
+		}
+		$("#lbl-mb-car-text").text(car_text);
 
 		$("#contentAjax").html('');
 		$("#hd-record-start").val(0);
@@ -1089,6 +1156,7 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'json',
             data: {make: id},
+			async: false,
             success: function(data) {
 				dataList[1] = data;
 			},
@@ -1126,8 +1194,48 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'json',
             data: {model: id},
+			async: false,
             success: function(data) {
 				dataList[2] = data;
+			},
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                // console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+		});
+	}
+	function getSubModelValue(dataObj){
+		$.ajax({
+            headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
+            url: "{{url('/ajaxSubModelValue')}}",
+            type: 'POST',
+            dataType: 'json',
+	        async: false, // wait ajax finish
+	        cache: false,
+            data: {model: $("#hd-model-filter").val(),year:dataObj.id},
+            success: function(data) {
+				dataList[3] = data;
+				$("#car-keyin").attr("placeholder","เลือกรุ่นย่อย");
+				initOption(dataList[3], dataObj,4);
+				
+			},
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                // console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+		});
+	}
+	function getSubModelValueInit(year){
+		$.ajax({
+            headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
+            url: "{{url('/ajaxSubModelValue')}}",
+            type: 'POST',
+            dataType: 'json',
+	        async: false, // wait ajax finish
+	        cache: false,
+            data: {model: $("#hd-model-filter").val(),year:year},
+            success: function(data) {
+				dataList[3] = data;
 			},
             error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
                 // console.log(JSON.stringify(jqXHR));
@@ -1142,10 +1250,14 @@ $(document).ready(function() {
 			var opValue = val.MakeValueName;
 			if (now==1) {
 				opKey = val.ModelValue;
-				opValue = val.ModelValue+'('+val.CC+')';
+				opValue = val.ModelValue;
 			} else if (now==2) {
 				opKey = val;
 				opValue = val;
+			}
+			else if (now==3) {
+				opKey = val.ModelDescription;
+				opValue = val.ModelDescription;
 			}
 			// console.log(opKey+' '+opValue);
 			option += '<option value="'+opKey+'">';
@@ -1170,11 +1282,16 @@ $(document).ready(function() {
 				break;
 			case "model":
 				$("#hd-model-filter").val(data.id);
-				$("#hd-model-text-filter").val(data.text);
+				// $("#hd-model-text-filter").val(data.text);
 				getModelYearValue(data);
 				break;
 			case "year":
 				$("#hd-model-year-filter").val(data.id);
+				getSubModelValue(data);
+				break;
+			case "submodel":
+				//$("#hd_year_value").val(data.id);
+				$("#hd-model-text-filter").val(data.text);
 				initOption(null, data,0);
 				break;
 			
@@ -1205,9 +1322,13 @@ $(document).ready(function() {
 			}else if(step==3){
 				$("#tag-model").removeClass("d-none");
 				$("#tag-model").find(".text").text(nowData.text);
-			}else{
+			}else if(step==4){
 				$("#tag-year").removeClass("d-none");
 				$("#tag-year").find(".text").text(nowData.text);
+			}
+			else{
+				$("#tag-sub-model").removeClass("d-none");
+				$("#tag-sub-model").find(".text").text(nowData.text);
 			}
 		}
 		// $('#chooseMain').html('');
@@ -1220,11 +1341,15 @@ $(document).ready(function() {
 				$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val["MakeValue"]+'" href="javascript:;" onclick="selectCarItem(this);">'+val["MakeValueName"]+'</a>');
 				}else if(step == 2){
 					$(".car-filter-ddl .content-zone").attr("data-type","model");
-					$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val["ModelValue"]+'" href="javascript:;" onclick="selectCarItem(this);">'+val["ModelValue"]+'('+val["CC"]+')</a>');
+					$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val["ModelValue"]+'" href="javascript:;" onclick="selectCarItem(this);">'+val["ModelValue"]+'</a>');
 				}
 				else if(step == 3){
 					$(".car-filter-ddl .content-zone").attr("data-type","year");
 					$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val+'" href="javascript:;" onclick="selectCarItem(this);">'+val+'</a>');
+				}
+				else if(step == 4){
+					$(".car-filter-ddl .content-zone").attr("data-type","submodel");
+					$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="'+val["ModelDescription"]+'" href="javascript:;" onclick="selectCarItem(this);">'+val["ModelDescription"]+'</a>');
 				}
 			});
 

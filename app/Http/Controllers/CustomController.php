@@ -27,6 +27,13 @@ class CustomController extends Controller
 			$data = $this->funcLoadModelYearValue($request->input("model"));
 		}
 		return response()->json($data);
+    }
+    public function ajaxSubModelValue(Request $request){
+		$data= array();
+		if(!is_null($request->input("model"))){
+			$data = $this->funcLoadSubModelValue($request->input("model"),$request->input("year"));
+		}
+		return response()->json($data);
 	}
 
 	//function
@@ -96,6 +103,27 @@ class CustomController extends Controller
                 'headers' => ['Accept' => 'application/json', 'Content-Type' => 'application/x-www-form-urlencoded' ],
                 'form_params' => [
 					"model_value"=>$model
+                ]
+            ]);
+            if ($response->getStatusCode()==200) {
+                return json_decode($response->getBody());
+            }
+        } catch (RequestException $e) {
+            echo Psr7\str($e->getRequest());
+            if ($e->hasResponse()) {
+                echo Psr7\str($e->getResponse());
+                exit();
+            }
+        }
+    }
+    function funcLoadSubModelValue($model,$year){
+		try {
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request('POST', config('app.url_api').'get_sub_model_value_list', [
+                'headers' => ['Accept' => 'application/json', 'Content-Type' => 'application/x-www-form-urlencoded' ],
+                'form_params' => [
+                    "model_value"=>$model,
+                    "year"=>$year
                 ]
             ]);
             if ($response->getStatusCode()==200) {
