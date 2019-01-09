@@ -96,7 +96,7 @@
                     <div class="form-group row mb-1">
                         <label for="" class="col-4 col-form-label text-right">โทรศัพท์ติดต่อ <sup class="text-danger">*</sup></label>
                         <div class="col-8">
-                            <input type="text" name="tel" class="form-control form-control-sm" id="interest-tel" value="" placeholder="088 888 8888" required>
+                            <input type="number" name="tel" class="form-control form-control-sm" id="interest-tel" maxlength="10" value="" placeholder="088 888 8888" required>
                         </div>
                     </div>
                     <div class="form-group row mb-1">

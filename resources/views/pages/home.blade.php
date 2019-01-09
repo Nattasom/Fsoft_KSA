@@ -112,7 +112,7 @@
                                         <div class="col-md-12 text-center">
                                             <img src="<?php echo $data->Thumbnail;?>" alt="" class="img-fluid">
                                             <p class="text-header-card my-3 px-3"><h5>เริ่มต้นเพียง</h5></p>
-                                            <h2 class="font-weight-bold text-50  text-red"><?php echo $data->NetPremium!=''?number_format($data->NetPremium,0).'<span class="text-18 text-dark font-weight-normal"> บาท / ปี</span>':''; ?> </h2>
+                                            <h2 class="font-weight-bold text-50  text-red"><?php echo $data->TotalPremium!=''?number_format($data->TotalPremium,0).'<span class="text-18 text-dark font-weight-normal"> บาท / ปี</span>':''; ?> </h2>
                                             <div class="mt-2">
                                                 <a href="<?php echo $link_product_detail; ?>/{{$category->id}}/{{$data->idx}}" class="text-card">อ่านรายละเอียด <i class="fa fa-chevron-right"></i></a>
                                             </div>
@@ -129,7 +129,7 @@
                                             </p>
                                         </div>
                                         <div class="col-5 text-right">
-                                            <p class="text-white mb-2"><?php echo number_format($data->SumInsured,0); ?> บ.</p>
+                                            <p class="text-white mb-2"><?php echo !empty($data->SumInsured)&&$data->SumInsured>0 ? number_format($data->SumInsured,0): "-"; ?> บ.</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -141,7 +141,7 @@
                                             </p>
                                         </div>
                                         <div class="col-5 text-right">
-                                            <p class="text-white mb-2"><?php echo !empty($data->DeductAmt) ? number_format($data->DeductAmt,0) : 'ไม่ต้องจ่าย'; ?></p>
+                                            <p class="text-white mb-2"><?php echo !empty($data->DeductAmt)&&$data->DeductAmt>0 ? number_format($data->DeductAmt)." บ." : '- บ.'; ?></p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -165,7 +165,7 @@
                                             </p>
                                         </div>
                                         <div class="col-5 text-right">
-                                            <p class="text-white mb-2"><?php echo number_format($data->TPPD,0); ?> บ.</p>
+                                            <p class="text-white mb-2"><?php echo !empty($data->TPPD)&&$data->TPPD>0 ? number_format($data->TPPD,0): "-"; ?> บ.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@
                                                 <input type="checkbox" class="form-check-input cbCompare" 
                                                 data-title="<?php echo $data->CatProductName; ?>" 
                                                 data-caption="" 
-                                                data-price="<?php echo $data->NetPremium;?>" 
+                                                data-price="<?php echo $data->TotalPremium;?>" 
                                                 data-catid="<?php echo $data->idx;?>"
                                                 data-all="<?php echo urlencode(json_encode($data));?>"
                                                 id="checkboxCompare<?php echo $data->CatProductListId;?>">
@@ -187,7 +187,7 @@
                                             <a data-toggle="modal" data-target="#interest" class="btn btn-warning btn-theme" 
                                             data-title="<?php echo $data->CatProductName; ?>" 
                                             data-caption="" 
-                                            data-price="<?php echo $data->NetPremium;?>" 
+                                            data-price="<?php echo $data->TotalPremium;?>" 
                                             data-producttype="<?php echo $data->ProductType; ?>" 
                                             data-icon="<?php echo $data->InsurerIcon;?>" 
                                             data-makevalue="<?php echo $data->MakeValue; ?>"
@@ -388,7 +388,7 @@ jQuery(document).ready(function($) {
                         '                <div class="col-md-12 text-center">'+
                         '                    <img src="'+val.Thumbnail+'" alt="" class="img-fluid">'+
                         '                    <p class="text-header-card my-3 px-3"></p><h5>เริ่มต้น</h5><p></p>'+
-                        '                    <h2 class="font-weight-bold text-50  text-red">'+addCommas(val.NetPremium)+' <span class="text-18 text-dark font-weight-normal">บาท / ปี</span> </h2>'+
+                        '                    <h2 class="font-weight-bold text-50  text-red">'+addCommas(val.TotalPremium)+' <span class="text-18 text-dark font-weight-normal">บาท / ปี</span> </h2>'+
                         '                    <div class="mt-2">'+
                         '                        <a href="#" class="text-card">อ่านรายละเอียด <i class="fa fa-chevron-right"></i></a>'+
                         '                    </div>'+
@@ -405,7 +405,7 @@ jQuery(document).ready(function($) {
                         '                    </p>'+
                         '                </div>'+
                         '                <div class="col-5 text-right">'+
-                        '                    <p class="text-white mb-2">'+addCommas(val.SumInsured)+' บ.</p>'+
+                        '                    <p class="text-white mb-2">'+ ($.trim(val.SumInsured)!=''&&val.SumInsured.length>0 ? addCommas(val.SumInsured) : '-')+' บ.</p>'+
                         '                </div>'+
                         '            </div>'+
                         '            <div class="row">'+
@@ -417,7 +417,7 @@ jQuery(document).ready(function($) {
                         '                    </p>'+
                         '                </div>'+
                         '                <div class="col-5 text-right">'+
-                        '                    <p class="text-white mb-2">'+(val.DeductAmt!=null&&val.DeductAmt.length>0?addCommas(val.DeductAmt):'ไม่ต้องจ่าย')+'</p>'+
+                        '                    <p class="text-white mb-2">'+($.trim(val.DeductAmt)!=''&&val.DeductAmt.length>0 ? addCommas(val.DeductAmt):'-')+' บ.</p>'+
                         '                </div>'+
                         '            </div>'+
                         '            <div class="row">'+
@@ -441,7 +441,7 @@ jQuery(document).ready(function($) {
                         '                    </p>'+
                         '                </div>'+
                         '                <div class="col-5 text-right">'+
-                        '                    <p class="text-white mb-2">'+addCommas(val.TPPD)+' บ.</p>'+
+                        '                    <p class="text-white mb-2">'+ ($.trim(val.TPPD)!=''&&val.TPPD.length>0 ? addCommas(val.TPPD) : '-') +' บ.</p>'+
                         '                </div>'+
                         '            </div>'+
                         '        </div>'+
@@ -452,7 +452,7 @@ jQuery(document).ready(function($) {
                         '                        <input type="checkbox" class="form-check-input cbCompare" '+
                         '                       data-title="'+val.CatProductName+'" '+
                         '                       data-caption="" '+
-                        '                       data-price="'+val.NetPremium+'" '+
+                        '                       data-price="'+val.TotalPremium+'" '+
                         '                       data-catid="'+val.idx+'"'+
                         '                       data-all="'+jsonAll+'"'+
                         '                       id="checkboxCompare'+val.CatProductListId+'">'+
@@ -463,7 +463,7 @@ jQuery(document).ready(function($) {
                         '                    <a data-toggle="modal" data-target="#interest" class="btn btn-warning btn-theme"'+
                         '                       data-title="'+val.CatProductName+'"'+
                         '                       data-caption=""'+
-                        '                       data-price="'+val.NetPremium+'"'+
+                        '                       data-price="'+val.TotalPremium+'"'+
                         '                       data-producttype="'+val.ProductType+'"'+
                         '                       data-icon="'+val.InsurerIcon+'"'+
                         '                       data-makevalue="'+val.MakeValue+'"'+

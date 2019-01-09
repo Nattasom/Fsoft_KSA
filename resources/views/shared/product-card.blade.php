@@ -70,7 +70,7 @@
             </div>
             <div class="row">
                 <div class="col-7">
-                    <p class="text-white mb-2">ทรัพย์สินบุคคลภายนอก
+                    <p class="text-white mb-2 text-xs">ทรัพย์สินบุคคลภายนอก
                         <a href="javascript:;" data-toggle="tooltip" data-html="true" title="@lang('info.thirdpartyproperty')">
                             <img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="information" >
                         </a>

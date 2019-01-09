@@ -160,6 +160,9 @@
 	.box__recommend-insurance [class^="slider__insurance"] .item { padding:0; padding:0 15px; }
 	.card-bc .show-text { display: none; }
 	.card-item .card-footer p { font-size:13px; }
+	.card-item .card-footer p.text-xs {
+		font-size: 0.85em;
+	}
 	.owl-home .card-body { min-height: 334px; }
 	.datepicker-dropdown { position:absolute; top:auto !important; left:auto !important; width:auto; }
 	.datepicker-dropdown:before, .datepicker-dropdown:after { display: inline-block; }

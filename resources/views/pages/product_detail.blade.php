@@ -15,14 +15,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-xs-12 pl-0 pr-0">
-                <?php  
-                $datas = array(
-                    array('title'=>'ประกันภัยไทยวิวัฒน์', 'img'=>'icon01.png', 'caption'=>'ประกันเปิด-ปิด ประเภท 1 ทุนประกัน 400,000', 'price'=>'8,000', 'list'=>array(1,2,3), 'table'=>array('400,000 บ.','2,000 บ.','อู่','1,000,000 บ.')),
-                );
-                ?>
-                <?php foreach ($datas as $data) {  ?>
-                
-                <?php } ?>
                 <div class="col-md-4 col-xs-12 contentDiv px-0">
                     <div class="card rounded-0">
                         <div class="overlay">
@@ -68,7 +60,7 @@
                 <div class="form-group row mb-2">
                     <label for="" class="col-4 col-form-label text-right">โทรศัพท์ติดต่อ <sup class="text-danger">*</sup></label>
                     <div class="col-8">
-                        <input type="text" class="form-control" name="tel" id="" value="" placeholder="088 888 8888">
+                        <input type="number" maxlength="10" class="form-control" name="tel" id="" value="" placeholder="088 888 8888">
                     </div>
                 </div>
                 <div class="form-group row mb-2">
@@ -287,7 +279,7 @@
                             <img src="{{ Config::get('app.url_assets') }}assets/img/ribbon2.png" alt="">
                         </div>
                         <div class="card-header text-center rounded-0">
-                            <span><img src="{{ Config::get('app.url_assets') }}assets/img/icon01.png" alt=""> ประกันภัยไทยวิวัฒน์</span>
+                            <span><img src="{{ $detail->InsurerIcon }}" style="height:30px;margin-top:-2px;" alt=""> {{$detail->InsurerName}}</span>
                         </div>
                         <div class="card-body rounded-0">
                             <div class="row">
@@ -480,7 +472,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <span class="line-height-35">โทรศัพท์ติดต่อ <sup class="text-danger">*</sup></span>
-                                    <input type="text" name="tel" class="form-control rounded-0 border-0">
+                                    <input type="number" maxlength="10" name="tel" class="form-control rounded-0 border-0">
                                 </div>
                                 <div class="col-md-6">
                                     <span class="line-height-35">อีเมล์ <sup class="text-danger">*</sup></span>
@@ -569,6 +561,31 @@
         $("#form-droplead").submit(function(e){
             e.preventDefault();
             var $alert = $("#mb-error-interest");
+            if ($("#form-droplead").find("[name='name']").val()=="") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead").find("[name='tel']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead").find("[name='email']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead").find("[name='callback_date']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead").find("[name='tel']").val().length < 9){
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
+                return;
+            }
             var linkInterest = $('#url_main').val() + "/Home/SendInterest";
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -597,6 +614,31 @@
         $("#form-droplead-pc").submit(function(e){
             e.preventDefault();
             var $alert = $("#pc-error-interest");
+            if ($("#form-droplead-pc").find("[name='name']").val()=="") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead-pc").find("[name='tel']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead-pc").find("[name='email']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead-pc").find("[name='callback_date']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead-pc").find("[name='tel']").val().length < 9){
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
+                return;
+            }
             var linkInterest = $('#url_main').val() + "/Home/SendInterest";
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

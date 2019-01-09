@@ -90,7 +90,14 @@
         });
         
         $('.tab__info').tabs();
-        
+        var currentUrl      = window.location.href;
+        if(currentUrl.indexOf("#scroll-down")!=-1){
+            $('html, body').animate({
+                scrollTop: $('.box__recommend-insurance').offset().top
+            }, {
+                duration: 700
+            });
+        }
         $('.scroll-down').click(function(){
             $('html, body').animate({
                 scrollTop: $('.box__recommend-insurance').offset().top

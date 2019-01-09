@@ -36,11 +36,9 @@
                         <ul class="list__main mt-4">
 
                             <li><a href="{{ Config::get('app.url_main') }}Home">หน้าแรก</a></li>
-                            <li><a href="{{ Config::get('app.url_main') }}Products">เลือกประกันรถตามงบ</a></li>
-                            <li><a href="#">แนะนำประกันรถ</a></li>
-                            <hr class="d-none d-sm-inline-block">
-                            <li><a href="#" class="d-block d-sm-none">เกี่ยวกับ กรุงศรี ออโต้ อินชัวรันส์ โบรกเกอร์</a></li>
-                            <li><a href="#" class="d-none d-sm-block">แนะนำประกันรถโดยกรุงศรี ออโต้ อินชัวรันส์ โบรกเกอร์</a></li>
+                            <li><a href="{{ Config::get('app.url_main') }}Custom">เลือกประกันรถตามงบ</a></li>
+                            <li><a href="{{url('/Home')}}#scroll-down" >แนะนำประกันรถ</a></li>
+                            <li><a href="#" class="">เกี่ยวกับ กรุงศรี ออโต้ อินชัวรันส์ โบรกเกอร์</a></li>
 
                         </ul>
                         

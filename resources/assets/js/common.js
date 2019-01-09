@@ -60,6 +60,31 @@ $(function(){
     $('#btn-interest').click(function(event) {
         var linkInterest = $('#url_main').val() + "Home/SendInterest";
         var $alert = $("#error-interest");
+        if ($("#interest-name").val()=="") {
+            $alert.removeClass("d-none");
+            $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+            return;
+        }
+        if ($("#interest-tel").val() == "") {
+            $alert.removeClass("d-none");
+            $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+            return;
+        }
+        if ($("#interest-email").val() == "") {
+            $alert.removeClass("d-none");
+            $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+            return;
+        }
+        if ($("#interest-callback_date").val() == "") {
+            $alert.removeClass("d-none");
+            $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+            return;
+        }
+        if ($("#interest-tel").val().length < 9){
+            $alert.removeClass("d-none");
+            $alert.text("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
+            return;
+        }
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

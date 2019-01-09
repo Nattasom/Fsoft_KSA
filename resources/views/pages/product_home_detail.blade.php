@@ -15,14 +15,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-xs-12 pl-0 pr-0">
-                <?php  
-                $datas = array(
-                    array('title'=>'ประกันภัยไทยวิวัฒน์', 'img'=>'icon01.png', 'caption'=>'ประกันเปิด-ปิด ประเภท 1 ทุนประกัน 400,000', 'price'=>'8,000', 'list'=>array(1,2,3), 'table'=>array('400,000 บ.','2,000 บ.','อู่','1,000,000 บ.')),
-                );
-                ?>
-                <?php foreach ($datas as $data) {  ?>
-                
-                <?php } ?>
                 <div class="col-md-4 col-xs-12 contentDiv px-0">
                     <div class="card rounded-0">
                         <div class="overlay">
@@ -536,7 +528,32 @@
         $("#form-droplead").submit(function(e){
             e.preventDefault();
             var linkInterest = $('#url_main').val() + "/Home/SendInterest";
-            console.log(linkInterest);
+            var $alert = $("#mb-error-interest");
+            if ($("#form-droplead").find("[name='name']").val()=="") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead").find("[name='tel']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead").find("[name='email']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead").find("[name='callback_date']").val() == "") {
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกข้อมูลครบถ้วน");
+                return;
+            }
+            if ($("#form-droplead").find("[name='tel']").val().length < 9){
+                $alert.removeClass("d-none");
+                $alert.text("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
+                return;
+            }
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 url: linkInterest,
@@ -546,7 +563,9 @@
                 success: function(data) {
                     console.log(data);
                     if (data.fail != null || data.fail != undefined) {
-                        msgAlert(data.fail);
+                        $alert.removeClass("d-none");
+                        $alert.text(data.fail);
+                        $(".interest-captcha-img").html(data.captcha);
                     }
                     if (data.status == '01') {
                         window.location.href = $('#url_main').val() + 'Success';

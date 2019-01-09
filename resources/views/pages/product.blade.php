@@ -1427,7 +1427,7 @@ $(document).ready(function() {
 			tmp = tmp.replace("[head_icon]",head_ico);
 			tmp = tmp.replace("[title_name]",v["InsurerName"]).replace("[title_name]",v["InsurerName"]).replace("[title_name]",v["InsurerName"]);
 			tmp = tmp.replace("[caption]",v["ProductName"]).replace("[caption]",v["ProductName"]).replace("[caption]",v["ProductName"]);
-			tmp = tmp.replace("[premium]",addCommas(parseInt(v["NetPremium"])));
+			tmp = tmp.replace("[premium]",addCommas(parseInt(v["TotalPremium"])));
 			tmp = tmp.replace("[type_tag]",'<a href="#" class="btn btn-default mx-0 btn-theme3">ชั้น '+v["ProductType"]+'</a>');
 			tmp = tmp.replace("[product_type]",v["ProductType"]);
 			tmp = tmp.replace("[ins_icon]",v["InsurerIcon"]);
@@ -1438,13 +1438,13 @@ $(document).ready(function() {
 			tmp = tmp.replace("[car_cc]",v["CC"]);
 			tmp = tmp.replace("[sperate_tag]","");
 			tmp = tmp.replace("[promotion_tag]","");
-			tmp = tmp.replace("[premium_val]",v["NetPremium"]).replace("[premium_val]",v["NetPremium"]);
-			tmp = tmp.replace("[suminsured]",addCommas(parseInt(v["SumInsured"])));
-			var deduct = v["DeductAmt"]=="" ? 0 : v["DeductAmt"];
-			tmp = tmp.replace("[deduct]",addCommas(parseInt(deduct)));
+			tmp = tmp.replace("[premium_val]",v["TotalPremium"]).replace("[premium_val]",v["TotalPremium"]);
+			tmp = tmp.replace("[suminsured]",($.trim(v["SumInsured"])!=''&&v["SumInsured"].length>0 ? addCommas(v["SumInsured"]) : '-')+" บ.");
+			var deduct = ($.trim(v["DeductAmt"])!=''&&v["DeductAmt"].length>0 ? addCommas(parseInt(v["DeductAmt"])) : "-") + " บ.";
+			tmp = tmp.replace("[deduct]",deduct);
 			var claim = parseInt(v["ClaimTypeValue"])==1 ? "อู่":"ห้าง";
 			tmp = tmp.replace("[claim_type]",claim);
-			tmp = tmp.replace("[tppd]",addCommas(parseInt(v["TPPD"])));
+			tmp = tmp.replace("[tppd]",($.trim(v["TPPD"])!=''&&v["TPPD"].length>0 ? addCommas(parseInt(v["TPPD"])) : '-')+" บ.");
 			var allData = encodeURIComponent(JSON.stringify(v));  // mg
 			tmp = tmp.replace("[json]",allData); // mg
 			appendHtml += tmp;
