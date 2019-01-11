@@ -855,6 +855,15 @@ $(document).ready(function() {
 		containerCssClass: 'mb-2'
 	});
 	deskYear.val('{{$model_year_value}}').trigger('change');
+	var sendData1 = {text:'{{$model_year_value}}', id:'{{$model_year_value}}'};
+	getSubModelValueInit(sendData1.id);
+	deskSubModel.html(setOption(dataList[3], 3));
+	deskSubModel.select2({ 
+		placeholder: "กรุณาเลือกรุ่นย่อย",
+		containerCssClass: 'mb-2'
+	});
+	deskSubModel.val(('{{$model_text_value}}'=="") ? ' ': '{{$model_text_value}}').trigger('change');
+	
 	@else
 	var option = "<option></option>";
 	deskYear.html(option);
@@ -862,18 +871,6 @@ $(document).ready(function() {
 		placeholder: "กรุณาเลือกปีรถยนต์",
 		containerCssClass: 'mb-2'
 	});
-	@endif
-
-	@if (isset($model_text_value) && !empty($model_text_value))
-	var sendData = {text:'{{$model_text_value}}', id:'{{$model_text_value}}'};
-	getSubModelValueInit(sendData.id);
-	deskSubModel.html(setOption(dataList[3], 3));
-	deskSubModel.select2({ 
-		placeholder: "กรุณาเลือกรุ่นย่อย",
-		containerCssClass: 'mb-2'
-	});
-	deskSubModel.val('{{$model_text_value}}').trigger('change');
-	@else
 	var option = "<option></option>";
 	deskSubModel.html(option);
 	deskSubModel.select2({ 
@@ -881,6 +878,9 @@ $(document).ready(function() {
 		containerCssClass: 'mb-2'
 	});
 	@endif
+
+	
+	
 
 
 	
@@ -924,7 +924,7 @@ $(document).ready(function() {
 	});
 	deskSubModel.on('select2:select', function (e) {
 		var data = e.params.data;
-		$('#hd-model-text-filter').val(data.id);
+		$('#hd-model-text-filter').val($.trim(data.id));
 	});
 
 	function setInputFilter(mobile=true) {
@@ -1245,6 +1245,16 @@ $(document).ready(function() {
 	}
 	function setOption(ListOptions, now = 0) {
 		var option = "<option></option>";
+		var opk = "";
+		var opv = "";
+		console.log("now = "+now);
+		if (now==3) {
+			opk = " ";
+			opv = "ไม่ทราบรุ่น";
+		}
+		option += '<option value="'+opk+'">';
+		option += opv;
+		option += '</option>';
 		$.each(ListOptions, function(index, val) {
 			var opKey = val.MakeValue;
 			var opValue = val.MakeValueName;
@@ -1335,6 +1345,9 @@ $(document).ready(function() {
 		// $('#chooseMain').select2();
 		$(".car-filter-ddl .content-zone").html('');
 		if (array != null) {
+			if(step == 4){
+			$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="" href="javascript:;" onclick="selectCarItem(this);">ไม่ทราบรุ่น</a>');
+			}
 			$.each(array, function(index, val) {
 				if(step==1){ //make value
 				$(".car-filter-ddl .content-zone").attr("data-type","make");
@@ -1362,10 +1375,12 @@ $(document).ready(function() {
 
 	
 	function callProductList(){
+		console.log("Model Deesc = "+$("#hd-model-text-filter").val());
 		var params = {
 			make_value:$("#hd-make-filter").val(),
 			model_value:$("#hd-model-filter").val(),
 			model_year_value:$("#hd-model-year-filter").val(),
+			model_description:$("#hd-model-text-filter").val(),
 			product_type:$("#hd-product-type-filter").val(),
 			premium:$("#hd-premium-filter").val(),
 			suminsured:$("#hd-suminsured-filter").val(),
@@ -1420,14 +1435,14 @@ $(document).ready(function() {
 			tmp = tmp.replace("[idx]",v["idx"]).replace("[idx]",v["idx"]).replace("[idx]",v["idx"]).replace("[idx]",v["idx"]);
 			tmp = tmp.replace("checkboxCompare[idx]", "checkboxCompare" + v["idx"]); // mg
 
-			var promotionTag = "<img src='"+v["promotion_tag"]+"' />";
-			tmp = (v["promotion_tag"]!=null&&v["promotion_tag"]!=undefined) ? tmp.replace("[promotion_icon]", promotionTag) : tmp.replace("[promotion_icon]", '');	
+			var promotionTag = "<img src='"+v["PromotionTag"]+"' />";
+			//tmp = (v["promotion_tag"]!=null&&v["promotion_tag"]!=undefined) ? tmp.replace("[promotion_icon]", promotionTag) : tmp.replace("[promotion_icon]", '');	
 			
 			var head_ico = '<img src="'+v["InsurerIcon"]+'" style="height:30px;margin-top:-2px;" alt="">';
 			tmp = tmp.replace("[head_icon]",head_ico);
 			tmp = tmp.replace("[title_name]",v["InsurerName"]).replace("[title_name]",v["InsurerName"]).replace("[title_name]",v["InsurerName"]);
 			tmp = tmp.replace("[caption]",v["ProductName"]).replace("[caption]",v["ProductName"]).replace("[caption]",v["ProductName"]);
-			tmp = tmp.replace("[premium]",addCommas(parseInt(v["TotalPremium"])));
+			tmp = tmp.replace("[premium]",addCommas(Math.round(v["TotalPremium"])));
 			tmp = tmp.replace("[type_tag]",'<a href="#" class="btn btn-default mx-0 btn-theme3">ชั้น '+v["ProductType"]+'</a>');
 			tmp = tmp.replace("[product_type]",v["ProductType"]);
 			tmp = tmp.replace("[ins_icon]",v["InsurerIcon"]);
@@ -1438,7 +1453,10 @@ $(document).ready(function() {
 			tmp = tmp.replace("[car_cc]",v["CC"]);
 			tmp = tmp.replace("[sperate_tag]","");
 			tmp = tmp.replace("[promotion_tag]","");
-			tmp = tmp.replace("[premium_val]",v["TotalPremium"]).replace("[premium_val]",v["TotalPremium"]);
+			tmp = tmp.replace("[promotion_icon]",promotionTag);
+			// console.log("totalpremium = "+v["TotalPremium"]);
+			// console.log("totalpremium round = "+Math.round(v["TotalPremium"]));
+			tmp = tmp.replace("[premium_val]",Math.round(v["TotalPremium"])).replace("[premium_val]",v["TotalPremium"]);
 			tmp = tmp.replace("[suminsured]",($.trim(v["SumInsured"])!=''&&v["SumInsured"].length>0 ? addCommas(v["SumInsured"]) : '-')+" บ.");
 			var deduct = ($.trim(v["DeductAmt"])!=''&&v["DeductAmt"].length>0 ? addCommas(parseInt(v["DeductAmt"])) : "-") + " บ.";
 			tmp = tmp.replace("[deduct]",deduct);

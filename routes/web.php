@@ -20,6 +20,8 @@ Route::any('/Login', 'HomeController@Login');
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');
+
+     //$exitCode = Artisan::call('compiled:clear');
     // return what you want
 });
 //Reoptimized class loader:

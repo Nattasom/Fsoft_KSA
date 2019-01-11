@@ -2,7 +2,6 @@
     <div class="card rounded-0 mb-4 card-item">
         <div class="overlay">
             [promotion_icon]
-            <!-- <img src="{{ Config::get('app.url_assets') }}assets/img/special.png" style="height:60px;" alt=""> -->
         </div>
         <div class="card-header rounded-0">
         <!-- <img src="{{ Config::get('app.url_assets') }}assets/img/" style="height:30px;margin-top:-2px;" alt=""> -->

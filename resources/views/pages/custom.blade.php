@@ -317,12 +317,21 @@ $(document).ready(function() {
 
 	deskSubModel.on('select2:select', function (e) {
 		var data = e.params.data;
-		$('#hd_model_text').val(data.id);
+		$('#hd_model_text').val($.trim(data.id));
 		undisabledSubmit();
 	});
 
 	function setOption(ListOptions, now = 0) {
 		var option = "<option></option>";
+		var opk = "";
+		var opv = "";
+		if (now==3) {
+			opk = " ";
+			opv = "ไม่ทราบรุ่น";
+		}
+		option += '<option value="'+opk+'">';
+		option += opv;
+		option += '</option>';
 		$.each(ListOptions, function(index, val) {
 			var opKey = val.MakeValue;
 			var opValue = val.MakeValueName;
@@ -495,6 +504,9 @@ $(document).ready(function() {
 		// $('#chooseMain').select2();
 		$(".car-filter-ddl .content-zone").html('');
 		if (array != null) {
+			if(step == 4){
+			$(".car-filter-ddl .content-zone").append('<a class="dropdown-item" data-val="" href="javascript:;" onclick="selectCarItem(this);">ไม่ทราบรุ่น</a>');
+			}
 			$.each(array, function(index, val) {
 				if(step==1){ //make value
 				$(".car-filter-ddl .content-zone").attr("data-type","make");

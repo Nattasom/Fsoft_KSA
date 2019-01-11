@@ -5,7 +5,7 @@
     <div class="container">
         <div class="col-md-12 text-center">
             <a href="{{url()->previous()}}" class="float-left d-inline-block d-sm-none linkback text-12"><i class="fa fa-caret-left" aria-hidden="true"></i> กลับ |</a>
-            <p><img src="{{ Config::get('app.url_assets') }}assets/img/icon/car-header.png" alt=""> {{ucfirst(strtolower($detail->MakeValue))}} / {{ucfirst(strtolower($detail->ModelValue))}} {{$detail->CC}}cc  <span class="text-gray">ประกัน</span> ชั้น {{$detail->ProductType}} </p>
+            <p><img src="{{ Config::get('app.url_assets') }}assets/img/icon/car-header.png" alt=""> {{ucfirst(strtolower($detail->MakeValue))}} / {{ucfirst(strtolower($detail->ModelValue))}} / {{ucfirst($detail->ModelDescription)}}  <span class="text-gray">ประกัน</span> ชั้น {{$detail->ProductType}} </p>
         </div>
     </div>
 </div>
@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div class="col-md-12 text-center mb-3">
                                     <p class="text-header-card mb-3 px-4">{{$detail->ProductName}}</p>
-                                    <h2 class="font-weight-bold text-50">{{number_format($detail->NetPremium)}} <span class="text-18 font-weight-normal">บาท / ปี</span></h2>
+                                    <h2 class="font-weight-bold text-50">{{number_format($detail->TotalPremium)}} <span class="text-18 font-weight-normal">บาท / ปี</span></h2>
                                     <a href="#" class="btn btn-default mx-1 btn-theme3">ชั้น {{$detail->ProductType}}</a>
                                    
                                     <!-- <a href="#" class="btn btn-default mx-1 btn-theme3">ผ่อน 10 ด.</a>
@@ -60,7 +60,7 @@
                 <div class="form-group row mb-2">
                     <label for="" class="col-4 col-form-label text-right">โทรศัพท์ติดต่อ <sup class="text-danger">*</sup></label>
                     <div class="col-8">
-                        <input type="number" maxlength="10" class="form-control" name="tel" id="" value="" placeholder="088 888 8888">
+                        <input type="text" maxlength="10" class="form-control number-text" name="tel" id="" value="" placeholder="088 888 8888">
                     </div>
                 </div>
                 <div class="form-group row mb-2">
@@ -162,13 +162,13 @@
                             <div class="card-body">
                                 <div class="row mb-2">
                                     <div class="col-6">ผ่อน 3 เดือน</div>
-                                    <div class="col-6 text-right">{{number_format(intval($detail->NetPremium)/3)}} บาท / เดือน</div>
+                                    <div class="col-6 text-right">{{number_format(intval($detail->TotalPremium)/3)}} บาท / เดือน</div>
                                     <hr class="border-list">
                                     <div class="col-6">ผ่อน 6 เดือน</div>
-                                    <div class="col-6 text-right">{{number_format(intval($detail->NetPremium)/6)}} บาท / เดือน</div>
+                                    <div class="col-6 text-right">{{number_format(intval($detail->TotalPremium)/6)}} บาท / เดือน</div>
                                     <hr class="border-list">
                                     <div class="col-6">ผ่อน 10 เดือน</div>
-                                    <div class="col-6 text-right">{{number_format(intval($detail->NetPremium)/10)}} บาท / เดือน</div>
+                                    <div class="col-6 text-right">{{number_format(intval($detail->TotalPremium)/10)}} บาท / เดือน</div>
                                 </div>
                             </div>
                         </div>
@@ -432,9 +432,9 @@
                             <div class="row">
                                 <div class="col-md-12 text-center">
                                     <!--<p class="text-header-card mb-3">
-                                        {{number_format($detail->NetPremium)}} บาท / ปี
+                                        {{number_format($detail->TotalPremium)}} บาท / ปี
                                     </p>-->
-                                    <h2 class="">{{number_format($detail->NetPremium)}}<span class="text-18">บาท / ปี</span></h2>
+                                    <h2 class="">{{number_format($detail->TotalPremium)}}<span class="text-18">บาท / ปี</span></h2>
                                 </div>
                             </div>
                         </div>
@@ -472,7 +472,7 @@
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <span class="line-height-35">โทรศัพท์ติดต่อ <sup class="text-danger">*</sup></span>
-                                    <input type="number" maxlength="10" name="tel" class="form-control rounded-0 border-0">
+                                    <input type="text" maxlength="10" name="tel" class="form-control rounded-0 border-0 number-text">
                                 </div>
                                 <div class="col-md-6">
                                     <span class="line-height-35">อีเมล์ <sup class="text-danger">*</sup></span>
@@ -639,7 +639,7 @@
                 $alert.text("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
                 return;
             }
-            var linkInterest = $('#url_main').val() + "/Home/SendInterest";
+            var linkInterest =  "{{url('/Home/SendInterest')}}";
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 url: linkInterest,

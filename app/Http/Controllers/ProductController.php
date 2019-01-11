@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\RequestException;
 
 class ProductController extends Controller
 {
@@ -250,7 +252,9 @@ class ProductController extends Controller
                     "make_value"   => $params["make_value"],
                     "model_value"  => $params["model_value"],
                     "model_year"   => $params["model_year_value"],
-                ]
+                    "model_description"   => $params["model_description"]
+                ],
+                "debug" => TRUE
             ]);
             if ($response->getStatusCode()==200) {
                 return json_decode($response->getBody());
