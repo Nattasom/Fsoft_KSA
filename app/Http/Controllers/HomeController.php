@@ -14,6 +14,7 @@ class HomeController extends Controller
 
     public function Index(Request $request)
     {
+        $request->session()->forget("car_filter");
         $data['banners'] = array();
         $data['slider'] = array();
         $data['categories'] = array();

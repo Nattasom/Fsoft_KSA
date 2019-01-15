@@ -23,31 +23,31 @@
 					</select> -->
 					
 						<div class="car-filter-tag" >
-							<button type="button" id="tag-make" class="btn-pill btn btn-inverse btn-sm btn-filter-tag d-none" data-step="1">
-								<span><span><span class="text"></span>
+							<button type="button" id="tag-make" class="btn-pill btn btn-inverse btn-sm btn-filter-tag {{empty($car_filter['make_value']) ? 'd-none':$car_filter['make_value']}}" data-step="1">
+								<span><span><span class="text">{{$car_filter['make_value']}}</span>
 								<svg id="Layer_1" width="14.13" height="14.13" viewBox="0 0 14.13 14.13">
 								<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
 								</svg></span></span>
 							</button>
-							<button type="button" id="tag-model" class="btn-pill btn btn-inverse btn-sm btn-filter-tag d-none" data-step="2">
-								<span><span><span class="text" ></span>
+							<button type="button" id="tag-model" class="btn-pill btn btn-inverse btn-sm btn-filter-tag {{empty($car_filter['model_value']) ? 'd-none':$car_filter['model_value']}}" data-step="2">
+								<span><span><span class="text" >{{$car_filter['model_value']}}</span>
 								<svg id="Layer_1" width="14.13" height="14.13" viewBox="0 0 14.13 14.13">
 								<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
 								</svg></span></span>
 							</button>
-							<button type="button" id="tag-year" class="btn-pill btn btn-inverse btn-sm btn-filter-tag d-none" data-step="3">
-								<span><span><span class="text"></span>
+							<button type="button" id="tag-year" class="btn-pill btn btn-inverse btn-sm btn-filter-tag {{empty($car_filter['model_year_value']) ? 'd-none':$car_filter['model_year_value']}}" data-step="3">
+								<span><span><span class="text">{{$car_filter['model_year_value']}}</span>
 								<svg id="Layer_1" width="14.13" height="14.13" viewBox="0 0 14.13 14.13">
 								<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
 								</svg></span></span>
 							</button>
-							<button type="button" id="tag-sub-model" class="btn-pill btn btn-inverse btn-sm btn-filter-tag d-none" data-step="4">
-								<span><span><span class="text"></span>
+							<button type="button" id="tag-sub-model" class="btn-pill btn btn-inverse btn-sm btn-filter-tag {{empty($car_filter['model_description']) ? 'd-none':$car_filter['model_description']}}" data-step="4">
+								<span><span><span class="text">{{$car_filter['model_description']}}</span>
 								<svg id="Layer_1" width="14.13" height="14.13" viewBox="0 0 14.13 14.13">
 								<polygon points="14.13 1.41 12.72 0 7.07 5.65 1.41 0 0 1.41 5.65 7.07 0 12.72 1.41 14.13 7.07 8.48 12.72 14.13 14.13 12.72 8.48 7.07 14.13 1.41" fill="#959595"></polygon>
 								</svg></span></span>
 							</button>
-							<input type="text" class="form-control" id="car-keyin" onkeyup="filterFunction()" placeholder="เลือกยี่ห้อรถ" />
+							<input type="text" class="form-control {{(!empty($car_filter['model_description'])) ? 'd-none':''}}" id="car-keyin"  onkeyup="filterFunction()" placeholder="เลือกยี่ห้อรถ" />
 						</div>
 						<div class="dropdown car-filter-ddl">
 							<button type="button" id="btn-ddl-car" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">DROPDOWN</button>
@@ -97,11 +97,11 @@
 						<p class="pt-2 pb-1 text-20">งบประมาณไม่เกิน</p>
 						<h2 class="position-relative">
 							<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#price" data-input="#hd_premium_value" data-rangeid="slider">
-							<span id="price" class="font-weight-normal">0</span>
+							<span id="price" class="font-weight-normal custom-price">0</span>
 							</a> 
 							<span class="position-absolute">บาท/ปี</span>
 						</h2>
-						<div class="slider" datatoid="slider"></div>
+						<div class="slider" style="    margin-top: 23px;" datatoid="slider"></div>
 						<!-- <div class="slider"><div class="dot"></div></div> -->
 						<!-- <div class="clearfix"></div> -->
 					</div>
@@ -127,12 +127,12 @@
 				<div class="row">
 					<div class="col-12 text-center">
 						{!! csrf_field() !!}
-						<input type="hidden" name="make_value" id="hd_make_value"/>
-						<input type="hidden" name="model_value" id="hd_model_value"/>
-						<input type="hidden" name="model_text" id="hd_model_text"/>
-						<input type="hidden" name="year_value" id="hd_year_value"/>
-						<input type="hidden" name="product_type" id="hd_product_type"/>
-						<input type="hidden" name="premium_value" id="hd_premium_value"/>
+						<input type="hidden" name="make_value" value="{{$car_filter['make_value']}}" id="hd_make_value"/>
+						<input type="hidden" name="model_value" value="{{$car_filter['model_value']}}" id="hd_model_value"/>
+						<input type="hidden" name="model_text" value="{{$car_filter['model_description']}}" id="hd_model_text"/>
+						<input type="hidden" name="year_value" value="{{$car_filter['model_year_value']}}" id="hd_year_value"/>
+						<input type="hidden" name="product_type" value="{{$car_filter['product_type']}}" id="hd_product_type"/>
+						<input type="hidden" name="premium_value" value="{{$car_filter['premium']}}" id="hd_premium_value"/>
 						<button type="submit" id="submitCustom" class="btn btn-gray px-5">ต่อไป <i class="fa fa-angle-right" aria-hidden="true"></i></button>
 					</div>
 				</div>
@@ -167,17 +167,7 @@ $(document).ready(function() {
 			undisabledSubmit();
 		}
 	});
-	function getProductType () {
-		var temp = new Array();
-		$('.customizetype a').each(function(index, el) {
-			var value = $(this).data('value');
-			if ($(this).hasClass('active')) {
-				temp.push(value);
-			}
-		});
-		var json = temp.join(',');
-		$('#hd_product_type').val(json);
-	}
+	
 	$("#form-custom").submit(function(){
 		var make = $("#hd_make_value").val();
 		var model = $("#hd_model_value").val();
@@ -209,6 +199,24 @@ var submodel = new Array();
 
 var dataList = [car,carmodel,year,submodel];
 $(document).ready(function() {
+	//car filter mobile
+	if($("#hd_make_value").val()!=""){
+		getModelValueInit($("#hd_make_value").val());
+	}
+	if($("#hd_model_value").val()!=""){
+		getModelYearValueInit($("#hd_model_value").val());
+	}
+	if($("#hd_year_value").val()!=""){
+		getSubModelValueInit($("#hd_year_value").val());
+	}
+	if($("#hd_premium_value").val()!=""){
+		getPremiumRangeValue();
+		setTimeout(function(){
+			$('[datatoid="slider"]').slider( "value", $("#hd_premium_value").val() );
+		},500);
+	}
+	
+
 	$(document).on("focus","#car-keyin",function(){
 		$(".car-filter-ddl .dropdown-menu").addClass("show");
 	});
@@ -259,23 +267,62 @@ $(document).ready(function() {
 	deskMake.select2({ 
 		placeholder: "กรุณาเลือกยี่ห้อรถยนต์"
 	});
-
+	@if (isset($car_filter['make_value']) && !empty($car_filter['make_value']))
+	deskMake.val('{{$car_filter['make_value']}}').trigger('change');
+	@endif
 	var option = "<option></option>";
 
+	@if (isset($car_filter['model_value']) && !empty($car_filter['model_value']))
+	var sendData = {text:'{{$car_filter['make_value']}}', id:'{{$car_filter['make_value']}}'};
+	getModelValueInit(sendData.id);
+	deskModel.html(setOption(dataList[1], 1));
+	deskModel.select2({ 
+		placeholder: "กรุณาเลือกรุ่นรถยนต์",
+		containerCssClass: 'mb-2'
+	});
+	deskModel.val('{{$car_filter['model_value']}}').trigger('change');
+	@else
+	var option = "<option></option>";
 	deskModel.html(option);
 	deskModel.select2({ 
-		placeholder: "กรุณาเลือกรุ่นรถยนต์"
+		placeholder: "กรุณาเลือกรุ่นรถยนต์",
+		containerCssClass: 'mb-2'
 	});
+	@endif
+	
 
+	@if (isset($car_filter['model_year_value']) && !empty($car_filter['model_year_value']))
+	var sendData = {text:'{{$car_filter['model_value']}}', id:'{{$car_filter['model_value']}}'};
+	getModelYearValueInit(sendData.id);
+	deskYear.html(setOption(dataList[2], 2));
+	deskYear.select2({ 
+		placeholder: "กรุณาเลือกปีรถยนต์",
+		containerCssClass: 'mb-2'
+	});
+	deskYear.val('{{$car_filter['model_year_value']}}').trigger('change');
+	var sendData1 = {text:'{{$car_filter['model_year_value']}}', id:'{{$car_filter['model_year_value']}}'};
+	getSubModelValueInit(sendData1.id);
+	deskSubModel.html(setOption(dataList[3], 3));
+	deskSubModel.select2({ 
+		placeholder: "กรุณาเลือกรุ่นย่อย",
+		containerCssClass: 'mb-2'
+	});
+	deskSubModel.val(('{{$car_filter['model_description']}}'=="") ? ' ': '{{$car_filter['model_description']}}').trigger('change');
+	
+	@else
+	var option = "<option></option>";
 	deskYear.html(option);
 	deskYear.select2({ 
-		placeholder: "กรุณาเลือกปีรถยนต์"
+		placeholder: "กรุณาเลือกปีรถยนต์",
+		containerCssClass: 'mb-2'
 	});
-
+	var option = "<option></option>";
 	deskSubModel.html(option);
 	deskSubModel.select2({ 
-		placeholder: "กรุณาเลือกรุ่นย่อย"
+		placeholder: "กรุณาเลือกรุ่นย่อย",
+		containerCssClass: 'mb-2'
 	});
+	@endif
 
 	deskMake.on('select2:select', function (e) {
 		var data = e.params.data;
@@ -296,6 +343,7 @@ $(document).ready(function() {
 		// $('#hd_model_text').val(data.text);
 		var sendData = {text:data.text, id:data.id};
 		getModelYearValue(sendData);
+		getPremiumRangeValue();
 		deskYear.html(setOption(dataList[2], 2));
 		deskYear.select2({ 
 			placeholder: "กรุณาเลือกปีรถยนต์"
@@ -318,8 +366,11 @@ $(document).ready(function() {
 	deskSubModel.on('select2:select', function (e) {
 		var data = e.params.data;
 		$('#hd_model_text').val($.trim(data.id));
+		getPremiumRangeValue();
 		undisabledSubmit();
 	});
+
+
 
 	function setOption(ListOptions, now = 0) {
 		var option = "<option></option>";
@@ -355,7 +406,69 @@ $(document).ready(function() {
 	}
 });
 // Desktop
-
+function getModelValueInit(id){
+		$.ajax({
+            headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
+            url: "{{url('/ajaxModelValue')}}",
+            type: 'POST',
+            dataType: 'json',
+            data: {make: id},
+			async: false,
+            success: function(data) {
+				dataList[1] = data;
+			},
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                // console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+		});
+	}
+	function getModelYearValueInit(id){
+		$.ajax({
+            headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
+            url: "{{url('/ajaxModelYearValue')}}",
+            type: 'POST',
+            dataType: 'json',
+            data: {model: id},
+			async: false,
+            success: function(data) {
+				dataList[2] = data;
+			},
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                // console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+		});
+	}
+	function getSubModelValueInit(year){
+		$.ajax({
+            headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
+            url: "{{url('/ajaxSubModelValue')}}",
+            type: 'POST',
+            dataType: 'json',
+	        async: false, // wait ajax finish
+	        cache: false,
+            data: {model: $("#hd_model_value").val(),year:year},
+            success: function(data) {
+				dataList[3] = data;
+			},
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                // console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+		});
+	}
+	function getProductType () {
+		var temp = new Array();
+		$('.customizetype a').each(function(index, el) {
+			var value = $(this).data('value');
+			if ($(this).hasClass('active')) {
+				temp.push(value);
+			}
+		});
+		var json = temp.join(',');
+		$('#hd_product_type').val(json);
+	}
 	function undisabledSubmit() {
 		var active = false;
 		if ($('#hd_make_value').val().length>0 && 
@@ -437,6 +550,55 @@ $(document).ready(function() {
             }
 		});
 	}
+	function getPremiumRangeValue(){
+		var params = {
+			make_value:$("#hd_make_value").val(),
+			model_value:$("#hd_model_value").val(),
+			model_description:$("#hd_model_text").val()
+		};
+		$.ajax({
+            headers: {'X-CSRF-TOKEN': CSRF_TOKEN },
+            url: "{{url('/ajaxGetPremiumRangeValue')}}",
+            type: 'POST',
+            dataType: 'json',
+	        async: false, // wait ajax finish
+	        cache: false,
+            data: params,
+            success: function(data) {
+				//console.log(data);
+				$.each(data,function(k,v){
+					productTypeRange[v.ProductType].min = v.MinPremium;
+					productTypeRange[v.ProductType].max = v.MaxPremium;
+				});
+			},
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                // console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+		});
+	}
+	var productTypeRange = {
+		"1":{
+			min:0,
+			max:0
+		},
+		"2":{
+			min:0,
+			max:0
+		},
+		"2+":{
+			min:0,
+			max:0
+		},
+		"3":{
+			min:0,
+			max:0
+		},
+		"3+":{
+			min:0,
+			max:0
+		}
+	}
 	function selectCarItem(element){
 		var type = $(element).parents(".content-zone").attr("data-type");
 		var val = $(element).attr("data-val");
@@ -452,6 +614,7 @@ $(document).ready(function() {
 			case "model":
 				$("#hd_model_value").val(data.id);
 				getModelYearValue(data);
+				getPremiumRangeValue();
 				break;
 			case "year":
 				$("#hd_year_value").val(data.id);
@@ -459,7 +622,8 @@ $(document).ready(function() {
 				break;
 			case "submodel":
 				//$("#hd_year_value").val(data.id);
-				$("#hd_model_text").val(data.text);
+				$("#hd_model_text").val(data.id);
+				getPremiumRangeValue();
 				initOption(null, data,0);
 				break;
 			
@@ -546,11 +710,66 @@ $(document).ready(function() {
     		max: maxPrice,
 			slide: function( event, ui ) {
 				$('#price').html(addCommas(ui.value));
-				
+				if(ui.value > 0){
+					$('#price').css({
+						"color":"#ffd400"
+					});
+				}
+				else{
+					$('#price').css({
+						"color":"inherit"
+					});
+				}
+				if(ui.value>0){
+					$(".customizetype .py-2").each(function(){
+						var productType = $(this).attr("data-value");
+						var $this = $(this);
+						if(productTypeRange[productType].min>0){
+							if(ui.value >= productTypeRange[productType].min){
+								$this.addClass("active");
+							}else if(ui.value < productTypeRange[productType].min){
+								$this.removeClass("active");
+							}
+						}
+					});
+					getProductType();
+				}
+				else{
+					$(".customizetype .py-2").each(function(){
+						var $this = $(this);
+						$this.removeClass("active");
+					});
+				}
+				undisabledSubmit();
 			},
 			change: function(event, ui) { 
+				$('#price').html(addCommas(ui.value));
 				// console.log(ui.value); 
 				$("#hd_premium_value").val(ui.value);
+				if(ui.value > 0){
+					$('#price').css({
+						"color":"#ffd400"
+					});
+				}
+				else{
+					$('#price').css({
+						"color":"inherit"
+					});
+				}
+				if(ui.value>0){
+					console.log(productTypeRange);
+					$(".customizetype .py-2").each(function(){
+						var productType = $(this).attr("data-value");
+						var $this = $(this);
+						if(productTypeRange[productType].min>0){
+							if(ui.value >= productTypeRange[productType].min){
+								$this.addClass("active");
+							}else if(ui.value < productTypeRange[productType].min){
+								$this.removeClass("active");
+							}
+						}
+					});
+				}
 				undisabledSubmit();
 			} 
     	});

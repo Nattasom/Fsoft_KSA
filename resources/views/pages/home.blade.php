@@ -176,7 +176,7 @@
                                                 <input type="checkbox" class="form-check-input cbCompare" 
                                                 data-title="<?php echo $data->CatProductName; ?>" 
                                                 data-caption="" 
-                                                data-price="<?php echo $data->TotalPremium;?>" 
+                                                data-price="<?php echo number_format($data->TotalPremium, 0, '', '');?>" 
                                                 data-catid="<?php echo $data->idx;?>"
                                                 data-all="<?php echo urlencode(json_encode($data));?>"
                                                 id="checkboxCompare<?php echo $data->CatProductListId;?>">
@@ -187,7 +187,7 @@
                                             <a data-toggle="modal" data-target="#interest" class="btn btn-warning btn-theme" 
                                             data-title="<?php echo $data->CatProductName; ?>" 
                                             data-caption="" 
-                                            data-price="<?php echo $data->TotalPremium;?>" 
+                                            data-price="<?php echo number_format($data->TotalPremium, 0, '', '');?>" 
                                             data-producttype="<?php echo $data->ProductType; ?>" 
                                             data-icon="<?php echo $data->InsurerIcon;?>" 
                                             data-makevalue="<?php echo $data->MakeValue; ?>"
@@ -374,6 +374,7 @@ jQuery(document).ready(function($) {
                 if (data.num_rows > 0) {
                     var jsonAll = encodeURIComponent(JSON.stringify(data.list[0]));
                     $.each(data.list, function(index, val) {
+                        var totalPremium = Math.round(val["TotalPremium"]);
                          append += '<div class="item col-12 col-sm-4 float-left" style="padding:0px '+pad+'px;min-height:610px;">'+
                         '<div class="contentDiv  px-1">'+
                         '    <div class="card rounded-0 mb-4 card-item">'+
@@ -388,7 +389,7 @@ jQuery(document).ready(function($) {
                         '                <div class="col-md-12 text-center">'+
                         '                    <img src="'+val.Thumbnail+'" alt="" class="img-fluid">'+
                         '                    <p class="text-header-card my-3 px-3"></p><h5>เริ่มต้น</h5><p></p>'+
-                        '                    <h2 class="font-weight-bold text-50  text-red">'+addCommas(val.TotalPremium)+' <span class="text-18 text-dark font-weight-normal">บาท / ปี</span> </h2>'+
+                        '                    <h2 class="font-weight-bold text-50  text-red">'+addCommas(totalPremium)+' <span class="text-18 text-dark font-weight-normal">บาท / ปี</span> </h2>'+
                         '                    <div class="mt-2">'+
                         '                        <a href="#" class="text-card">อ่านรายละเอียด <i class="fa fa-chevron-right"></i></a>'+
                         '                    </div>'+
@@ -452,7 +453,7 @@ jQuery(document).ready(function($) {
                         '                        <input type="checkbox" class="form-check-input cbCompare" '+
                         '                       data-title="'+val.CatProductName+'" '+
                         '                       data-caption="" '+
-                        '                       data-price="'+val.TotalPremium+'" '+
+                        '                       data-price="'+totalPremium+'" '+
                         '                       data-catid="'+val.idx+'"'+
                         '                       data-all="'+jsonAll+'"'+
                         '                       id="checkboxCompare'+val.CatProductListId+'">'+
@@ -463,7 +464,7 @@ jQuery(document).ready(function($) {
                         '                    <a data-toggle="modal" data-target="#interest" class="btn btn-warning btn-theme"'+
                         '                       data-title="'+val.CatProductName+'"'+
                         '                       data-caption=""'+
-                        '                       data-price="'+val.TotalPremium+'"'+
+                        '                       data-price="'+totalPremium+'"'+
                         '                       data-producttype="'+val.ProductType+'"'+
                         '                       data-icon="'+val.InsurerIcon+'"'+
                         '                       data-makevalue="'+val.MakeValue+'"'+

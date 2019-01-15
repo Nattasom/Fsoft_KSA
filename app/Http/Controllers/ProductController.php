@@ -10,6 +10,26 @@ class ProductController extends Controller
 {
     public function Index(Request $request)
 	{
+        $tmp_search = array(
+            "product_type"=>'',
+            "suminsured"=>'',
+            "premium"=>'',
+            "deduct"=>'',
+            "claim_type"=>'',
+            "insurer"=>'',
+            "sperate"=>'',
+            "tppd_min"=>'',
+            "tppd_max"=>'',
+            "make_value"=>'',
+            "model_value"=>'',
+            "model_year_value"=>'',
+            "model_description"=>'',
+        );
+        if ($request->session()->exists('car_filter')) {
+            $tmp_search = $request->session()->get("car_filter");
+        }
+
+
 		$make = "";
 		$model = "";
 		$model_text ="";
@@ -19,27 +39,30 @@ class ProductController extends Controller
         $productTypeVal = "";
 		$productTypeText = "1 / 2+ / 2 / 3+ / 3";
 		$cartext = "";
-		if(!is_null($request->input("make_value"))){
-			$make = $request->input("make_value");
+		if(!empty($tmp_search["make_value"])){
+			$make = $tmp_search["make_value"];
 			$cartext .="".ucfirst($make);
 		}
-		if(!is_null($request->input("model_value"))){
-            $model = ucfirst($request->input("model_value"));
+		if(!empty($tmp_search["model_value"])){
+            $model = $tmp_search["model_value"];
             $cartext .=" / ".ucfirst($model);
 		}
-		if(!is_null($request->input("model_text"))){
-			$model_text = $request->input("model_text");
+		if(!empty($tmp_search["model_description"])){
+			$model_text = $tmp_search["model_description"];
 			$cartext .=" / ".ucfirst($model_text);
-		}
-		if(!is_null($request->input("year_value"))){
-			$model_year = $request->input("year_value");
+        }
+        else{
+            $cartext .=" / ไม่ทราบรุ่น";
+        }
+		if(!empty($tmp_search["model_year_value"])){
+			$model_year = $tmp_search["model_year_value"];
 			$cartext .=" / ".$model_year;
         }
-        if(!is_null($request->input("premium_value"))){
-            $premium_value = $request->input("premium_value");
+        if(!empty($tmp_search["premium"])){
+            $premium_value = $tmp_search["premium"];
         }
-		if(!is_null($request->input("product_type"))){
-			$arrProd = explode(',',$request->input("product_type"));
+		if(!is_null($tmp_search["product_type"])){
+			$arrProd = explode(',',$tmp_search["product_type"]);
 			$productTypeText = "";
 			foreach($arrProd as $k=>$v){
 				if($k!=0){
@@ -48,8 +71,24 @@ class ProductController extends Controller
 				$productTypeText .= $v;
 			}
             $productType = $arrProd;
-            $productTypeVal = $request->input("product_type");
+            $productTypeVal = $tmp_search["product_type"];
         }
+        // $advancedSearch = array(
+        //     "product_type"=>$productTypeVal,
+        //     "suminsured"=>'',
+        //     "premium"=>'',
+        //     "deduct"=>'',
+        //     "claim_type"=>'',
+        //     "insurer"=>'',
+        //     "sperate"=>'',
+        //     "tppd_min"=>'',
+        //     "tppd_max"=>'',
+        //     "make_value"=>$make,
+        //     "model_value"=>$model,
+        //     "model_year_value"=>$model_year,
+        //     "model_description"=>$model_text,
+        // );
+        // $request->session()->put('car_filter',$advancedSearch);
         $data["make_value_list"] = $this->funcLoadMakeValue();
 		$data["make_value"] = $make;
         $data["model_value"] = $model;
@@ -81,6 +120,22 @@ class ProductController extends Controller
 		return view("pages.product_detail", $data);
 	}
 	public function ajaxLoadProductList(Request $request){
+        $advancedSearch = array(
+            "product_type"=>$request->input("product_type"),
+            "suminsured"=>$request->input("suminsured"),
+            "premium"=>$request->input("premium"),
+            "deduct"=>$request->input("deduct"),
+            "claim_type"=>$request->input("claim_type"),
+            "insurer"=>$request->input("insurer"),
+            "sperate"=>$request->input("sperate"),
+            "tppd_min"=>$request->input("tppd_min"),
+            "tppd_max"=>$request->input("tppd_max"),
+            "make_value"=>$request->input("make_value"),
+            "model_value"=>$request->input("model_value"),
+            "model_year_value"=>$request->input("model_year_value"),
+            "model_description"=>$request->input("model_description"),
+        );
+        $request->session()->put('car_filter',$advancedSearch);
 		$data = $this->funcGetProductList($request->input());
 		return response()->json($data);
 	}
@@ -252,9 +307,8 @@ class ProductController extends Controller
                     "make_value"   => $params["make_value"],
                     "model_value"  => $params["model_value"],
                     "model_year"   => $params["model_year_value"],
-                    "model_description"   => $params["model_description"]
-                ],
-                "debug" => TRUE
+                    "model_description"   => trim($params["model_description"])
+                ]
             ]);
             if ($response->getStatusCode()==200) {
                 return json_decode($response->getBody());

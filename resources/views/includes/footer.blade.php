@@ -35,8 +35,8 @@
                 <div class="row">
                     <div class="col-6 text-right">
                         <ul class="list-inline mt-4">
-                            <li class="d-inline-block"><a href="#" class="text-white px-2">เลือกประกันรถตามงบ</a></li>
-                            <li class="d-inline-block"><a href="#" class="text-white px-2">แนะนำประกันรถ</a></li>
+                            <li class="d-inline-block"><a href="{{ url('/Custom') }}" class="text-white px-2">เลือกประกันรถตามงบ</a></li>
+                            <li class="d-inline-block"><a href="{{url('/Home')}}#scroll-down" class="text-white px-2">แนะนำประกันรถ</a></li>
                             <li class="d-inline-block"><a href="#" class="text-white px-2">เกี่ยวกับ กรุงศรี ออโต้ อินชัวรันส์ โบรกเกอร์</a></li>
                         </ul>
                     </div>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-6 pl-0">
                                 <p class="text-white text-16 mb-0 ml-4">CALL CENTER</p>
-                                <p class="text-white font-weight-bold text-22"><a href="tel:028287888" style="color:inherit;"><i class="fa fa-phone text-white" aria-hidden="true"></i> 02-828-7888</a></p>
+                                <p class="text-white font-weight-bold text-22"><a href="tel:028287888" style="color:inherit;"><i class="fa fa-phone text-white" aria-hidden="true"></i> 0-2828-7888</a></p>
                             </div>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
         <form>
           <div class="form-group">
             <label for="title"></label>
-            <input type="number" class="form-control" id="" placeholder="" value="">
+            <input type="text" class="form-control number-text" id="" placeholder="" value="">
             <input type="hidden" id="filter-form" value="">
             <input type="hidden" id="filter-input" value="">
             <input type="hidden" id="filter-rangeid" value="">
@@ -179,7 +179,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">ปิด</button>
-        <button type="button" id="submitFilterRange" class="btn btn-sm btn-primary">ตกลง</button>
+        <button type="button" id="submitFilterRange" class="btn btn-sm btn-yellow">ตกลง</button>
       </div>
     </div>
   </div>

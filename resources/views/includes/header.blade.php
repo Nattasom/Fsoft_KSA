@@ -1,3 +1,9 @@
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MF7XQPM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    
     <!-- <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-white" id="mainnav">
         <div class="container position-relative">
             <a class="navbar-brand" href="{{ Config::get('app.url_main') }}"><img src="{{ Config::get('app.url_assets') }}assets/img/icon/logo__krungsri.png" height="100" alt="logo" /></a>
@@ -35,8 +41,8 @@
                         <a class="float-right mb-2 d-block d-sm-none" id="closeNav"><img src="{{ Config::get('app.url_assets') }}assets/img/close.png" alt="" height="20"></a>
                         <ul class="list__main mt-4">
 
-                            <li><a href="{{ Config::get('app.url_main') }}Home">หน้าแรก</a></li>
-                            <li><a href="{{ Config::get('app.url_main') }}Custom">เลือกประกันรถตามงบ</a></li>
+                            <li><a href="{{ url('/Home') }}">หน้าแรก</a></li>
+                            <li><a href="{{ url('/Custom') }}">เลือกประกันรถตามงบ</a></li>
                             <li><a href="{{url('/Home')}}#scroll-down" >แนะนำประกันรถ</a></li>
                             <li><a href="#" class="">เกี่ยวกับ กรุงศรี ออโต้ อินชัวรันส์ โบรกเกอร์</a></li>
 

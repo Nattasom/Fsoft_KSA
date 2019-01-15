@@ -3,13 +3,27 @@
 
 <div class="box-header">
     <div class="container">
-        <div class="col-md-12 text-center">
+        <div class="col-md-12 text-center" style="padding: 0 15px 0 35px;">
             <a href="{{url()->previous()}}" class="float-left d-inline-block d-sm-none linkback text-12"><i class="fa fa-caret-left" aria-hidden="true"></i> กลับ |</a>
             <p><img src="{{ Config::get('app.url_assets') }}assets/img/icon/car-header.png" alt=""> {{ucfirst(strtolower($detail->MakeValue))}} / {{ucfirst(strtolower($detail->ModelValue))}} / {{ucfirst($detail->ModelDescription)}}  <span class="text-gray">ประกัน</span> ชั้น {{$detail->ProductType}} </p>
         </div>
     </div>
 </div>
-
+@php($sperate_pay = '')
+@php($totalPremium = number_format($detail->TotalPremium,0,'',''))
+<?php 
+$arrPay = array();
+    if(!empty($detail->SplitPay)){
+        $arrPay = explode(',',$detail->SplitPay);
+        $fMax = 0;
+        for($i=0;$i<count($arrPay);$i++){
+            if(intval($arrPay[$i])>$fMax){
+                $fMax = intval($arrPay[$i]);
+            }
+        }
+        $sperate_pay = "ผ่อน ".$fMax." ด.";
+    }
+?>
 <!-- mobile -->
 <div class="d-md-none d-lg-none">
     <div class="container">
@@ -18,7 +32,9 @@
                 <div class="col-md-4 col-xs-12 contentDiv px-0">
                     <div class="card rounded-0">
                         <div class="overlay">
-                            <!-- <img src="{{ Config::get('app.url_assets') }}assets/img/special.png" style="height:70px;" alt=""> -->
+                            @if(!empty($detail->PromotionTag))
+                                <img src="{{$detail->PromotionTag}}" alt="">
+                            @endif
                         </div>
                         <div class="card-header rounded-0">
                             <p><img src="{{$detail->InsurerIcon}}" style="height:30px;margin-top:-2px;" alt="">{{$detail->InsurerName}}</p>
@@ -29,9 +45,13 @@
                                     <p class="text-header-card mb-3 px-4">{{$detail->ProductName}}</p>
                                     <h2 class="font-weight-bold text-50">{{number_format($detail->TotalPremium)}} <span class="text-18 font-weight-normal">บาท / ปี</span></h2>
                                     <a href="#" class="btn btn-default mx-1 btn-theme3">ชั้น {{$detail->ProductType}}</a>
-                                   
-                                    <!-- <a href="#" class="btn btn-default mx-1 btn-theme3">ผ่อน 10 ด.</a>
-                                    <a href="#" class="btn btn-default mx-1 btn-theme3">โปรโมชั่น</a> -->
+                                    @if(!empty($sperate_pay))
+                                        <a href="#" class="btn btn-default mx-1 btn-theme3">{{$sperate_pay }}</a>
+                                    @endif
+                                     @if(!empty($detail->PromotionTag))
+                                        <a href="" class="btn btn-default btn-theme3">โปรโมชั่น</a>
+                                     @endif
+                                   <!-- <a href="#" class="btn btn-default mx-1 btn-theme3">โปรโมชั่น</a> -->
                                 </div>
                             </div>
                         </div>
@@ -141,7 +161,10 @@
                 <div class="col-6 col-md-3 text-center mb-3">
                     <img src="{{ Config::get('app.url_assets') }}assets/img/product/04.png" alt="" class="mb-2">
                     <p>ค่าเสียหายส่วนแรก</p>
-                    <h3>ไม่ต้องจ่าย</h3>
+                    <h3>{{!empty($detail->DeductAmt)&&intval($detail->DeductAmt)>0 ? number_format($detail->DeductAmt,0):'ไม่ต้องจ่าย'}}</h3>
+                    @if(!empty($detail->DeductAmt)&&intval($detail->DeductAmt)>0)
+                    <p>บาท</p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -149,6 +172,7 @@
     <section>
         <div class="container">
             <div class="row">
+                @if(count($arrPay)>0)
                 <div class="col-md-12 mb-3">
                     <div class="card rounded-0 border-0">
                         <div class="card-header text-center bg-theme rounded-0 fixed-header" id="headingOne">
@@ -161,19 +185,29 @@
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="row mb-2">
-                                    <div class="col-6">ผ่อน 3 เดือน</div>
-                                    <div class="col-6 text-right">{{number_format(intval($detail->TotalPremium)/3)}} บาท / เดือน</div>
-                                    <hr class="border-list">
-                                    <div class="col-6">ผ่อน 6 เดือน</div>
-                                    <div class="col-6 text-right">{{number_format(intval($detail->TotalPremium)/6)}} บาท / เดือน</div>
-                                    <hr class="border-list">
-                                    <div class="col-6">ผ่อน 10 เดือน</div>
-                                    <div class="col-6 text-right">{{number_format(intval($detail->TotalPremium)/10)}} บาท / เดือน</div>
+                                    <?php 
+                                            for($i=0;$i<count($arrPay);$i++)
+                                            {
+                                                if($i!=0){
+                                            ?>  
+                                                <hr class="border-list">
+                                            <?php
+                                                }
+                                                $pay = $totalPremium/$arrPay[$i];
+                                            ?>
+                                                <div class="col-6">ผ่อน <?php echo $arrPay[$i];?> เดือน</div>
+                                                <div class="col-6 text-right"><?php echo number_format($pay,0);?> บาท / เดือน</div>
+                                            <?php
+                                            }
+                                            ?>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endif
+                 @if(!empty(strip_tags($detail->ProductDesc1)))
                 <div class="col-md-12 mb-3">
                     <div class="card rounded-0 border-0">
                         <div class="card-header text-center bg-theme rounded-0 fixed-header" id="headingTwo">
@@ -197,6 +231,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 <div class="col-md-12 mb-3">
                     <div class="card rounded-0 border-0">
                         <div class="card-header text-center bg-theme rounded-0 fixed-header" id="headingThree">
@@ -237,16 +272,17 @@
                                     <div class="col-6">อุบัติเหตุส่วนบุคคล</div>
                                     <div class="col-6 text-right">{{number_format($detail->PA_Passengers)}} บาท</div>
                                     <hr class="border-list">
-                                    <div class="col-6">ค่ารักษาพยาบาล</div>
-                                    <div class="col-6 text-right">{{number_format($detail->MED)}} บาท</div>
-                                    <hr class="border-list">
                                     <div class="col-6">ประกันตัวผู้ขับขี่</div>
                                     <div class="col-6 text-right">{{number_format($detail->PA_Driver)}} บาท</div>
+                                    <hr class="border-list">
+                                    <div class="col-6">ค่ารักษาพยาบาล</div>
+                                    <div class="col-6 text-right">{{number_format($detail->MED)}} บาท</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                 @if(!empty(strip_tags($detail->ProductDesc2)))
                 <div class="col-md-12 mb-3">
                     <div class="card rounded-0 border-0">
                         <div class="card-header text-center bg-theme rounded-0 fixed-header" id="headingFive">
@@ -263,6 +299,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>
@@ -276,7 +313,10 @@
                 <div class="col-md-12">
                     <div class="card rounded-0">
                         <div class="overlay">
-                            <img src="{{ Config::get('app.url_assets') }}assets/img/ribbon2.png" alt="">
+                            @if(!empty($detail->PromotionTag))
+                                <img src="{{$detail->PromotionTag}}" alt="">
+                            @endif
+                            
                         </div>
                         <div class="card-header text-center rounded-0">
                             <span><img src="{{ $detail->InsurerIcon }}" style="height:30px;margin-top:-2px;" alt=""> {{$detail->InsurerName}}</span>
@@ -288,7 +328,12 @@
                                         {{$detail->ProductName}}
                                     </p>
                                     <a href="" class="btn btn-default btn-theme3"><img src="{{ Config::get('app.url_assets') }}assets/img/icon/car.png" alt=""> {{$detail->ProductType}}</a>
-                                    <a href="" class="btn btn-default btn-theme3"><img src="{{ Config::get('app.url_assets') }}assets/img/icon/calendar.png" alt=""> 10 ด.</a>
+                                    @if(!empty($sperate_pay))
+                                        <a href="" class="btn btn-default btn-theme3"><img src="{{ Config::get('app.url_assets') }}assets/img/icon/calendar.png" alt=""> {{$sperate_pay }}</a>
+                                    @endif
+                                    @if(!empty($detail->PromotionTag))
+                                    <a href="" class="btn btn-default btn-theme3">โปรโมชั่น</a>
+                                     @endif
                                 </div>
                             </div>
                         </div>
@@ -317,29 +362,33 @@
             </div>
             <div class="row">
                 <div class="col-md-3 text-center mb-3">
-                    <img src="{{ Config::get('app.url_assets') }}assets/img/product/01.png" alt="" class="mb-2" width="90" height="70">
+                    <img src="{{ Config::get('app.url_assets') }}assets/img/product/01.png" alt="" class="mb-2" >
                     <p>ทุนประกัน</p>
                     <h3>{{number_format($detail->SumInsured)}}</h3>
                     <p>บาท</p>
                 </div>
                 <div class="col-md-3 text-center mb-3">
-                    <img src="{{ Config::get('app.url_assets') }}assets/img/product/02.png" alt="" class="mb-2" width="90" height="70">
+                    <img src="{{ Config::get('app.url_assets') }}assets/img/product/02.png" alt="" class="mb-2" >
                     <p>ทรัพย์สินส่วนบุคคล</p>
                     <h3>{{number_format($detail->TPPD)}}</h3>
                     <p>บาท</p>
                 </div>
                 <div class="col-md-3 text-center mb-3">
-                    <img src="{{ Config::get('app.url_assets') }}assets/img/product/03.png" alt="" class="mb-2" width="90" height="70">
+                    <img src="{{ Config::get('app.url_assets') }}assets/img/product/03.png" alt="" class="mb-2" >
                     <p>ซ่อม</p>
                     <h3>{{(intval($detail->ClaimTypeValue)==1 ? 'อู่':'ห้าง')}}</h3>
                 </div>
                 <div class="col-md-3 text-center mb-3">
-                    <img src="{{ Config::get('app.url_assets') }}assets/img/product/04.png" alt="" class="mb-2" width="90" height="70">
+                    <img src="{{ Config::get('app.url_assets') }}assets/img/product/04.png" alt="" class="mb-2" >
                     <p>ค่าเสียหายส่วนแรก</p>
-                    <h3>ไม่ต้องจ่าย</h3>
+                    <h3>{{!empty($detail->DeductAmt)&&intval($detail->DeductAmt)>0 ? number_format($detail->DeductAmt,0):'ไม่ต้องจ่าย'}}</h3>
+                    @if(!empty($detail->DeductAmt)&&intval($detail->DeductAmt)>0)
+                    <p>บาท</p>
+                    @endif
                 </div>
             </div>
             <div class="row">
+            @if(!empty(strip_tags($detail->ProductDesc1)))
                 <div class="col-md-12 mb-3">
                     <div class="card rounded-0 border-0">
                         <div class="card-header text-center bg-theme rounded-0 fixed-header" id="headingTwo">
@@ -356,6 +405,8 @@
                         </div>
                     </div>
                 </div>
+            @endif
+                
                 <div class="col-md-12 mb-3">
                     <div class="card rounded-0 border-0">
                         <div class="card-header text-center bg-theme rounded-0 fixed-header" id="headingThree">
@@ -396,16 +447,17 @@
                                     <div class="col-6">อุบัติเหตุส่วนบุคคล</div>
                                     <div class="col-6 text-right">{{number_format($detail->PA_Passengers)}} บาท</div>
                                     <hr class="border-list">
+                                    <div class="col-6">ประกันตัวผู้ขับขี่</div>
+                                        <div class="col-6 text-right">{{number_format($detail->PA_Driver)}} บาท</div>
+                                    <hr class="border-list">
                                         <div class="col-6">ค่ารักษาพยาบาล</div>
                                         <div class="col-6 text-right">{{number_format($detail->MED)}} บาท</div>
-                                    <hr class="border-list">
-                                        <div class="col-6">ประกันตัวผู้ขับขี่</div>
-                                        <div class="col-6 text-right">{{number_format($detail->PA_Driver)}} บาท</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                 @if(!empty(strip_tags($detail->ProductDesc2)))
                 <div class="col-md-12 mb-3">
                     <div class="card rounded-0 border-0">
                         <div class="card-header text-center bg-theme rounded-0 fixed-header" id="headingFive">
@@ -422,6 +474,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
         <div class="col-md-5">
@@ -523,6 +576,8 @@
                     </div>
                 </div>
             </div>
+            <!-- ผ่อน -->
+             @if(count($arrPay)>0)
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <div class="card rounded-0 border-0">
@@ -533,23 +588,37 @@
                             </button>
                             </h5>
                         </div>
+                       
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="row mb-2">
-                                    <div class="col-6">ผ่อน 3 เดือน</div>
-                                    <div class="col-6 text-right">2,500 บาท / เดือน</div>
-                                    <hr class="border-list">
-                                    <div class="col-6">ผ่อน 6 เดือน</div>
-                                    <div class="col-6 text-right">1,250 บาท / เดือน</div>
-                                    <hr class="border-list">
-                                    <div class="col-6">ผ่อน 10 เดือน</div>
-                                    <div class="col-6 text-right">750 บาท / เดือน</div>
+                                    
+                                            <?php 
+                                            
+                                            for($i=0;$i<count($arrPay);$i++)
+                                            {
+                                                if($i!=0){
+                                            ?>  
+                                                <hr class="border-list">
+                                            <?php
+                                                }
+                                                $pay = $totalPremium/$arrPay[$i];
+                                            ?>
+                                                <div class="col-6">ผ่อน <?php echo $arrPay[$i];?> เดือน</div>
+                                                <div class="col-6 text-right"><?php echo number_format($pay,0);?> บาท / เดือน</div>
+                                            <?php
+                                            }
+                                            ?>
+                                    
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
+            @endif
+            <!-- ผ่อน -->
         </div>
     </div>
 </div>
@@ -586,7 +655,7 @@
                 $alert.text("กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง");
                 return;
             }
-            var linkInterest = $('#url_main').val() + "/Home/SendInterest";
+            var linkInterest = "{{url('/Home/SendInterest')}}";
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 url: linkInterest,

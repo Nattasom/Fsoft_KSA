@@ -20,7 +20,7 @@ Route::any('/Login', 'HomeController@Login');
 
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');
-
+    $exitCode1 = Artisan::call('clear-compiled');
      //$exitCode = Artisan::call('compiled:clear');
     // return what you want
 });
@@ -81,10 +81,11 @@ Route::group(['middleware' => 'usersession'], function () {
     Route::get('/Compare', 'CompareController@Index');
 	Route::any('/Compare/AddCompare', 'CompareController@AddCompare');
     Route::get('/Compare/RemoveCompare/{id}', 'CompareController@RemoveCompare');
-    Route::get('/Custom', 'CustomController@Index');
+    Route::any('/Custom', 'CustomController@Index');
     Route::post('/ajaxModelValue', 'CustomController@ajaxLoadModel');
     Route::post('/ajaxModelYearValue', 'CustomController@ajaxLoadYearModel');
     Route::post('/ajaxSubModelValue', 'CustomController@ajaxSubModelValue');
+    Route::post('/ajaxGetPremiumRangeValue', 'CustomController@ajaxGetPremiumRangeValue');
 
     Route::get('/Success', 'SuccessController@Index');
 

@@ -5,7 +5,7 @@
     <div class="container">
         <div class="col-md-12 text-center py-3">
 
-			<div class="card card-yellow position-absolute card-bc d-block d-sm-none">
+			<div class="card card-yellow position-absolute  card-bc d-block d-sm-none">
 				<div class="card-header py-2">
 					<p class="font-weight-bold mb"><a id="btnFilterForm"><img src="{{ Config::get('app.url_assets') }}assets/img/set.png" alt="" class="align-top">ปรับแต่งประกันรถตามงบ <span class="float-right"><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></p>
 				</div>
@@ -86,10 +86,10 @@
 						<div role="tabpanel" class="mt-3">
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs nav-pills nav-justified" role="tablist">
-								<li role="presentation" class="nav-item">
+								<li role="presentation" class="nav-item nav-item-filter">
 									<a href="#filter" aria-controls="filter" class="btn btn-yellow active show" role="tab" data-toggle="tab"><img src="{{ Config::get('app.url_assets') }}assets/img/Group-1.png" alt="" > กรองข้อมูล</a>
 								</li>
-								<li role="presentation" class="nav-item">
+								<li role="presentation" class="nav-item nav-item-filter">
 									<a href="#sort" aria-controls="sort" class="btn btn-yellow" role="tab" data-toggle="tab""><img src="{{ Config::get('app.url_assets') }}assets/img/sort.png" alt="" > เรียงลำดับข้อมูล</a>
 								</li>
 							</ul>
@@ -109,7 +109,7 @@
 											</p>
 										</div>
 										<div class="col-12 mt-2">
-											<div class="slider-range" datatoid="r1" data-href="#hd-premium-filter" data-href-label="#lbl-mb-premium-text" data-val="{{$premium_value}}" min="{{$premium_filter->Minimum}}"  max="{{$premium_filter->Maximum}}"></div>
+											<div class="slider-range" step="1" datatoid="r1" data-href="#hd-premium-filter" data-href-label="#lbl-mb-premium-text" data-val="{{$premium_value}}" min="{{$premium_filter->Minimum}}"  max="{{$premium_filter->Maximum}}"></div>
 										</div>
 									</div>
 									<div class="row mb-4">
@@ -133,12 +133,12 @@
 										<div class="col-7 text-right">
 											<p class="mb-0">
 												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-suminsured-text" data-input="#hd-suminsured-filter"  data-rangeid="r2">
-													<span class="text-33 lbl-start-suminsured" id="lbl-suminsured-text">{{number_format($suminsured_filter->Minimum)}}</span> บาท
+													<span class="text-33 lbl-start-suminsured"  id="lbl-suminsured-text">{{number_format($suminsured_filter->Maximum)}}</span> บาท
 												</a>
 											</p>
 										</div>
 										<div class="col-12 mt-2">
-											<div class="slider-range" datatoid="r2" data-val="0" data-href="#hd-suminsured-filter" data-href-label="#lbl-suminsured-text" min="{{$suminsured_filter->Minimum}}" max="{{$suminsured_filter->Maximum}}"></div>
+											<div class="slider-range" datatoid="r2" step="10000" data-val="{{$suminsured_filter->Maximum}}" data-href="#hd-suminsured-filter" data-href-label="#lbl-suminsured-text" min="{{$suminsured_filter->Minimum}}" max="{{$suminsured_filter->Maximum}}"></div>
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -148,12 +148,12 @@
 										<div class="col-7 text-right">
 											<p>
 												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-deduct-text" data-input="#hd-deduct-filter" data-rangeid="r3">
-													<span class="text-33" id="lbl-deduct-text">1,000</span> บาท
+													<span class="text-33" id="lbl-deduct-text">0</span> บาท
 												</a>
 											</p>
 										</div>
 										<div class="col-12 mt-2">
-											<div class="slider-range" data-val="0" data-href="#hd-deduct-filter" data-href-label="#lbl-deduct-text" datatoid="r3" min="0" max="10000"></div>
+											<div class="slider-range" step="1000" data-val="0" data-href="#hd-deduct-filter" data-href-label="#lbl-deduct-text" datatoid="r3" min="0" max="10000"></div>
 										</div>
 									</div>
 									<div class="row mb-2">
@@ -163,25 +163,25 @@
 										<div class="col-7">
 											<div class="row">
 												<div class="col-6 text-center">
-													<p class="checkboxlist multiple claim-select" data-val="1"><img src="{{ Config::get('app.url_assets') }}assets/img/home.png" height="30" class="" /><br>อู่</p>
+													<p class="checkboxlist multiple claim-select" data-val="1"><img src="{{ Config::get('app.url_assets') }}assets/img/home.png" height="30" class="active" /><br>อู่</p>
 												</div>
 												<div class="col-6 text-center">
-													<p class="checkboxlist multiple claim-select" data-val="2"><img src="{{ Config::get('app.url_assets') }}assets/img/town.png" height="30" class="" /><br>ห้าง</p>
+													<p class="checkboxlist multiple claim-select" data-val="2"><img src="{{ Config::get('app.url_assets') }}assets/img/town.png" height="30" class="active" /><br>ห้าง</p>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="row mb-2">
+									<div class="row mb-2 d-none">
 										<div class="col-5 text-left">
 											<p class="mb-0">ผู้ขับขี่ <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 										</div>
 										<div class="col-7">
 											<div class="row">
 												<div class="col-6 text-center">
-													<p class="checkboxlist driver-select" data-val="1"><img src="{{ Config::get('app.url_assets') }}assets/img/people.png" height="30" class="active" /><br>ระบุชื่อ</p>
+													<p class="checkboxlist driver-select" data-val="1"><img src="{{ Config::get('app.url_assets') }}assets/img/people.png" height="30" class="" /><br>ระบุชื่อ</p>
 												</div>
 												<div class="col-6 text-center">
-													<p class="checkboxlist driver-select" data-val="0"><img src="{{ Config::get('app.url_assets') }}assets/img/peoples.png" height="30" class="" /><br>ไม่ระบุชื่อ</p>
+													<p class="checkboxlist driver-select" data-val="0"><img src="{{ Config::get('app.url_assets') }}assets/img/peoples.png" height="30" class="active" /><br>ไม่ระบุชื่อ</p>
 												</div>
 											</div>
 										</div>
@@ -191,7 +191,7 @@
 											<!-- Filter -->
 											<button class="btn btn-gray py-1 px-2" type="button" id="filterMore_mb">ปรับแต่งเพิ่มเติม</button>
 											<div id="contentFilterMore_mb" class="px-0 py-3">
-												<div class="row mb-3">
+												<div class="row mb-3 d-none">
 													<div class="col-12 text-left mb-1">
 														<p class="mb-1">คุ้มครองน้ำท่วม <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 														<p class="text-rangemulti">
@@ -208,7 +208,7 @@
 														<!-- <p class="mb-0 text-brown" style="font-size:18px;">211,045 บาท</p> -->
 													</div>
 												</div>
-												<div class="row mb-3">
+												<div class="row mb-3 d-none">
 													<div class="col-12 text-left mb-1">
 														<p class="mb-1">ทรัพย์สินส่วนบุคคลภายนอก <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 														<p class="text-rangemulti">
@@ -229,7 +229,7 @@
 												<?php foreach ($insurer_filter as $key => $value) { ?>
 												<div class="form-group mb-1">
 													<div class="form-check text-left">
-													<input class="form-check-input chk-insurer" type="checkbox" name="iss" value="{{$value->InsurerCode}}" id="isscb<?php echo $key;?>">
+													<input class="form-check-input chk-insurer-mb" type="checkbox" name="iss" value="{{$value->InsurerCode}}" id="isscb<?php echo $key;?>" checked>
 													<label class="form-check-label" for="isscb<?php echo $key;?>">
 													{{$value->InsurerName}}
 													</label>
@@ -240,7 +240,7 @@
 												<p class="mb-2">วิธีการชำระเงิน</p>
 												<div class="form-group mb-1">
 													<div class="form-check text-left">
-													<input class="form-check-input chk-sperate" type="checkbox" name="iss" value="1" id="isscbradiodesk00">
+													<input class="form-check-input chk-sperate-mb" type="radio" name="iss1" value="" id="isscbradiodesk00" checked>
 													<label class="form-check-label" for="isscbradiodesk00">
 													ชำระครั้งเดียว
 													</label>
@@ -249,7 +249,7 @@
 												<?php foreach ($sperate_filter as $key => $value) { ?>
 												<div class="form-group mb-1">
 													<div class="form-check text-left">
-													<input class="form-check-input chk-sperate" type="checkbox" name="iss" value="{{$value->SperatePayMonth}}" id="isscbradio<?php echo $key;?>">
+													<input class="form-check-input chk-sperate-mb" type="radio" name="iss1" value="{{$value->SperatePayMonth}}" id="isscbradio<?php echo $key;?>">
 													<label class="form-check-label" for="isscbradio<?php echo $key;?>">
 													{{$value->Description}}
 													</label>
@@ -261,11 +261,7 @@
 											<!-- Filter -->
 										</div>
 									</div>
-									<div class="row mb-3">
-										<div class="col-12 text-center">
-											<button class="btn btn-yellow px-3" type="button" id="confirm_filter" >ยืนยันข้อมูล</button>
-										</div>
-									</div>
+									
 								</div>
 
 								<div role="tabpanel" class="tab-pane pt-4 text-left" id="sort">
@@ -302,6 +298,11 @@
 										</div>
 									</div>
 								</div>
+								<div class="row mb-3">
+										<div class="col-12 text-center">
+											<button class="btn btn-yellow px-3" type="button" id="confirm_filter" >ยืนยันข้อมูล</button>
+										</div>
+									</div>
 							</div>
 						</div>
 
@@ -365,12 +366,12 @@
 							<div class="col-12 text-center">
 								<p class="mb-0">
 									<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-mb-premium-text-desk" data-input="#hd-premium-filter" data-rangeid="rr1">
-										<span class="" id="lbl-mb-premium-text-desk">{{$premium_value}}</span> บาท/ปี
+										<span class="" id="lbl-mb-premium-text-desk">{{number_format($premium_value)}}</span> บาท/ปี
 									</a>
 								</p>
 							</div>
 							<div class="col-12 mt-2">
-								<div class="slider-range" datatoid="rr1" data-href="#hd-premium-filter" data-href-label="#lbl-mb-premium-text-desk" data-val="{{$premium_value}}" min="{{$premium_filter->Minimum}}"  max="{{$premium_filter->Maximum}}"></div>
+								<div class="slider-range" datatoid="rr1" step="1" data-href="#hd-premium-filter" data-href-label="#lbl-mb-premium-text-desk" data-val="{{$premium_value}}" min="{{$premium_filter->Minimum}}"  max="{{$premium_filter->Maximum}}"></div>
 							</div>
 						</div>
 						<div class="row mb-4">
@@ -409,12 +410,12 @@
 										<div class="col-7 text-right">
 											<p class="mb-0">
 												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-suminsured-text-desk" data-input="#hd-suminsured-filter" data-rangeid="rr2">
-													<span class="" id="lbl-suminsured-text-desk">300,000</span> บาท
+													<span class="" id="lbl-suminsured-text-desk">{{number_format($suminsured_filter->Maximum)}}</span> บาท
 												</a>
 											</p>
 										</div>
 										<div class="col-12 mt-2">
-											<div class="slider-range" datatoid="rr2" data-val="0" data-href="#hd-suminsured-filter" data-href-label="#lbl-suminsured-text-desk" min="{{$suminsured_filter->Minimum}}" max="{{$suminsured_filter->Maximum}}"></div>
+											<div class="slider-range" step="10000" datatoid="rr2" data-val="{{$suminsured_filter->Maximum}}" data-href="#hd-suminsured-filter" data-href-label="#lbl-suminsured-text-desk" min="{{$suminsured_filter->Minimum}}" max="{{$suminsured_filter->Maximum}}"></div>
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -424,12 +425,12 @@
 										<div class="col-7 text-right">
 											<p>
 												<a data-toggle="modal" data-target="#ModalFilterRange" data-form="#lbl-deduct-text-desk" data-input="#hd-deduct-filter" data-rangeid="rr3">
-													<span class="" id="lbl-deduct-text-desk">1,000</span> บาท
+													<span class="" id="lbl-deduct-text-desk">0</span> บาท
 												</a>
 											</p>
 										</div>
 										<div class="col-12 mt-2">
-											<div class="slider-range" datatoid="rr3" data-val="0" data-href="#hd-deduct-filter" data-href-label="#lbl-deduct-text-desk" datatoid="r3" min="0" max="10000"></div>
+											<div class="slider-range" datatoid="rr3" step="1000" data-val="0" data-href="#hd-deduct-filter" data-href-label="#lbl-deduct-text-desk" datatoid="r3" min="0" max="10000"></div>
 										</div>
 									</div>
 									<div class="row mb-2">
@@ -439,25 +440,25 @@
 										<div class="col-7">
 											<div class="row">
 												<div class="col-6 text-center">
-													<p class="checkboxlist multiple claim-select-desk" data-val="1"><img src="{{ Config::get('app.url_assets') }}assets/img/home.png" height="30" class="" /><br>อู่</p>
+													<p class="checkboxlist multiple claim-select-desk" data-val="1"><img src="{{ Config::get('app.url_assets') }}assets/img/home.png" height="30" class="active" /><br>อู่</p>
 												</div>
 												<div class="col-6 text-center">
-													<p class="checkboxlist multiple claim-select-desk" data-val="2"><img src="{{ Config::get('app.url_assets') }}assets/img/town.png" height="30" class="" /><br>ห้าง</p>
+													<p class="checkboxlist multiple claim-select-desk" data-val="2"><img src="{{ Config::get('app.url_assets') }}assets/img/town.png" height="30" class="active" /><br>ห้าง</p>
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class="row mb-2">
+									<div class="row mb-2 d-none">
 										<div class="col-5 text-left">
 											<p class="mb-0">ผู้ขับขี่ <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 										</div>
 										<div class="col-7">
 											<div class="row">
 												<div class="col-6 text-center">
-													<p class="checkboxlist driver-select-desk" data-val="1"><img src="{{ Config::get('app.url_assets') }}assets/img/people.png" height="30" class="active" /><br>ระบุชื่อ</p>
+													<p class="checkboxlist driver-select-desk" data-val="1"><img src="{{ Config::get('app.url_assets') }}assets/img/people.png" height="30" class="" /><br>ระบุชื่อ</p>
 												</div>
 												<div class="col-6 text-center">
-													<p class="checkboxlist driver-select-desk" data-val="0"><img src="{{ Config::get('app.url_assets') }}assets/img/peoples.png" height="30" class="" /><br>ไม่ระบุชื่อ</p>
+													<p class="checkboxlist driver-select-desk" data-val="0"><img src="{{ Config::get('app.url_assets') }}assets/img/peoples.png" height="30" class="active" /><br>ไม่ระบุชื่อ</p>
 												</div>
 											</div>
 										</div>
@@ -467,7 +468,7 @@
 											<!-- Filter -->
 											<button class="btn btn-gray py-1 text-brown" type="button" id="filterMore">ปรับแต่งเพิ่มเติม</button>
 											<div id="contentFilterMore" class="px-0 py-3">
-												<div class="row mb-3">
+												<div class="row mb-3 d-none">
 													<div class="col-12 text-left mb-1">
 														<p class="mb-1">คุ้มครองน้ำท่วม <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 														<p class="text-rangemulti">
@@ -484,7 +485,7 @@
 														<!-- <p class="mb-0 text-brown" style="font-size:18px;">211,045 บาท</p> -->
 													</div>
 												</div>
-												<div class="row mb-3">
+												<div class="row mb-3 d-none">
 													<div class="col-12 text-left mb-1">
 														<p class="mb-1">ทรัพย์สินส่วนบุคคลภายนอก <a href="#"><img src="{{ Config::get('app.url_assets') }}assets/img/info.png" alt="" height="10" class="align-middle"></a></p>
 														<p class="text-rangemulti">
@@ -505,7 +506,7 @@
 												<?php foreach ($insurer_filter as $key => $value) { ?>
 												<div class="form-group mb-1">
 													<div class="form-check text-left">
-													<input class="form-check-input chk-insurer" type="checkbox" name="iss" value="{{$value->InsurerCode}}" id="isscbdesk<?php echo $key;?>">
+													<input class="form-check-input chk-insurer" type="checkbox" name="iss" value="{{$value->InsurerCode}}" id="isscbdesk<?php echo $key;?>" checked>
 													<label class="form-check-label" for="isscbdesk<?php echo $key;?>">
 													{{$value->InsurerName}}
 													</label>
@@ -519,7 +520,7 @@
 												?>
 												<div class="form-group mb-1">
 													<div class="form-check text-left">
-													<input class="form-check-input chk-sperate" type="checkbox" name="iss" value="1" id="isscbradio00">
+													<input class="form-check-input chk-sperate" type="radio" name="iss" value="" id="isscbradio00" checked>
 													<label class="form-check-label" for="isscbradio00">
 													ชำระครั้งเดียว
 													</label>
@@ -528,7 +529,7 @@
 												<?php foreach ($sperate_filter as $key => $value) { ?>
 												<div class="form-group mb-1">
 													<div class="form-check text-left">
-													<input class="form-check-input chk-sperate" type="checkbox" name="iss" value="{{$value->SperatePayMonth}}" id="isscbradiodesk<?php echo $key;?>">
+													<input class="form-check-input chk-sperate" type="radio" name="iss" value="{{$value->SperatePayMonth}}" id="isscbradiodesk<?php echo $key;?>">
 													<label class="form-check-label" for="isscbradiodesk<?php echo $key;?>">
 													{{$value->Description}}
 													</label>
@@ -540,11 +541,7 @@
 											<!-- Filter -->
 										</div>
 									</div>
-									<div class="row mb-3">
-										<div class="col-12 text-center">
-											<button class="btn btn-yellow px-3" type="button" id="confirm_filter_desk" >ยืนยันข้อมูล</button>
-										</div>
-									</div>
+									
 								</div>
 								<div role="tabpanel" class="tab-pane pt-4" id="sort_desk">
 									<div class="form-group">
@@ -557,7 +554,7 @@
 									</div>
 									<div class="form-group">
 										<div class="form-check">
-										<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+										<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
 										<label class="form-check-label" for="exampleRadios1">
 										ราคา : สูงไปต่ำ
 										</label>
@@ -565,7 +562,7 @@
 									</div>
 									<div class="form-group">
 										<div class="form-check">
-										<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+										<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
 										<label class="form-check-label" for="exampleRadios1">
 										บริษัทประกัน : ก-ฮ
 										</label>
@@ -573,13 +570,18 @@
 									</div>
 									<div class="form-group">
 										<div class="form-check">
-										<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+										<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
 										<label class="form-check-label" for="exampleRadios1">
 										บริษัทประกัน : ฮ-ก
 										</label>
 										</div>
 									</div>
 								</div>
+								<div class="row mb-3">
+										<div class="col-12 text-center">
+											<button class="btn btn-yellow px-3" type="button" id="confirm_filter_desk" >ยืนยันข้อมูล</button>
+										</div>
+									</div>
 							</div>
 						</div>
 
@@ -640,6 +642,11 @@ $(document).ready(function() {
 	}
 	if($("#hd-year-filter").val()!=""){
 		getSubModelValueInit($("#hd-year-filter").val());
+		if($("#hd-model-text-filter").val()==""){
+			$("#tag-sub-model").removeClass("d-none");
+			$("#tag-sub-model").find(".text").text("ไม่ทราบรุ่น");
+			$("#car-keyin").addClass("d-none");
+		}
 	}
 	$(document).on("focus","#car-keyin",function(){
 		$(".car-filter-ddl .dropdown-menu").addClass("show");
@@ -734,6 +741,14 @@ $(document).ready(function() {
 				$('#maindivcontent').css('margin-top', hcardbc+'px');
 			}
 			// $(this).parents('.card-bc').children('.card-body').children('.show-form').slideDown('fast');
+		});
+		$(".nav-item-filter").click(function(){
+			setTimeout(function(){
+				var hcardbc = $('#btnFilterForm').parents('.card-bc').children('.card-body').children('.show-form').height()+15;
+				console.log("nav click = "+hcardbc);
+				$('#maindivcontent').css('margin-top', hcardbc+'px');
+			},500);
+			
 		});
 	}
 
@@ -935,16 +950,12 @@ $(document).ready(function() {
 		claimtype = claimtype.join(',');
 		var driver = $(".driver-select"+(!mobile?'-desk':'')+" img[class=active]").parent().attr("data-val");
 		var product_type = '';
-		var insurer = new Array();
-		$('.chk-insurer:checked').each(function(index, el) {
-			insurer.push($(this).val());
-		});
-		insurer = insurer.join(',');
-		var sperate = new Array();
-		$(".chk-sperate:checked").each(function(index, el) {
-			sperate.push($(this).val());
-		});
-		sperate = sperate.join(',');
+		
+		// var sperate = new Array();
+		// $(".chk-sperate:checked").each(function(index, el) {
+		// 	sperate.push($(this).val());
+		// });
+		// sperate = sperate.join(',');
 		var order_field = '';
 		var order_type = '';
 		var i = 0;
@@ -994,8 +1005,7 @@ $(document).ready(function() {
 		$("#hd-product-type-filter").val(product_type);
 		$("#hd-claimtype-filter").val(claimtype);
 		$("#hd-drive-filter").val(driver);
-		$("#hd-insurer-filter").val(insurer);
-		$("#hd-sperate-filter").val(sperate);
+		// $("#hd-sperate-filter").val(sperate);
 		$("#hd-order-field").val(order_field);
 		$("#hd-order-type").val(order_type);
 
@@ -1028,11 +1038,27 @@ $(document).ready(function() {
 		
 		var hcardbc = $(this).parents('.card-bc').children('.card-body').children('.show-text').height();
 		$('#maindivcontent').css('margin-top', hcardbc+'px');
+		var sperate = $(".chk-sperate-mb:checked").val();
+		$("#hd-sperate-filter").val(sperate);
+		var insurer = new Array();
+		$('.chk-insurer-mb:checked').each(function(index, el) {
+			insurer.push($(this).val());
+		});
+		insurer = insurer.join(',');
+		$("#hd-insurer-filter").val(insurer);
 		setInputFilter();
 		callProductList();
 	});
 	// PC
 	$('#confirm_filter_desk').click(function(event) {
+		var sperate = $(".chk-sperate:checked").val();
+		$("#hd-sperate-filter").val(sperate);
+		var insurer = new Array();
+		$('.chk-insurer:checked').each(function(index, el) {
+			insurer.push($(this).val());
+		});
+		insurer = insurer.join(',');
+		$("#hd-insurer-filter").val(insurer);
 		setInputFilter();
 		callProductList();
 	});
@@ -1066,6 +1092,7 @@ $(document).ready(function() {
 
 	var funcSlide = function(div){
 		$(div).slider({
+			step:parseInt(div.attr('step')),
 			min: parseInt(div.attr('min')),
 			max: parseInt(div.attr('max')),
 			// value:parseInt(div.attr("data-val")),
@@ -1085,9 +1112,13 @@ $(document).ready(function() {
 				}
 			}
 		});
+		console.log(div);
+		console.log($(div).attr("data-val"))
+		$(div).slider("value",$(div).attr("data-val"));
 	};
 	var funcSlideMulti = function(div){
 		$(div).slider({
+			step:parseInt(div.attr('step')),
 			range: true,
 			min: parseInt(div.attr('min')),
 			max: parseInt(div.attr('max')),
@@ -1301,7 +1332,7 @@ $(document).ready(function() {
 				break;
 			case "submodel":
 				//$("#hd_year_value").val(data.id);
-				$("#hd-model-text-filter").val(data.text);
+				$("#hd-model-text-filter").val(data.id);
 				initOption(null, data,0);
 				break;
 			
@@ -1413,7 +1444,7 @@ $(document).ready(function() {
 					$("#lazyLoad").removeClass("d-none");
 					drawCard(data.list);
 					var start = parseInt($("#hd-record-start").val());
-					$("#hd-record-start").val(start+1);
+					$("#hd-record-start").val(start+parseInt($("#hd-record-length").val()));
 				}else{
 					$("#lazyLoad").addClass("d-none");
 				}
@@ -1435,7 +1466,23 @@ $(document).ready(function() {
 			tmp = tmp.replace("[idx]",v["idx"]).replace("[idx]",v["idx"]).replace("[idx]",v["idx"]).replace("[idx]",v["idx"]);
 			tmp = tmp.replace("checkboxCompare[idx]", "checkboxCompare" + v["idx"]); // mg
 
-			var promotionTag = "<img src='"+v["PromotionTag"]+"' />";
+			var promotionTag = "";
+			var promoDesc = '';
+			if(v["PromotionTag"]!=null){
+				promotionTag = "<img src='"+v["PromotionTag"]+"' />";
+				promoDesc = '<a href="#" class="btn btn-default mx-0 btn-theme3">โปรโมชั่น</a>';
+			}
+			var splitPay = '';
+			if(v["SplitPay"]!=null){
+				var arrSplit = v["SplitPay"].split(',');
+				var max = 0;
+				for(var i = 0;i<arrSplit.length;i++){
+					if(parseInt(arrSplit[i])>max){
+						max = parseInt(arrSplit[i]);
+					}
+				}
+				splitPay = '<a href="#" class="btn btn-default mx-0 btn-theme3">ผ่อน '+max+' ด.</a>';
+			}
 			//tmp = (v["promotion_tag"]!=null&&v["promotion_tag"]!=undefined) ? tmp.replace("[promotion_icon]", promotionTag) : tmp.replace("[promotion_icon]", '');	
 			
 			var head_ico = '<img src="'+v["InsurerIcon"]+'" style="height:30px;margin-top:-2px;" alt="">';
@@ -1451,14 +1498,14 @@ $(document).ready(function() {
 			tmp = tmp.replace("[motor_type]",v["MotorType"]);
 			tmp = tmp.replace("[seat]",v["Seat"]);
 			tmp = tmp.replace("[car_cc]",v["CC"]);
-			tmp = tmp.replace("[sperate_tag]","");
-			tmp = tmp.replace("[promotion_tag]","");
+			tmp = tmp.replace("[sperate_tag]",splitPay);
+			tmp = tmp.replace("[promotion_tag]",promoDesc);
 			tmp = tmp.replace("[promotion_icon]",promotionTag);
 			// console.log("totalpremium = "+v["TotalPremium"]);
 			// console.log("totalpremium round = "+Math.round(v["TotalPremium"]));
-			tmp = tmp.replace("[premium_val]",Math.round(v["TotalPremium"])).replace("[premium_val]",v["TotalPremium"]);
-			tmp = tmp.replace("[suminsured]",($.trim(v["SumInsured"])!=''&&v["SumInsured"].length>0 ? addCommas(v["SumInsured"]) : '-')+" บ.");
-			var deduct = ($.trim(v["DeductAmt"])!=''&&v["DeductAmt"].length>0 ? addCommas(parseInt(v["DeductAmt"])) : "-") + " บ.";
+			tmp = tmp.replace("[premium_val]",Math.round(v["TotalPremium"])).replace("[premium_val]",Math.round(v["TotalPremium"]));
+			tmp = tmp.replace("[suminsured]",($.trim(v["SumInsured"])!=''&&v["SumInsured"].length>0&&parseInt(v["SumInsured"])!=0 ? addCommas(v["SumInsured"]) : '-')+" บ.");
+			var deduct = ($.trim(v["DeductAmt"])!=''&&v["DeductAmt"].length>0&&parseInt(v["DeductAmt"])!=0 ? addCommas(parseInt(v["DeductAmt"])) : "-") + " บ.";
 			tmp = tmp.replace("[deduct]",deduct);
 			var claim = parseInt(v["ClaimTypeValue"])==1 ? "อู่":"ห้าง";
 			tmp = tmp.replace("[claim_type]",claim);

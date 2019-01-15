@@ -887,3 +887,16 @@ img[alt="information"] { height: 10px !important; width: 10px !important; displa
 	transform: translate(-35%,-50%);
 	color: #665659;
 }
+.custom-price{
+	display: block;
+	margin-right: 60px;
+	text-align: right;
+	padding: 0 10px;
+	border-radius: 15px;
+	border: 2px solid #ffd400;
+}
+@media (min-width: 768px) {
+	.custom-price {
+		font-size:42px;
+	}
+}

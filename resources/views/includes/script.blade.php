@@ -119,12 +119,15 @@
       var rangetype = button.data('rangetype') // Extract info from data-* attributes
       var modal = $(this)
       console.log(rangeid);
-      modal.find('.modal-body input[type="number"]').val('');
+      modal.find('.modal-body input[type="text"]').val('');
         var min = parseInt($('[datatoid="'+rangeid+'"]').attr('min'));
         var max = parseInt($('[datatoid="'+rangeid+'"]').attr('max'));
-        modal.find('.modal-body input[type="number"]').attr('placeholder','Min:'+addCommas(min)+' / Max:'+addCommas(max));
-        modal.find('.modal-body input[type="number"]').attr('min', min);
-        modal.find('.modal-body input[type="number"]').attr('max', max);
+        modal.find('.modal-body input[type="text"]').attr('placeholder','ราคาเริ่มต้น / ราคาสูงสุด');
+        if(min != undefined && max != undefined){
+            modal.find('.modal-body input[type="text"]').attr('min', min);
+            modal.find('.modal-body input[type="text"]').attr('max', max);
+        }
+        
       $('#filter-form').val(form);
       $('#filter-input').val(input);
       $('#filter-rangeid').val(rangeid);
@@ -133,7 +136,7 @@
       }
     });
     $('#submitFilterRange').click(function(event) {
-        var num = $('#ModalFilterRange input[type="number"]').val();
+        var num = $('#ModalFilterRange input[type="text"]').val();
         var form = $('#ModalFilterRange #filter-form').val();
         var input = $('#ModalFilterRange #filter-input').val();
         var rangeid = $('#ModalFilterRange #filter-rangeid').val();
